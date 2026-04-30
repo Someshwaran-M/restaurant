@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/contact.css";
 
-// ─── HOOK ───────────────────────────────────────────────────────────────────────
+/* ─── HOOK ───────────────────────── */
 function useIntersectionObserver(options = {}) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -14,7 +14,7 @@ function useIntersectionObserver(options = {}) {
           observer.disconnect();
         }
       },
-      { threshold: 0.12, ...options },
+      { threshold: 0.12, ...options }
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -24,43 +24,68 @@ function useIntersectionObserver(options = {}) {
   return [ref, isVisible];
 }
 
-// ─── DATA ───────────────────────────────────────────────────────────────────────
+/* 🔥 CONTACT ITEMS (SVG ICONS) */
 const contactItems = [
   {
-    icon: "📧",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 4h16v16H4z" />
+        <path d="M22 6l-10 7L2 6" />
+      </svg>
+    ),
     label: "Email",
     value: "msomesh43@gmail.com",
     href: "mailto:msomesh43@gmail.com",
   },
   {
-    icon: "📞",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.12.89.32 1.76.6 2.6a2 2 0 0 1-.45 2.11L9.91 10.09a16 16 0 0 0 4 4l.66-.24a2 2 0 0 1 2.11.45c.84.28 1.71.48 2.6.6A2 2 0 0 1 22 16.92z"/>
+      </svg>
+    ),
     label: "Phone",
     value: "+91 9384712673",
-    href: "tel:+91 9384712673",
+    href: "tel:+919384712673",
   },
-  { icon: "📍", label: "Location", value: "Namakkal,Tamil Nadu, India", href: "#" },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10z" />
+        <circle cx="12" cy="11" r="2" />
+      </svg>
+    ),
+    label: "Location",
+    value: "Namakkal, Tamil Nadu, India",
+    href: "#",
+  },
 ];
 
+/* 🔥 SOCIAL ICONS */
 const socialLinks = [
-  { icon: "🐙", label: "GitHub", href: "https://github.com" },
-  { icon: "💼", label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: "🐦", label: "Twitter", href: "https://twitter.com" },
-  { icon: "📸", label: "Instagram", href: "https://instagram.com" },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M12 .5C5.7.5.8 5.4.8 11.7c0 5 3.2 9.2 7.6 10.7.6.1.8-.3.8-.6v-2.3c-3.1.7-3.7-1.3-3.7-1.3-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 2.7.8 3.3 2 .1-.7.4-1.1.7-1.3-2.5-.3-5.1-1.2-5.1-5.5 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 1.1.9-.2 1.8-.3 2.7-.3s1.8.1 2.7.3c2.1-1.4 3-1.1 3-1.1.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.3-2.6 5.2-5.1 5.5.4.3.8 1 .8 2v3c0 .3.2.7.8.6 4.4-1.5 7.6-5.7 7.6-10.7C23.2 5.4 18.3.5 12 .5z"/>
+      </svg>
+    ),
+    label: "GitHub",
+    href: "https://github.com/Someshwaran-M",
+  },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
+        <path d="M20.45 20.45h-3.6v-5.5c0-1.3-.03-3-1.85-3-1.85 0-2.13 1.45-2.13 2.94v5.56H9.27V9h3.46v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.09 2.09 0 110-4.17 2.09 2.09 0 010 4.17zM7.14 20.45H3.54V9h3.6v11.45z"/>
+      </svg>
+    ),
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/someshwaran-m-dev",
+  },
 ];
 
-// ─── ICONS ───────────────────────────────────────────────────────────────────────
+/* ICONS */
 function SendIcon() {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <line x1="22" y1="2" x2="11" y2="13" />
       <polygon points="22 2 15 22 11 13 2 9 22 2" />
     </svg>
@@ -69,30 +94,16 @@ function SendIcon() {
 
 function CheckIcon() {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
 }
 
-// ─── CONTACT FORM ────────────────────────────────────────────────────────────────
+/* FORM */
 function ContactForm({ isVisible }) {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [status, setStatus] = useState("idle"); // idle | sending | success
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [status, setStatus] = useState("idle");
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -101,109 +112,42 @@ function ContactForm({ isVisible }) {
     e.preventDefault();
     setStatus("sending");
 
-    // ── Replace this with your real API / EmailJS / Formspree call ──
-    await new Promise((res) => setTimeout(res, 1800));
+    await new Promise((res) => setTimeout(res, 1500));
 
     setStatus("success");
     setForm({ name: "", email: "", subject: "", message: "" });
-    setTimeout(() => setStatus("idle"), 4000);
+
+    setTimeout(() => setStatus("idle"), 3000);
   };
 
   return (
     <div className={`contact-form-wrap ${isVisible ? "visible" : ""}`}>
-      <form className="contact-form" onSubmit={handleSubmit} noValidate>
-        {/* Row: Name + Email */}
+      <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-row">
-          <div className="field">
-            <label htmlFor="cf-name">Your Name</label>
-            <input
-              id="cf-name"
-              name="name"
-              type="text"
-              placeholder="John Doe"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="cf-email">Email Address</label>
-            <input
-              id="cf-email"
-              name="email"
-              type="email"
-              placeholder="john@example.com"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          <input name="name" placeholder="Your Name" value={form.name} onChange={handleChange} required />
+          <input name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
         </div>
 
-        {/* Subject */}
-        <div className="field">
-          <label htmlFor="cf-subject">Subject</label>
-          <input
-            id="cf-subject"
-            name="subject"
-            type="text"
-            placeholder="Project enquiry / Collaboration / Other"
-            value={form.subject}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <input name="subject" placeholder="Subject" value={form.subject} onChange={handleChange} required />
 
-        {/* Message */}
-        <div className="field">
-          <label htmlFor="cf-message">Message</label>
-          <textarea
-            id="cf-message"
-            name="message"
-            placeholder="Tell me about your project, idea, or just say hi..."
-            value={form.message}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <textarea name="message" placeholder="Your Message" value={form.message} onChange={handleChange} required />
 
-        {/* Success banner */}
         {status === "success" && (
           <div className="success-banner">
-            <CheckIcon />
-            Message sent! I'll get back to you soon.
+            <CheckIcon /> Message sent!
           </div>
         )}
 
-        {/* Submit */}
-        <button
-          type="submit"
-          className={`submit-btn ${status === "sending" ? "sending" : ""}`}
-          disabled={status !== "idle"}
-        >
-          {status === "sending" ? (
-            <>
-              <span className="spinner" />
-              <span>Sending…</span>
-            </>
-          ) : status === "success" ? (
-            <>
-              <CheckIcon />
-              <span>Sent!</span>
-            </>
-          ) : (
-            <>
-              <span>Send Message</span>
-              <SendIcon />
-            </>
-          )}
+        <button type="submit" className="submit-btn">
+          {status === "sending" ? "Sending..." : "Send Message"}
+          <SendIcon />
         </button>
       </form>
     </div>
   );
 }
 
-// ─── MAIN COMPONENT ──────────────────────────────────────────────────────────────
+/* MAIN */
 export default function Contact() {
   const [titleRef, titleVisible] = useIntersectionObserver();
   const [infoRef, infoVisible] = useIntersectionObserver();
@@ -211,75 +155,34 @@ export default function Contact() {
 
   return (
     <section id="contact" className="contact-section">
-      {/* Animated background blobs */}
       <div className="contact-blob blob-1" />
       <div className="contact-blob blob-2" />
 
-      {/* ── Title ── */}
-      <div
-        ref={titleRef}
-        className={`contact-title-wrap ${titleVisible ? "visible" : ""}`}
-      >
-        <h2 className="contact-title">
-          Get In<span>Touch</span>
-        </h2>
-        <p className="contact-subtitle">Let's work together</p>
+      <div ref={titleRef} className={`contact-title-wrap ${titleVisible ? "visible" : ""}`}>
+        <h2 className="contact-title">Get In <span>Touch</span></h2>
       </div>
 
-      {/* ── Two-column layout ── */}
       <div className="contact-layout">
-        {/* Info panel */}
-        <div
-          ref={infoRef}
-          className={`contact-info ${infoVisible ? "visible" : ""}`}
-        >
-          <h3 className="info-headline">
-            Let's build something <em>amazing</em> together
-          </h3>
-          <p className="info-desc">
-            I'm currently available for freelance work and full-time
-            opportunities. Whether you have a project in mind or just want to
-            say hello, feel free to reach out — I'll get back to you as soon as
-            possible.
-          </p>
+        <div ref={infoRef} className={`contact-info ${infoVisible ? "visible" : ""}`}>
+          {contactItems.map((item) => (
+            <a key={item.label} className="contact-item" href={item.href}>
+              <div className="item-icon">{item.icon}</div>
+              <div>
+                <strong>{item.label}</strong>
+                <p>{item.value}</p>
+              </div>
+            </a>
+          ))}
 
-          {/* Contact items */}
-          <div className="contact-items">
-            {contactItems.map((item) => (
-              <a
-                key={item.label}
-                className="contact-item"
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel="noreferrer"
-              >
-                <div className="item-icon">{item.icon}</div>
-                <div className="item-text">
-                  <span className="item-label">{item.label}</span>
-                  <span className="item-value">{item.value}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          {/* Social row */}
           <div className="social-row">
             {socialLinks.map((s) => (
-              <a
-                key={s.label}
-                className="social-btn"
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                title={s.label}
-              >
+              <a key={s.label} href={s.href} target="_blank" className="social-btn">
                 {s.icon}
               </a>
             ))}
           </div>
         </div>
 
-        {/* Form panel */}
         <div ref={formRef}>
           <ContactForm isVisible={formVisible} />
         </div>

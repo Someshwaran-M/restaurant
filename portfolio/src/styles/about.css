@@ -18,7 +18,7 @@
 ════════════════════════════════════ */
 .about {
   position: relative;
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,6 +27,7 @@
   background: var(--bg-dark);
   font-family: var(--font);
   overflow: hidden;
+  margin-top: 0;                  
 }
 
 /* Subtle dot grid */
@@ -232,6 +233,7 @@
   color: var(--text-dim);
   line-height: 1.8;
   margin-bottom: 14px;
+  text-align: justify;
 }
 
 /* ── Stats Chips ── */

@@ -1,12 +1,11 @@
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion"; // ✅ FIXED
 import "../styles/about.css";
-// import photo from "../assets/images/photo.jpeg"; // ← uncomment with your photo path
 
 function About() {
   const leftRef = useRef(null);
   const rightRef = useRef(null);
 
-  /* Scroll-triggered reveal */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -17,7 +16,7 @@ function About() {
           }
         });
       },
-      { threshold: 0.15 },
+      { threshold: 0.15 }
     );
 
     if (leftRef.current) observer.observe(leftRef.current);
@@ -28,76 +27,79 @@ function About() {
 
   return (
     <section id="about" className="about">
-      {/* Ambient blobs */}
       <div className="about-blob about-blob--left" />
       <div className="about-blob about-blob--right" />
 
-      {/* ── LEFT — Photo ring ── */}
-      <div className="about-left" ref={leftRef}>
+      {/* LEFT — IMAGE */}
+      <motion.div
+        className="about-left"
+        ref={leftRef}
+        initial={{ opacity: 0, x: -60 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="about-ring-outer">
           <div className="about-ring-inner">
-            {/*
-              Replace the placeholder below with your real photo:
-              <img className="about-photo" src={photo} alt="Someshwaran" />
-            */}
-            <div className="about-photo-placeholder">
-              <svg
-                width="90"
-                height="90"
-                viewBox="0 0 24 24"
-                fill="rgba(255,255,255,0.12)"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
+            <img
+              className="profile-img"
+              src="/profile.jpg"   // ✅ FIXED (use public)
+              alt="Someshwaran"
+            />
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* ── RIGHT — Content ── */}
-      <div className="about-right" ref={rightRef}>
+      {/* RIGHT — CONTENT */}
+      <motion.div
+        className="about-right"
+        ref={rightRef}
+        initial={{ opacity: 0, x: 60 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+      >
         <h2 className="about-title">
           About <span className="about-title--cyan">Me</span>
         </h2>
 
-        <h3 className="about-role">Full Stack Developer!</h3>
+        <h3 className="about-role">Full Stack Developer</h3>
 
         <p className="about-desc">
-          I am a passionate Full Stack Developer with a strong foundation in Python and React.
-          js, gained through internships and academic projects. I have hands-on experience in
-           building responsive web applications, developing REST APIs, and creating intuitive
-            user interfaces using modern frontend technologies like HTML, CSS, and JavaScript.
-        </p>
-        <p className="about-desc">
-          During my internships, I worked on real-world applications, implementing features 
-          such as data management systems, search functionality, and performance optimization.
-           I enjoy solving problems, writing clean and efficient code, and continuously 
-           learning new technologies to improve my development skills.
-        </p>
-        <p className="about-desc">
-          I am highly motivated to start my professional journey as a software developer, 
-          where I can contribute to meaningful projects and grow within the IT industry.
+          I am a passionate Full Stack Developer with strong skills in React.js,
+          Python, and Django. I specialize in building responsive web applications,
+          developing REST APIs, and creating user-friendly interfaces.
         </p>
 
-        {/* Stats chips — extra details */}
+        <p className="about-desc">
+          During my internships, I worked on real-world projects where I implemented
+          dynamic features, optimized performance, and improved application usability.
+          I enjoy solving problems and writing clean, efficient code.
+        </p>
+
+        <p className="about-desc">
+          I am currently seeking an entry-level developer role where I can contribute
+          to impactful projects while continuously learning and growing in the IT industry.
+        </p>
+
+        {/* ✅ REALISTIC STATS */}
         <div className="about-stats">
           <div className="stat-chip">
+            <span className="stat-number">Fresher</span>
+            <span className="stat-label">Status</span>
+          </div>
+          <div className="stat-chip">
             <span className="stat-number">3+</span>
-            <span className="stat-label">Years Experience</span>
+            <span className="stat-label">Projects</span>
           </div>
           <div className="stat-chip">
-            <span className="stat-number">20+</span>
-            <span className="stat-label">Projects Done</span>
-          </div>
-          <div className="stat-chip">
-            <span className="stat-number">10+</span>
-            <span className="stat-label">Happy Clients</span>
+            <span className="stat-number">2</span>
+            <span className="stat-label">Internships</span>
           </div>
         </div>
 
-        <button className="about-btn">More About Me</button>
-      </div>
+        <a href="#projects" className="about-btn">
+          View Projects
+        </a>
+      </motion.div>
     </section>
   );
 }

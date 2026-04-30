@@ -19,10 +19,12 @@
 ════════════════════════════════════ */
 .services {
   position: relative;
-  padding: 90px 80px;
+  padding: 10px 80px;
   background: var(--bg-dark);
   font-family: var(--font);
   overflow: hidden;
+  text-align: center;
+  
 }
 
 /* Subtle dot grid texture */
@@ -101,7 +103,7 @@
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 20px;
 }
 
 /* ════════════════════════════════════
@@ -111,13 +113,14 @@
   position: relative;
   background: var(--bg-card);
   border-radius: 16px;
-  padding: 36px 30px;
+  padding: 30px 40px;
   border: 1.5px solid rgba(0, 229, 255, 0.15);
   display: flex;
   flex-direction: column;
   gap: 16px;
   cursor: default;
-  overflow: hidden;
+  overflow: visible;
+  height: auto;
 
   /* Entry animation — hidden by default */
   opacity: 0;
@@ -128,6 +131,10 @@
     border-color 0.4s ease,
     background 0.4s ease,
     box-shadow 0.4s ease;
+}
+
+.srv-card.active {
+  overflow: visible;   /* allow expansion */
 }
 
 /* Visible state (added by IntersectionObserver) */
@@ -311,4 +318,34 @@
   .srv-card__desc {
     font-size: 0.83rem;
   }
+}
+
+.srv-card__btn:hover {
+  background: var(--cyan);
+  color: #0a0f1e;
+  transform: translateY(-2px);
+}
+
+/* DEFAULT HIDDEN */
+.srv-card__more {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  
+}
+
+/* WHEN CLICKED (ACTIVE) */
+.srv-card.active .srv-card__more {
+  max-height: 1000px; /* 🔥 IMPORTANT increase */
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 12px;
+}
+
+/* TEXT STYLE */
+.srv-card__more p {
+  font-size: 14px;
+  color: #e2e8f0;
+  margin: 4px 0;
 }
