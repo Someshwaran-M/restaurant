@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --cyan:         #00e5ff;
+  --purple:       #b44fff;
+  --pink:         #ff3cac;
+  --bg-dark:      #0a0f1e;
+  --bg-nav:       #0d1226;
+  --text-primary: #ffffff;
+  --text-muted:   #cdd6f4;
+  --text-dim:     #8892b0;
+  --font:         'Poppins', sans-serif;
+}
+
+/* ════════════════════════════════════
+   SKILLS SECTION
+════════════════════════════════════ */
+.skills {
+  position: relative;
+  padding: 10px 80px;
+  background: var(--bg-dark);
+  font-family: var(--font);
+  overflow: hidden;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Dot grid texture */
+.skills::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+/* ── Ambient blobs ── */
+.sk-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(90px);
+}
+
+.sk-blob--l {
+  width: 350px;
+  height: 350px;
+  top: 50%;
+  left: -80px;
+  transform: translateY(-50%);
+  background: radial-gradient(circle, rgba(0, 200, 230, 0.1) 0%, transparent 70%);
+  animation: blobFloat 8s ease-in-out infinite alternate;
+}
+
+.sk-blob--r {
+  width: 300px;
+  height: 300px;
+  bottom: -60px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(180, 79, 255, 0.1) 0%, transparent 70%);
+  animation: blobFloat 10s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes blobFloat {
+  from { transform: translateY(-50%) scale(1); }
+  to   { transform: translateY(-44%) scale(1.1); }
+}
+
+/* ════════════════════════════════════
+   INNER LAYOUT — two columns
+════════════════════════════════════ */
+.skills-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  width: 100%;
+  align-items: start;
+}
+
+/* ════════════════════════════════════
+   COLUMN TITLE
+════════════════════════════════════ */
+.skills-col-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 36px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Animated underline */
+.skills-col-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  border-radius: 3px;
+  animation: pulseBar 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseBar {
+  from { width: 60px; opacity: 0.7; }
+  to   { width: 100px; opacity: 1; }
+}
+
+/* ════════════════════════════════════
+   TECHNICAL SKILLS — BAR SECTION
+════════════════════════════════════ */
+.skills-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Each skill row fades up */
+.skill-bar-wrap {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Icon + Name + % badge row */
+.skill-label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.skill-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.skill-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+/* Dark pill badge showing percentage */
+.skill-percent-badge {
+  background: #0d1226;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.08);
+  letter-spacing: 0.5px;
+}
+
+/* Track */
+.skill-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Animated fill */
+.skill-fill {
+  height: 100%;
+  border-radius: 10px;
+  width: 0%;
+  transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--cyan);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+  position: relative;
+}
+
+/* Glowing moving dot at fill tip */
+.skill-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px var(--cyan), 0 0 16px var(--cyan);
+}
+
+/* ════════════════════════════════════
+   PROFESSIONAL SKILLS — CIRCLES
+════════════════════════════════════ */
+.skills-circles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px 24px;
+  justify-items: center;
+}
+
+.circle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: popIn 0.6s ease forwards;
+}
+
+.circle-wrap:nth-child(1) { animation-delay: 0.1s; }
+.circle-wrap:nth-child(2) { animation-delay: 0.2s; }
+.circle-wrap:nth-child(3) { animation-delay: 0.3s; }
+.circle-wrap:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes popIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+.circle-wrap svg {
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.2));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.circle-wrap:hover svg {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.45));
+}
+
+.circle-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — TABLET (≤ 1024px)
+════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .skills {
+    padding: 70px 48px;
+  }
+
+  .skills-inner {
+    gap: 50px;
+  }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 768px)
+════════════════════════════════════ */
+@media (max-width: 768px) {
+  .skills {
+    padding: 60px 28px;
+    min-height: auto;
+  }
+
+  .skills-inner {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .skills-col-title {
+    font-size: 1.4rem;
+  }
+
+  .skill-track {
+    height: 5px;
+  }
+
+  .sk-blob--l {
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE (≤ 400px)
+════════════════════════════════════ */
+@media (max-width: 400px) {
+  .skills {
+    padding: 50px 18px;
+  }
+
+  .skills-circles {
+    gap: 24px 12px;
+  }
+
+  .skills-col-title {
+    font-size: 1.2rem;
+  }
+
+  .circle-label {
+    font-size: 0.8rem;
+  }
+}
+
+.skill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
