@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/contact.css";
+import emailjs from "@emailjs/browser";
 
 /* ─── HOOK ───────────────────────── */
 function useIntersectionObserver(options = {}) {
@@ -108,24 +109,54 @@ function ContactForm({ isVisible }) {
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("sending");
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setStatus("sending");
 
-    await new Promise((res) => setTimeout(res, 1500));
+  try {
+    await emailjs.send(
+      "service_l6wwgmo",
+      "template_v3z3tt3",
+      {
+        from_name: form.name,
+        from_email: form.email,
+        subject: form.subject,
+        message: form.message,
+      },
+      "ITIZsfkr8FcYyycK6"
+    );
 
     setStatus("success");
-    setForm({ name: "", email: "", subject: "", message: "" });
+
+    setForm({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
 
     setTimeout(() => setStatus("idle"), 3000);
-  };
+
+  } catch (error) {
+    console.error(error);
+    setStatus("idle");
+    alert("Failed to send message");
+  }
+};
 
   return (
     <div className={`contact-form-wrap ${isVisible ? "visible" : ""}`}>
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-row">
           <input name="name" placeholder="Your Name" value={form.name} onChange={handleChange} required />
-          <input name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+          <input
+  type="email"
+  name="email"
+  placeholder="Email"
+  value={form.email}
+  onChange={handleChange}
+  required
+/>
         </div>
 
         <input name="subject" placeholder="Subject" value={form.subject} onChange={handleChange} required />

@@ -33,7 +33,7 @@ const projects = [
   accent: "#7c3aed",
   tags: ["python", "Django"],
   icon: <FaUserGraduate />,
-  github: "https://github.com/Someshwaran-M/Student-Career-Counseling",
+  github: "https://github.com/Someshwaran-M/Student-Career-",
 
   // ✅ FIXED: No wrong link
   live: "https://student-career.onrender.com",

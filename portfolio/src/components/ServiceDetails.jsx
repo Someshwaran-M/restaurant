@@ -128,7 +128,7 @@ const ServiceDetails = () => {
     <div className="details-container">
       
       {/* 🔙 Back Button */}
-      <button className="back-btn" onClick={() => navigate("/")}>
+      <button className="back-btn" onClick={() => navigate("/services")}>
         ← Back
       </button>
 
