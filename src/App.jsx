@@ -10,8 +10,8 @@ import Contact from "./components/Contact";
 import ServiceDetails from "./components/ServiceDetails";
 
 import "./styles/global.css";
+//import ThemeToggle from "./components/ThemeToggle";//
 
-// ✅ Home page layout (your full portfolio)
 function Home() {
   return (
     <>
@@ -21,6 +21,7 @@ function Home() {
       <Skills />
       <Projects />
       <Contact />
+     
     </>
   );
 }

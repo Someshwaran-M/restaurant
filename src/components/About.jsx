@@ -87,7 +87,7 @@ function About() {
             <span className="stat-label">Status</span>
           </div>
           <div className="stat-chip">
-            <span className="stat-number">3+</span>
+            <span className="stat-number">6+</span>
             <span className="stat-label">Projects</span>
           </div>
           <div className="stat-chip">

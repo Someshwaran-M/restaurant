@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/projects.css";
 
-/* ✅ IMPORT ICONS */
 import {
   FaCogs,
   FaUserGraduate,
   FaFileAlt,
+  FaUsers,
+  FaBirthdayCake,
+  FaCode,
 } from "react-icons/fa";
 
-/* 🔥 UPDATED PROJECT DATA (WITH ICONS) */
 const projects = [
   {
     id: 1,
@@ -51,6 +52,45 @@ const projects = [
     github: "https://github.com/Someshwaran-M/Online-Exam",
     live: "https://online-exam-theta.vercel.app/",
   },
+  {
+  id: 4,
+  title: "CRM Control Dashboard",
+  category: "React Dashboard",
+  description:
+    "Modern CRM dashboard for managing customers, drivers, orders, branches, and analytics with a responsive admin interface.",
+  gradient: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+  accent: "#3b82f6",
+  tags: ["React", "CSS", "JavaScript"],
+  icon: <FaUsers />,
+  github: "https://github.com/Someshwaran-M/CRM-Control-Dashboard",
+  live: "https://crm-control-dashboard.vercel.app/",
+},
+{
+  id: 5,
+  title: "Birthday Celebration Website",
+  category: "Frontend Web Application",
+  description:
+    "Interactive birthday celebration website featuring animations, photo gallery, wishes, memories, music, and responsive design.",
+  gradient: "linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%)",
+  accent: "#ec4899",
+  tags: ["React", "CSS", "Animations"],
+  icon: <FaBirthdayCake />,
+  github: "https://github.com/Someshwaran-M/Birthday-Website",
+  live: "https://birthdayweb-three.vercel.app/",
+},
+{
+  id: 6,
+  title: "CodeGenZ Solutions",
+  category: "Company Portfolio Website",
+  description:
+    "Professional business website showcasing software development services, company portfolio, technologies, and contact information.",
+  gradient: "linear-gradient(135deg, #1e293b 0%, #0f766e 100%)",
+  accent: "#14b8a6",
+  tags: ["React", "Responsive", "UI/UX"],
+  icon: <FaCode />,
+  github: "https://github.com/Someshwaran-M/CodeGenZ-Solutions",
+  live: "https://codegenzsolutions-sigma.vercel.app/",
+},
   
 ];
 

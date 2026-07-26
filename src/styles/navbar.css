@@ -10,16 +10,7 @@
 }
 
 /* ── ROOT VARIABLES ── */
-:root {
-  --cyan: #00e5ff;
-  --purple: #b44fff;
-  --pink: #ff3cac;
-  --bg-dark: #0a0f1e;
-  --bg-nav: #0d1226;
-  --text-primary: #ffffff;
-  --text-muted: #cdd6f4;
-  --font: 'Poppins', sans-serif;
-}
+
 
 /* ── NAVBAR ── */
 .navbar {

@@ -11,6 +11,7 @@ function Navbar() {
     { name: "Skills", id: "skills" },
     { name: "Projects", id: "projects" }, // ✅ FIXED
     { name: "Contact", id: "contact" },
+    
   ];
 
   const handleScroll = (id) => {
