@@ -9,8 +9,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import ServiceDetails from "./components/ServiceDetails";
 
-import "./styles/global.css";
-//import ThemeToggle from "./components/ThemeToggle";//
+
 
 function Home() {
   return (
