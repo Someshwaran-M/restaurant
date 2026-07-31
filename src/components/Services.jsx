@@ -112,7 +112,7 @@ function Services({ darkMode }) {
 />
   <div className="relative z-10 mx-auto max-w-7xl px-6">
 
-    {/* Heading */}
+
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -144,7 +144,6 @@ function Services({ darkMode }) {
 
     </motion.div>
 
-    {/* Cards */}
     <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
 
     {services.map((service, index) => {
@@ -165,7 +164,7 @@ function Services({ darkMode }) {
     ? "border border-white/10 bg-[#141922] hover:border-orange-500/50 hover:shadow-[0_0_30px_rgba(249,115,22,.18)]"
     : "border border-gray-200 bg-white shadow-lg hover:border-orange-400"
 }`}>
-      {/* Icon */}
+      
       <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-orange-500/10 transition-all duration-500 group-hover:bg-orange-500">
 
         <Icon
@@ -175,14 +174,14 @@ function Services({ darkMode }) {
 
       </div>
 
-      {/* Title */}
+     
       <h3 className={`mt-5 text-2xl font-bold ${
   darkMode ? "text-white" : "text-gray-900"
 }`}>
         {service.title}
       </h3>
 
-      {/* Description */}
+  
       <p className={`mt-3 text-base leading-7 ${
   darkMode ? "text-gray-400" : "text-gray-600"
 }`}>
@@ -195,8 +194,6 @@ function Services({ darkMode }) {
 
     </div>
 
-    {/* ================= HOW IT WORKS ================= */}
-
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -205,7 +202,6 @@ function Services({ darkMode }) {
       className="mt-20"
     >
 
-      {/* Heading */}
 
       <div className="text-center">
 
@@ -226,18 +222,15 @@ function Services({ darkMode }) {
 
       </div>
 
-      {/* Timeline */}
 
       <div className="relative mt-24">
 
-        {/* Line */}
         <div className={`absolute left-0 top-10 hidden h-[2px] w-full lg:block ${
   darkMode ? "bg-white/10" : "bg-gray-300"
 }`}></div>
 
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
 
-          {/* Step 1 */}
           <div className="relative text-center">
 
             <div className="relative mx-auto flex h-18 w-18 items-center justify-center rounded-3xl border border-orange-500/40 bg-orange-500/10">
@@ -264,7 +257,6 @@ function Services({ darkMode }) {
 
           </div>
 
-          {/* Step 2 */}
           <div className="relative text-center">
 
             <div className="relative mx-auto flex h-18 w-18 items-center justify-center rounded-3xl border border-orange-500/40 bg-orange-500/10">
@@ -291,7 +283,6 @@ function Services({ darkMode }) {
 
           </div>
 
-          {/* Step 3 */}
           <div className="relative text-center">
 
             <div className="relative mx-auto flex h-18 w-18 items-center justify-center rounded-3xl border border-orange-500/40 bg-orange-500/10">
@@ -318,7 +309,6 @@ function Services({ darkMode }) {
 
           </div>
 
-          {/* Step 4 */}
           <div className="relative text-center">
 
             <div className="relative mx-auto flex h-18 w-18 items-center justify-center rounded-3xl border border-orange-500/40 bg-orange-500/10">
@@ -352,7 +342,6 @@ function Services({ darkMode }) {
     </motion.div>
 
   </div>
-  {/* ================= WHY CHOOSE US ================= */}
 
 <section className="mt-32">
 
@@ -407,8 +396,6 @@ function Services({ darkMode }) {
     : "border border-gray-200 bg-white shadow-lg hover:border-orange-400"
 }`}
 >
-
-          {/* Icon */}
 
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/10 transition-all duration-500 group-hover:bg-orange-500">
 
@@ -477,7 +464,6 @@ function Services({ darkMode }) {
 
 </div>
 </section>
-
 
 </>
   );

@@ -37,7 +37,7 @@ function App() {
         </section>
 
         <section id="destinationcards">
-          <DestinationCards />
+          <DestinationCards darkMode={darkMode} />
         </section>
 
         <section id="services">

@@ -86,9 +86,11 @@ const destinations = [
   },
 ];
 
-function DestinationCards() {
+function DestinationCards({ darkMode }) {
   return (
-    <section className="bg-[#070B15] py-24">
+    <section className={`py-20 transition-all duration-500 ${
+  darkMode ? "bg-[#070B15]" : "bg-white"
+}`}>
 
       <div className="max-w-7xl mx-auto px-6">
 
@@ -97,14 +99,16 @@ function DestinationCards() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="mx-auto max-w-4xl text-center"
         >
 
           <span className="uppercase tracking-[6px] text-orange-400 font-bold">
             One Way Destinations
           </span>
 
-          <h2 className="mt-6 text-5xl lg:text-6xl font-black text-white leading-tight">
+          <h3 className={`mt-4 text-4xl lg:text-5xl font-extrabold leading-tight ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
 
             One Way Taxi Destinations Across{" "}
 
@@ -112,16 +116,18 @@ function DestinationCards() {
               Tamil Nadu, Kerala & Karnataka
             </span>
 
-          </h2>
+          </h3>
 
-          <p className="mt-6 text-gray-400 text-lg max-w-3xl mx-auto">
+          <p className={`mx-auto mt-5 max-w-2xl text-base leading-7 ${
+  darkMode ? "text-gray-400" : "text-gray-600"
+}`}>
             Premium one way taxi service with transparent pricing,
             professional drivers and 24×7 booking support.
           </p>
 
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mt-20">
+        <div className="mt-14 grid gap-6 lg:grid-cols-2">
 
        {destinations.map((item, index) => (
 
@@ -134,14 +140,18 @@ function DestinationCards() {
       delay: index * 0.08,
     }}
     viewport={{ once: true }}
-    className="group overflow-hidden rounded-3xl border border-white/10 bg-[#121721] hover:border-orange-500/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10"
+    className={`group overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 ${
+  darkMode
+    ? "border border-white/10 bg-[#121721] hover:border-orange-500/40 hover:shadow-xl hover:shadow-orange-500/20"
+    : "border border-gray-200 bg-white shadow-lg hover:border-orange-400"
+}`}
   >
 
     <div className="grid md:grid-cols-[46%_54%]">
 
       {/* Left Image */}
 
-      <div className="relative overflow-hidden h-[260px]">
+      <div className="relative overflow-hidden h-[220px]">
 
         <img
           src={item.image}
@@ -165,17 +175,21 @@ function DestinationCards() {
 
       {/* Right Content */}
 
-      <div className="flex flex-col justify-between p-6">
+      <div className="flex flex-col justify-between p-3">
 
         <div>
 
-          <h3 className="text-3xl font-bold text-white leading-tight">
+          <h3 className={`text-2xl font-bold leading-tight ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
 
             {item.title}
 
           </h3>
 
-          <p className="mt-3 text-gray-400 text-lg">
+          <p className={`mt-2 text-base ${
+  darkMode ? "text-gray-400" : "text-gray-600"
+}`}>
 
             {item.subtitle}
 
@@ -189,9 +203,9 @@ function DestinationCards() {
 
           <a
             href="tel:+919888444952"
-            className="flex-1 h-14 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center gap-3 text-white font-bold shadow-lg shadow-orange-500/20"
+            className="flex-1 h-11 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center gap-3 text-white text-sm font-semibold shadow-lg shadow-orange-500/20"
           >
-            <Phone size={20} />
+            <Phone size={16} />
             Call Now
           </a>
 
@@ -199,9 +213,9 @@ function DestinationCards() {
             href="https://wa.me/919888444952"
             target="_blank"
             rel="noreferrer"
-            className="flex-1 h-14 rounded-full border border-orange-500 bg-orange-500/10 hover:bg-orange-500 transition-all duration-300 flex items-center justify-center gap-3 text-orange-400 hover:text-white font-bold"
+            className="flex-1 h-11 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center gap-3 text-white text-sm font-semibold shadow-lg shadow-orange-500/20"
           >
-            <MessageCircle size={20} />
+            <MessageCircle size={16} />
             Get Fare
           </a>
 
@@ -209,7 +223,9 @@ function DestinationCards() {
 
         {/* Bottom Info */}
 
-        <p className="mt-5 text-sm text-gray-500 leading-7">
+        <p className={`mt-4 text-xs leading-6 ${
+  darkMode ? "text-gray-500" : "text-gray-500"
+}`}>
           Fixed fare • No hidden charges • 24/7 Booking Support
         </p>
 
