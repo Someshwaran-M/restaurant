@@ -43,38 +43,45 @@ const faqs = [
       "We provide taxi services across Tamil Nadu, Kerala, Karnataka, Pondicherry and nearby cities.",
   },
 ];
-
-function Faq() {
+function Faq({ darkMode }) {
   const [active, setActive] = useState(0);
 
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-[#080C16] py-28"
+      className={`relative overflow-hidden py-20 transition-all duration-500 ${
+  darkMode ? "bg-[#080C16]" : "bg-white"
+}`}
     >
-      {/* Background Glow */}
+      <div
+  className={`absolute left-0 top-40 h-80 w-80 rounded-full blur-[120px] ${
+    darkMode ? "bg-orange-500/10" : "bg-orange-300/20"
+  }`}
+/>
 
-      <div className="absolute left-0 top-40 h-96 w-96 rounded-full bg-orange-500/10 blur-[140px]" />
-
-      <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-orange-600/10 blur-[150px]" />
+<div
+  className={`absolute right-0 bottom-0 h-80 w-80 rounded-full blur-[120px] ${
+    darkMode ? "bg-orange-600/10" : "bg-yellow-300/20"
+  }`}
+/>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-
-        {/* Heading */}
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: .6 }}
           viewport={{ once: true }}
-          className="mx-auto mb-16 max-w-4xl text-center"
+          className="mx-auto mb-12 max-w-3xl text-center"
         >
 
           <span className="text-sm font-bold uppercase tracking-[6px] text-orange-400">
             FAQ
           </span>
 
-          <h2 className="mt-5 text-5xl font-extrabold text-white md:text-6xl">
+          <h2 className={`mt-4 text-4xl font-extrabold md:text-5xl ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
             Good To{" "}
             <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
               Know
@@ -83,8 +90,7 @@ function Faq() {
 
         </motion.div>
 
-        {/* FAQ */}
-        <div className="mx-auto max-w-5xl space-y-5">
+        <div className="mx-auto max-w-4xl space-y-4">
                       {faqs.map((item, index) => (
 
             <motion.div
@@ -96,19 +102,27 @@ function Faq() {
                 delay: index * 0.05,
               }}
               viewport={{ once: true }}
-              className="overflow-hidden rounded-[26px] border border-white/10 bg-[#141922]"
+              className={`overflow-hidden rounded-2xl transition-all duration-300 ${
+  darkMode
+    ? "border border-white/10 bg-[#141922]"
+    : "border border-gray-200 bg-white shadow-md"
+}`}
             >
-
-              {/* Question */}
 
               <button
                 onClick={() =>
                   setActive(active === index ? -1 : index)
                 }
-                className="flex w-full items-center justify-between px-8 py-7 text-left transition hover:bg-orange-500/5"
+                className={`flex w-full items-center justify-between px-6 py-5 transition ${
+  darkMode
+    ? "hover:bg-orange-500/5"
+    : "hover:bg-orange-50"
+}`}
               >
 
-                <span className="text-2xl font-bold text-white">
+                <span className={`text-lg font-semibold ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
                   {item.question}
                 </span>
 
@@ -120,8 +134,6 @@ function Faq() {
                 />
 
               </button>
-
-              {/* Answer */}
 
               <AnimatePresence>
 
@@ -141,9 +153,15 @@ function Faq() {
                     className="overflow-hidden"
                   >
 
-                    <div className="border-t border-white/10 px-8 pb-8 pt-6">
+                    <div className={`px-6 pb-6 pt-5 ${
+  darkMode
+    ? "border-t border-white/10"
+    : "border-t border-gray-200"
+}`}>
 
-                      <p className="text-lg leading-9 text-gray-400">
+                      <p className={`text-base leading-7 ${
+  darkMode ? "text-gray-400" : "text-gray-600"
+}`}>
                         {item.answer}
                       </p>
 
@@ -161,17 +179,15 @@ function Faq() {
 
         </div>
 
-                {/* ================= CTA ================= */}
-
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mt-24"
+          className="mt-14"
         >
 
-          <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-r from-orange-500 via-orange-400 to-amber-400 px-8 py-20 text-center shadow-[0_30px_80px_rgba(249,115,22,0.35)] md:px-20">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500 via-orange-400 to-amber-400 px-8 py-14 text-center shadow-[0_20px_50px_rgba(249,115,22,0.3)] md:px-16">
 
             {/* Background Glow */}
             <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
@@ -179,39 +195,33 @@ function Faq() {
 
             <div className="relative z-10">
 
-              <h2 className="text-4xl font-extrabold text-white md:text-6xl">
+              <h2 className="text-3xl font-extrabold text-white md:text-5xl">
                 Bags Packed?
                 <br />
                 Let's Hit The Road!
               </h2>
 
-              <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-gray-300">
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-100">
                 Book your taxi in seconds via WhatsApp or call us directly.
                 Fixed pricing, professional drivers, 24/7 support and
                 comfortable rides across South India.
               </p>
 
-              {/* Buttons */}
-
-              <div className="mt-12 flex flex-col items-center justify-center gap-5 md:flex-row">
-
-                {/* WhatsApp */}
+              <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row">
 
                 <a
                   href="https://wa.me/919888444952"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex h-16 items-center justify-center gap-3 rounded-full bg-[#0B101B] px-10 text-lg font-bold text-white transition hover:scale-105"
-                >
-                  <MessageCircle size={24} />
+                  className="flex h-12 items-center justify-center gap-2 rounded-full bg-[#0B101B] px-8 text-base font-semibold text-white transition hover:scale-105"
+    >
+    <MessageCircle size={24} />
                   WhatsApp Booking
                 </a>
 
-                {/* Call */}
-
                 <a
                   href="tel:+919888444952"
-                  className="flex h-16 items-center justify-center gap-3 rounded-full border-2 border-[#0B101B] px-10 text-lg font-bold text-[#0B101B] transition hover:bg-[#0B101B] hover:text-white"
+                  className="flex h-12 items-center justify-center gap-2 rounded-full border-2 border-[#0B101B] px-8 text-base font-semibold text-[#0B101B] transition hover:bg-[#0B101B] hover:text-white"
                 >
                   <Phone size={24} />
                   +91 98884 44952
@@ -226,9 +236,6 @@ function Faq() {
         </motion.div>
 
         </div>
-
-        
-              
 
     </section>
   );

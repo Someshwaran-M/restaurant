@@ -50,11 +50,11 @@ function App() {
 
 
         <section id="testimonials">
-          <Testimonials />
+          <Testimonials darkMode={darkMode} />
         </section>
 
         <section id="faq">
-          <Faq />
+          <Faq darkMode={darkMode}/>
         </section>
 
       <Tours darkMode={darkMode} />
