@@ -41,11 +41,11 @@ function App() {
         </section>
 
         <section id="services">
-          <Services />
+          <Services darkMode={darkMode} />
         </section>
 
         <section id="serviceareas">
-          <ServiceAreas />
+          <ServiceAreas darkMode={darkMode} />
         </section>
 
 

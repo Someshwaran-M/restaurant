@@ -104,14 +104,10 @@ function Testimonials({ darkMode }) {
 }`}
             >
 
-              {/* Quote Icon */}
-
               <Quote
                 size={36}
                 className="absolute right-8 top-8 text-orange-500/20 group-hover:text-orange-500/40"
               />
-
-              {/* Stars */}
 
               <div className="flex gap-2">
 
@@ -126,9 +122,6 @@ function Testimonials({ darkMode }) {
                 ))}
 
               </div>
-
-              {/* Review */}
-
               <p className={`mt-5 text-base leading-7 ${
   darkMode ? "text-gray-300" : "text-gray-600"
 }`}>
@@ -138,8 +131,6 @@ function Testimonials({ darkMode }) {
               <div className={`my-6 h-px w-full ${
   darkMode ? "bg-white/10" : "bg-gray-200"
 }`}></div>
-
-              {/* Customer */}
 
               <h3 className={`text-xl font-bold ${
   darkMode ? "text-white" : "text-gray-900"
@@ -156,7 +147,6 @@ function Testimonials({ darkMode }) {
           ))}
 
         </div>
-
         
               </div>
 

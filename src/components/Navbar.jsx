@@ -58,7 +58,7 @@ function Navbar({ darkMode, setDarkMode }) {
             <a
               href={`#${item.toLowerCase()}`}
               className={`relative font-semibold tracking-wide transition-all duration-300 hover:text-orange-500 after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full ${
-  darkMode ? "text-white" : "text-white"
+  darkMode ? "text-white" : "text-black"
 }`}
             >
               {item}

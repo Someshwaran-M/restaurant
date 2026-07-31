@@ -70,48 +70,58 @@ const allCities = [
   "Virudhunagar",
   "Villupuram",
 ];
-
-function ServiceAreas() {
+function ServiceAreas({ darkMode }) {
   return (
     <section
       id="service-areas"
-      className="relative overflow-hidden bg-[#0A0F1A] py-28"
+      className={`relative overflow-hidden py-20 transition-all duration-500 ${
+  darkMode ? "bg-[#0A0F1A]" : "bg-white"
+}`}
     >
-      {/* Background Glow */}
-      <div className="absolute left-0 top-40 h-96 w-96 rounded-full bg-orange-500/10 blur-[150px]" />
+      <div
+  className={`absolute left-0 top-40 h-80 w-80 rounded-full blur-[120px] ${
+    darkMode ? "bg-orange-500/10" : "bg-orange-300/20"
+  }`}
+/>
 
-      <div className="absolute right-0 bottom-20 h-96 w-96 rounded-full bg-orange-600/10 blur-[160px]" />
-
+<div
+  className={`absolute right-0 bottom-20 h-80 w-80 rounded-full blur-[120px] ${
+    darkMode ? "bg-orange-600/10" : "bg-yellow-300/20"
+  }`}
+/>
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-             {/* Heading */}
+          
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mx-auto mb-20 max-w-5xl text-center"
+          className="mx-auto mb-14 max-w-4xl text-center"
         >
           <span className="text-sm font-bold uppercase tracking-[6px] text-orange-400">
             SERVICE AREAS
           </span>
 
-          <h2 className="mt-5 text-5xl font-extrabold leading-tight text-white md:text-6xl">
+          <h3 className={`mt-4 text-4xl font-extrabold leading-tight md:text-5xl ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
             Taxi Services Across{" "}
             <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300 bg-clip-text text-transparent">
               Tamil Nadu
             </span>{" "}
             & South India
-          </h2>
+          </h3>
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-gray-400">
+          <p className={`mx-auto mt-5 max-w-3xl text-base leading-7 ${
+  darkMode ? "text-gray-400" : "text-gray-600"
+}`}>
             Safe, affordable and reliable taxi services for airport transfers,
             one-way trips, round trips and outstation travel with professional
             drivers.
           </p>
         </motion.div>
 
-        {/* Featured Cities */}
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
           {featuredCities.map((city, index) => (
 
@@ -124,15 +134,19 @@ function ServiceAreas() {
                 delay: index * 0.08,
               }}
               viewport={{ once: true }}
-              className="group rounded-[28px] border border-white/10 bg-[#141922] p-8 transition-all duration-500 hover:-translate-y-2 hover:border-orange-500/50 hover:shadow-[0_0_40px_rgba(249,115,22,0.18)]"
+              className={`group rounded-2xl p-6 transition-all duration-500 hover:-translate-y-2 ${
+  darkMode
+    ? "border border-white/10 bg-[#141922] hover:border-orange-500/50 hover:shadow-[0_0_30px_rgba(249,115,22,.18)]"
+    : "border border-gray-200 bg-white shadow-lg hover:border-orange-400"
+}`}
             >
 
               <div className="flex items-start gap-5">
 
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10 transition group-hover:bg-orange-500">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500/10 transition group-hover:bg-orange-500">
 
                   <MapPin
-                    size={32}
+                    size={26}
                     className="text-orange-400 group-hover:text-white"
                   />
 
@@ -140,15 +154,19 @@ function ServiceAreas() {
 
                 <div className="flex-1">
 
-                  <h3 className="text-3xl font-bold text-white">
+                  <h3 className={`text-2xl font-bold ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
                     {city.name}
                   </h3>
 
-                  <p className="mt-2 text-lg text-gray-400">
+                  <p className={`mt-2 text-base ${
+  darkMode ? "text-gray-400" : "text-gray-600"
+}`}>
                     {city.desc}
                   </p>
 
-                  <button className="mt-5 inline-flex items-center gap-2 font-semibold text-orange-400 transition hover:text-orange-300">
+                  <button className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-orange-500 transition hover:text-orange-600">
 
                     View Taxi
 
@@ -168,9 +186,8 @@ function ServiceAreas() {
 
         </div>
 
-        {/* All Cities */}
 
-        <div className="mt-20 flex flex-wrap justify-center gap-4">
+        <div className="mt-12 flex flex-wrap justify-center gap-3">
 
           {allCities.map((city, index) => (
 
@@ -183,7 +200,11 @@ function ServiceAreas() {
                 delay: index * 0.02,
               }}
               viewport={{ once: true }}
-              className="rounded-full border border-white/10 bg-[#141922] px-7 py-3 text-base font-medium text-gray-300 transition-all duration-300 hover:border-orange-500 hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/20"
+              className={`rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 ${
+  darkMode
+    ? "border border-white/10 bg-[#141922] text-gray-300 hover:border-orange-500 hover:bg-orange-500 hover:text-white"
+    : "border border-gray-200 bg-white text-gray-700 hover:border-orange-500 hover:bg-orange-500 hover:text-white"
+}`}
             >
               {city}
             </motion.button>
@@ -192,66 +213,73 @@ function ServiceAreas() {
 
         </div>
 
-        {/* Bottom CTA */}
+       <motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  viewport={{ once: true }}
+  className="mt-14"
+>
+  <div
+    className={`relative overflow-hidden rounded-3xl px-6 py-10 md:px-12 ${
+      darkMode
+        ? "border border-white/10 bg-[#101827]"
+        : "border border-gray-200 bg-gray-50 shadow-lg"
+    }`}
+  >
+  
+    <div
+      className={`absolute -left-20 top-0 h-48 w-48 rounded-full blur-[100px] ${
+        darkMode ? "bg-orange-500/20" : "bg-orange-300/20"
+      }`}
+    />
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-24 rounded-[32px] border border-orange-500/20 bg-gradient-to-r from-orange-500/10 via-[#141922] to-orange-500/10 p-10"
-        >
-
-          <section className="relative overflow-hidden bg-[#0B101B] py-20">
-
-  {/* Background Glow */}
-  <div className="absolute left-0 top-0 h-full w-1/2 bg-orange-500/10 blur-[120px]" />
-
-  <div className="relative z-10 mx-auto max-w-7xl px-6">
-
-    <div className="flex flex-col items-center justify-center text-center">
-
-      <h2 className="text-4xl font-extrabold text-white md:text-5xl">
+    <div
+      className={`relative z-10 flex flex-col items-center text-center`}
+    >
+      <h2
+        className={`text-2xl font-bold md:text-4xl ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}
+      >
         Book Taxi from Any City Instantly
       </h2>
 
-      <p className="mt-4 text-lg text-gray-400">
+      <p
+        className={`mt-3 text-sm md:text-base ${
+          darkMode ? "text-gray-400" : "text-gray-600"
+        }`}
+      >
         Fixed fare • No hidden charges • Instant confirmation
       </p>
 
-      <div className="mt-10 flex flex-col gap-5 sm:flex-row">
-
-        {/* Call Button */}
-
+      <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+    
         <a
           href="tel:+918884449452"
-          className="flex items-center justify-center gap-3 rounded-full border-2 border-orange-500 px-10 py-4 text-xl font-bold text-orange-400 transition-all duration-300 hover:bg-orange-500 hover:text-white"
+          className={`flex items-center justify-center gap-2 rounded-full px-7 py-3 text-base font-semibold transition-all duration-300 ${
+            darkMode
+              ? "border border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white"
+              : "border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
+          }`}
         >
-          <Phone size={24} />
+          <Phone size={18} />
           Call Now
         </a>
-
-        {/* WhatsApp Button */}
 
         <a
           href="https://wa.me/918884449452"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center justify-center gap-3 rounded-full bg-orange-500 px-10 py-4 text-xl font-bold text-white transition-all duration-300 hover:bg-orange-600"
+          className="flex items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-3 text-base font-semibold text-white transition-all duration-300 hover:bg-orange-600"
         >
-          <MessageCircle size={24} />
-          Get Instant Fare on WhatsApp
+          <MessageCircle size={18} />
+          Get Instant Fare on Whatsapp
         </a>
-
       </div>
-
     </div>
-
   </div>
-
-</section>
-
-        </motion.div>
+</motion.div>
               </div>
 
     </section>
