@@ -1,152 +1,491 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import "../styles/hero.css";
-import { FaWhatsapp, FaLinkedin ,FaGithub} from "react-icons/fa";
-// ❌ removed import photo (important)
+import {
+  MapPin,
+  ShieldCheck,
+  Clock3,
+  BadgeDollarSign,
+} from "lucide-react";
 
-const roles = [
-  "Frontend Developer",
-  "Web Designer",
-  "React Developer",
-  "Full Stack Developer",
-];
+import heroImage from "../assets/images/hero.jpg";
 
 function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [typing, setTyping] = useState(true);
-
-  useEffect(() => {
-    const current = roles[roleIndex];
-    let timeout;
-
-    if (typing) {
-      if (displayed.length < current.length) {
-        timeout = setTimeout(
-          () => setDisplayed(current.slice(0, displayed.length + 1)),
-          80
-        );
-      } else {
-        timeout = setTimeout(() => setTyping(false), 1600);
-      }
-    } else {
-      if (displayed.length > 0) {
-        timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 45);
-      } else {
-        setRoleIndex((i) => (i + 1) % roles.length);
-        setTyping(true);
-      }
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, typing, roleIndex]);
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    show: (i = 1) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.2,
-        duration: 0.6,
-      },
-    }),
-  };
-
-  const socials = [
-  {
-    label: "WhatsApp",
-    link: "https://wa.me/9384712673",
-    icon: <FaWhatsapp />,
-  },
-  
-  {
-    label: "Linkedin",
-    link: "https://linkedin.com/in/someshwaran-m-dev",
-    icon: <FaLinkedin />,
-  },
-  {
-    label: "GitHub",
-    link: "https://github.com/Someshwaran-M",
-    icon: <FaGithub />,
-  },
-
-];
-
   return (
-    <section id="home" className="hero">
-      <div className="hero-blob" />
+    <section
+      id="home"
+      className="relative min-h-screen overflow-hidden"
+    >
+      {/* Background */}
+      <div
+  className="absolute top-0 left-0 w-full h-[850px] bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: `url(${heroImage})`,
+  }}
+/>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/65" />
 
-      <motion.div className="hero-left" initial="hidden" animate="show">
-        <motion.p variants={fadeUp} custom={1} className="hero-greeting">
-          Hello, It's Me
-        </motion.p>
+      {/* Orange Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-orange-900/60 via-black/30 to-black/60" />
 
-        <motion.h1 variants={fadeUp} custom={2} className="hero-name">
-          Someshwaran M
-        </motion.h1>
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-40 pb-20">
 
-        <motion.p variants={fadeUp} custom={3} className="hero-role-line">
-          And I'm a{" "}
-          <span className="hero-role-typed">
-            {displayed}
-            <span className="cursor">|</span>
-          </span>
-        </motion.p>
+        <div className="grid lg:grid-cols-2 gap-14 items-start">
 
-        <motion.p variants={fadeUp} custom={4} className="hero-desc">
-          I Have hands-on experience in building scalable web applications 
-          using React.js, Python, and Django. Skilled in developing responsive user interfaces, 
-          designing RESTful APIs, and managing databases with MySQL. Experienced in integrating 
-          frontend and backend systems to deliver efficient, user-focused solutions. Strong 
-          problem-solving mindset with practical exposure through internships and real-world projects.
-        </motion.p>
+          {/* LEFT SIDE */}
 
-        <motion.div className="hero-socials" variants={fadeUp} custom={5}>
-          {socials.map((s, i) => (
-            <a
-              key={s.label}
-              href={s.link}
-              target="_blank"
-              rel="noreferrer"
-              className="social-btn"
-            >
-              {s.icon}
-            </a>
-          ))}
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -70 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: .8 }}
+          >
 
-        <motion.div
-          variants={fadeUp}
-          custom={6}
-          style={{ display: "flex", gap: "12px" }}
-        >
-          <a href="#about" className="btn-more">
-            More About Me
-          </a>
+            {/* Badge */}
 
-          <a href="/Somesh_resume.pdf" download className="btn-more">
-            Download Resume
-          </a>
-        </motion.div>
-      </motion.div>
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-orange-400 bg-orange-500/10 backdrop-blur-xl">
 
-      {/* ✅ IMAGE FIXED */}
-      <motion.div
-        className="hero-right"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-      >
-        <div className="photo-ring-outer">
-          <div className="photo-ring-inner">
-            <img
-              className="profile-img"
-              src="/profile.jpg"
-              alt="Someshwaran"
-            />
-          </div>
+              <span className="w-3 h-3 rounded-full bg-orange-400 animate-pulse" />
+
+              <span className="text-orange-200 font-semibold tracking-wide uppercase">
+                One Way & Outstation Cab Service
+              </span>
+
+            </div>
+
+            {/* Heading */}
+
+            <h1 className="mt-10 text-6xl xl:text-7xl font-extrabold leading-none text-white">
+
+              Book
+
+              <span className="text-orange-400">
+                {" "}One Way
+              </span>
+
+              <br />
+
+              Taxi Across
+
+              <br />
+
+              <span className="text-orange-300">
+                South India
+              </span>
+
+            </h1>
+
+            {/* Description */}
+
+            <p className="mt-8 max-w-xl text-lg leading-9 text-gray-200">
+
+              Travel anywhere in Tamil Nadu, Kerala & Karnataka with reliable
+              taxi service. Fixed fare, clean vehicles and professional
+              drivers for safe outstation and airport rides.
+
+            </p>
+
+            {/* Feature Chips */}
+
+            <div className="mt-10 flex flex-wrap gap-2">
+
+              <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-lg text-white">
+                <BadgeDollarSign size={18} className="text-orange-400" />
+                Fixed Fare
+              </div>
+
+              <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-lg text-white">
+                <ShieldCheck size={18} className="text-orange-400" />
+                No Hidden Charges
+              </div>
+
+              <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-lg text-white">
+                <Clock3 size={18} className="text-orange-400" />
+                24/7 Booking Support
+              </div>
+
+              <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-lg text-white">
+                <MapPin size={18} className="text-orange-400" />
+                Verified Drivers
+              </div>
+
+            </div>
+
+                        {/* Stats */}
+
+            <div className="grid grid-cols-3 gap-2 mt-8 border-t border-white/10 pt-10">
+
+              <div className="flex items-center gap-2">
+
+                <div className="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center">
+                  <MapPin className="text-orange-400" />
+                </div>
+
+                <div>
+                  <h2 className="text-4xl font-bold text-white">
+                    10,000+
+                  </h2>
+
+                  <p className="text-gray-300">
+                    Happy Trips
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="flex items-center gap-4">
+
+                <div className="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center">
+                  <ShieldCheck className="text-orange-400" />
+                </div>
+
+                <div>
+                  <h2 className="text-4xl font-bold text-white">
+                    55+
+                  </h2>
+
+                  <p className="text-gray-300">
+                    Cities Covered
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="flex items-center gap-4">
+
+                <div className="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center">
+                  ★
+                </div>
+
+                <div>
+                  <h2 className="text-4xl font-bold text-white">
+                    5★
+                  </h2>
+
+                  <p className="text-gray-300">
+                    Average Rating
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* Scroll */}
+
+            <div className="mt-14 flex items-center gap-3 text-gray-300">
+
+              <span className="animate-bounce text-2xl">
+                ↓
+              </span>
+
+              Scroll to explore
+
+            </div>
+
+          </motion.div>
+
+          {/* RIGHT SIDE */}
+
+          <motion.div
+            initial={{ opacity: 0, x: 70 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: .8 }}
+            className="rounded-[40px] border border-white/10 bg-white/10 backdrop-blur-2xl p-8 shadow-2xl"
+          >
+
+            <h2 className="text-4xl font-bold text-white">
+              Quick Taxi Booking
+            </h2>
+
+            <p className="text-gray-300 mt-2">
+              One Way • Outstation • Airport Drop
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-5 mt-8">
+
+              <input
+                type="text"
+                placeholder="Pickup Location"
+                className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder:text-gray-400 outline-none"
+              />
+
+              <input
+                type="text"
+                placeholder="Drop Location"
+                className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder:text-gray-400 outline-none"
+              />
+
+              <input
+                type="text"
+                placeholder="Full Name"
+                className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder:text-gray-400 outline-none"
+              />
+
+              <input
+                type="text"
+                placeholder="Mobile Number"
+                className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder:text-gray-400 outline-none"
+              />
+
+              <input
+                type="date"
+                className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white outline-none"
+              />
+
+              <input
+                type="time"
+                className="bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white outline-none"
+              />
+
+              </div>
+                          {/* Trip Type */}
+
+            <div className="mt-8">
+
+              <label className="text-gray-300 text-sm font-semibold uppercase tracking-wide">
+                Trip Type
+              </label>
+
+              <div className="grid grid-cols-2 gap-4 mt-3">
+
+                <button className="rounded-2xl border border-orange-500 bg-orange-500/20 px-6 py-5 text-left hover:bg-orange-500/30 transition">
+
+                  <h3 className="text-white text-xl font-bold">
+                    One Way
+                  </h3>
+
+                  <p className="text-orange-200 text-sm mt-1">
+                    Min 150 KM
+                  </p>
+
+                </button>
+
+                <button className="rounded-2xl border border-white/20 bg-white/5 px-6 py-5 text-left hover:bg-white/10 transition">
+
+                  <h3 className="text-white text-xl font-bold">
+                    Round Trip
+                  </h3>
+
+                  <p className="text-gray-300 text-sm mt-1">
+                    Min 300 KM / Day
+                  </p>
+
+                </button>
+
+              </div>
+
+            </div>
+
+            {/* AC Selection */}
+
+            <div className="mt-8">
+
+              <label className="text-gray-300 text-sm font-semibold uppercase tracking-wide">
+                AC / NON-AC
+              </label>
+
+              <div className="grid grid-cols-2 gap-4 mt-3">
+
+                <button className="rounded-2xl border border-orange-500 bg-orange-500/20 py-4 text-white font-bold hover:bg-orange-500/30 transition">
+                  ❄ AC
+                </button>
+
+                <button className="rounded-2xl border border-white/20 bg-white/5 py-4 text-white font-bold hover:bg-white/10 transition">
+                  Non AC
+                </button>
+
+              </div>
+
+            </div>
+
+            {/* Vehicle Selection */}
+
+            <div className="mt-8">
+
+              <label className="text-gray-300 text-sm font-semibold uppercase tracking-wide">
+                Select Vehicle
+              </label>
+
+              <div className="grid grid-cols-3 gap-4 mt-4">
+
+                {/* Mini */}
+
+                <div className="rounded-2xl border border-white/20 bg-white/5 hover:border-orange-500 hover:bg-orange-500/10 transition cursor-pointer p-4 text-center">
+
+                  <img
+                    src="public/cars/mini.jpg"
+                    alt="Mini"
+                    className="h-20 mx-auto object-contain"
+                  />
+
+                  <p className="text-orange-400 font-bold mt-3">
+                    ₹15/km
+                  </p>
+
+                  <h4 className="text-white font-semibold mt-1">
+                    MINI
+                  </h4>
+
+                </div>
+
+                {/* Sedan */}
+
+                <div className="rounded-2xl border border-orange-500 bg-orange-500/10 cursor-pointer p-4 text-center">
+
+                  <img
+                    src="public/cars/sedan.png"
+                    alt="Sedan"
+                    className="h-20 mx-auto object-contain"
+                  />
+
+                  <p className="text-orange-400 font-bold mt-3">
+                    ₹16/km
+                  </p>
+
+                  <h4 className="text-white font-semibold mt-1">
+                    SEDAN
+                  </h4>
+
+                </div>
+
+                {/* Ertiga */}
+
+                <div className="rounded-2xl border border-white/20 bg-white/5 hover:border-orange-500 hover:bg-orange-500/10 transition cursor-pointer p-4 text-center">
+
+                  <img
+                    src="public/cars/ertiga.jpeg"
+                    alt="Ertiga"
+                    className="h-20 mx-auto object-contain"
+                  />
+
+                  <p className="text-orange-400 font-bold mt-3">
+                    ₹21/km
+                  </p>
+
+                  <h4 className="text-white font-semibold mt-1">
+                    ERTIGA
+                  </h4>
+
+                </div>
+
+                {/* Innova */}
+
+                <div className="rounded-2xl border border-white/20 bg-white/5 hover:border-orange-500 hover:bg-orange-500/10 transition cursor-pointer p-4 text-center">
+
+                  <img
+                    src="public/cars/innova.jpg"
+                    alt="Innova"
+                    className="h-20 mx-auto object-contain"
+                  />
+
+                  <p className="text-orange-400 font-bold mt-3">
+                    ₹22/km
+                  </p>
+
+                  <h4 className="text-white font-semibold mt-1">
+                    INNOVA
+                  </h4>
+
+                </div>
+
+                {/* Traveller */}
+
+                <div className="rounded-2xl border border-white/20 bg-white/5 hover:border-orange-500 hover:bg-orange-500/10 transition cursor-pointer p-4 text-center">
+
+                  <img
+                    src="public/cars/traveller.jpg"
+                    alt="Traveller"
+                    className="h-20 mx-auto object-contain"
+                  />
+
+                  <p className="text-orange-400 font-bold mt-3">
+                    ₹30/km
+                  </p>
+
+                  <h4 className="text-white font-semibold mt-1">
+                    TEMPO TRAVELLER
+                  </h4>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+<a
+  href="https://wa.me/919888444952"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mt-8 flex h-16 w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-xl font-bold text-white shadow-lg shadow-orange-500/30 transition hover:from-orange-600 hover:to-orange-700"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-7 w-7"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M20.52 3.48A11.8 11.8 0 0 0 12.06 0C5.52 0 .18 5.34.18 11.88c0 2.1.54 4.14 1.62 5.94L0 24l6.36-1.68a11.85 11.85 0 0 0 5.7 1.44h.06c6.54 0 11.88-5.34 11.88-11.88 0-3.18-1.26-6.18-3.48-8.4zm-8.46 18.3a9.9 9.9 0 0 1-5.04-1.38l-.36-.18-3.78.96 1.02-3.66-.24-.42A9.88 9.88 0 0 1 2.1 11.88c0-5.46 4.5-9.96 9.96-9.96 2.64 0 5.16 1.02 7.02 2.94a9.82 9.82 0 0 1 2.94 7.02c0 5.46-4.44 9.9-9.96 9.9zm5.46-7.44c-.3-.18-1.8-.9-2.1-.96-.24-.12-.48-.12-.66.18-.18.24-.72.9-.9 1.08-.18.18-.3.18-.6.06-.3-.18-1.2-.42-2.28-1.38-.84-.72-1.44-1.62-1.62-1.92-.18-.3 0-.42.12-.6.12-.12.3-.3.42-.48.12-.12.18-.3.3-.48.06-.18 0-.36-.06-.54-.06-.18-.66-1.62-.9-2.22-.24-.54-.48-.48-.66-.48h-.54c-.18 0-.48.06-.72.3-.24.24-.96.9-.96 2.16s.96 2.46 1.08 2.64c.18.18 1.92 2.94 4.68 4.08.66.3 1.2.48 1.62.6.72.24 1.38.18 1.92.12.6-.12 1.8-.72 2.04-1.44.24-.66.24-1.26.18-1.44-.12-.18-.3-.24-.6-.42z"/>
+  </svg>
+
+  <span>Send Booking via WhatsApp</span>
+</a>
+
+{/* Divider */}
+
+<div className="my-6 flex items-center gap-4">
+
+  <div className="h-px flex-1 bg-white/10"></div>
+
+  <span className="text-sm text-gray-400">
+    or call directly
+  </span>
+
+  <div className="h-px flex-1 bg-white/10"></div>
+
+</div>
+
+{/* Call Button */}
+
+<a
+  href="tel:+919888444952"
+  className="flex h-14 w-full items-center justify-center gap-3 rounded-2xl border-2 border-orange-500 bg-orange-500/5 text-orange-400 text-2xl font-bold transition-all duration-300 hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/30">
+  <span>+918884449452</span>
+</a>
+
+          </motion.div>
+
         </div>
-      </motion.div>
+
+{/* Trust Bar */}
+<div className="mt-8 rounded-full border border-orange-500/30 bg-orange-500/10 px-6 py-5 backdrop-blur-xl">
+
+  <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-orange-100">
+
+    <div className="flex items-center gap-2">
+      <ShieldCheck size={16} className="text-orange-400" />
+      <span>No Hidden Charges</span>
+    </div>
+
+    <div className="flex items-center gap-2">
+      <ShieldCheck size={16} className="text-orange-400" />
+      <span>Verified Drivers</span>
+    </div>
+
+    <div className="flex items-center gap-2">
+      <ShieldCheck size={16} className="text-orange-400" />
+      <span>Instant Confirmation</span>
+    </div>
+
+    <div className="flex items-center gap-2">
+      <ShieldCheck size={16} className="text-orange-400" />
+      <span>Pay Driver Directly</span>
+    </div>
+
+  </div>
+
+</div>
+      </div>
 
     </section>
   );

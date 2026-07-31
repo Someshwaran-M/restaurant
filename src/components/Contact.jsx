@@ -1,223 +1,239 @@
-import { useState, useEffect, useRef } from "react";
-import "../styles/contact.css";
-import emailjs from "@emailjs/browser";
+// src/components/Contact.jsx
 
-/* ─── HOOK ───────────────────────── */
-function useIntersectionObserver(options = {}) {
-  const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+import { motion } from "framer-motion";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Send,
+} from "lucide-react";
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.12, ...options }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return [ref, isVisible];
-}
-
-/* 🔥 CONTACT ITEMS (SVG ICONS) */
-const contactItems = [
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M4 4h16v16H4z" />
-        <path d="M22 6l-10 7L2 6" />
-      </svg>
-    ),
-    label: "Email",
-    value: "msomesh43@gmail.com",
-    href: "mailto:msomesh43@gmail.com",
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.12.89.32 1.76.6 2.6a2 2 0 0 1-.45 2.11L9.91 10.09a16 16 0 0 0 4 4l.66-.24a2 2 0 0 1 2.11.45c.84.28 1.71.48 2.6.6A2 2 0 0 1 22 16.92z"/>
-      </svg>
-    ),
-    label: "Phone",
-    value: "+91 9384712673",
-    href: "tel:+919384712673",
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10z" />
-        <circle cx="12" cy="11" r="2" />
-      </svg>
-    ),
-    label: "Location",
-    value: "Namakkal, Tamil Nadu, India",
-    href: "#",
-  },
-];
-
-/* 🔥 SOCIAL ICONS */
-const socialLinks = [
-  {
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-        <path d="M12 .5C5.7.5.8 5.4.8 11.7c0 5 3.2 9.2 7.6 10.7.6.1.8-.3.8-.6v-2.3c-3.1.7-3.7-1.3-3.7-1.3-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 2.7.8 3.3 2 .1-.7.4-1.1.7-1.3-2.5-.3-5.1-1.2-5.1-5.5 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 1.1.9-.2 1.8-.3 2.7-.3s1.8.1 2.7.3c2.1-1.4 3-1.1 3-1.1.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.3-2.6 5.2-5.1 5.5.4.3.8 1 .8 2v3c0 .3.2.7.8.6 4.4-1.5 7.6-5.7 7.6-10.7C23.2 5.4 18.3.5 12 .5z"/>
-      </svg>
-    ),
-    label: "GitHub",
-    href: "https://github.com/Someshwaran-M",
-  },
-  {
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
-        <path d="M20.45 20.45h-3.6v-5.5c0-1.3-.03-3-1.85-3-1.85 0-2.13 1.45-2.13 2.94v5.56H9.27V9h3.46v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.09 2.09 0 110-4.17 2.09 2.09 0 010 4.17zM7.14 20.45H3.54V9h3.6v11.45z"/>
-      </svg>
-    ),
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/someshwaran-m-dev",
-  },
-];
-
-/* ICONS */
-function SendIcon() {
+function Contact() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <line x1="22" y1="2" x2="11" y2="13" />
-      <polygon points="22 2 15 22 11 13 2 9 22 2" />
-    </svg>
-  );
-}
+    <section
+  id="contact"
+  className="relative overflow-hidden bg-[#080C16] py-28"
+>
+      {/* Background Glow */}
 
-function CheckIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
+<div className="absolute left-0 top-40 h-96 w-96 rounded-full bg-orange-500/10 blur-[140px]" />
 
-/* FORM */
-function ContactForm({ isVisible }) {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
-  const [status, setStatus] = useState("idle");
+<div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-orange-600/10 blur-[150px]" />
 
-  const handleChange = (e) =>
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+<div className="relative z-10 max-w-7xl mx-auto px-6">
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  setStatus("sending");
+        {/* Heading */}
 
-  try {
-    await emailjs.send(
-      "service_l6wwgmo",
-      "template_v3z3tt3",
-      {
-        from_name: form.name,
-        from_email: form.email,
-        subject: form.subject,
-        message: form.message,
-      },
-      "ITIZsfkr8FcYyycK6"
-    );
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: .6 }}
+  viewport={{ once: true }}
+  className="mx-auto mb-20 max-w-4xl text-center"
+>
 
-    setStatus("success");
+  <span className="text-sm font-bold uppercase tracking-[6px] text-orange-400">
+    CONTACT US
+  </span>
 
-    setForm({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+  <h2 className="mt-5 text-5xl font-extrabold text-white md:text-6xl">
+    Let's Plan Your{" "}
+    <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
+      Dream Vacation
+    </span>
+  </h2>
 
-    setTimeout(() => setStatus("idle"), 3000);
+  <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-gray-400">
+    Have questions or need a customized travel package?
+    Our travel experts are always ready to help you.
+  </p>
 
-  } catch (error) {
-    console.error(error);
-    setStatus("idle");
-    alert("Failed to send message");
-  }
-};
+</motion.div>
+        <div className="grid lg:grid-cols-2 gap-16 mt-20">
 
-  return (
-    <div className={`contact-form-wrap ${isVisible ? "visible" : ""}`}>
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <div className="form-row">
-          <input name="name" placeholder="Your Name" value={form.name} onChange={handleChange} required />
-          <input
-  type="email"
-  name="email"
-  placeholder="Email"
-  value={form.email}
-  onChange={handleChange}
-  required
-/>
-        </div>
+          {/* Contact Info */}
 
-        <input name="subject" placeholder="Subject" value={form.subject} onChange={handleChange} required />
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: .6 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-8">
 
-        <textarea name="message" placeholder="Your Message" value={form.message} onChange={handleChange} required />
+              <div className="group flex gap-5 rounded-[28px] border border-white/10 bg-[#141922] p-6 transition-all duration-500 hover:-translate-y-2 hover:border-orange-500/40 hover:shadow-[0_0_35px_rgba(249,115,22,.18)]">
 
-        {status === "success" && (
-          <div className="success-banner">
-            <CheckIcon /> Message sent!
-          </div>
-        )}
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10 transition group-hover:bg-orange-500">
+                  <Phone className="text-orange-400 group-hover:text-white transition" size={30} />
+                </div>
 
-        <button type="submit" className="submit-btn">
-          {status === "sending" ? "Sending..." : "Send Message"}
-          <SendIcon />
-        </button>
-      </form>
-    </div>
-  );
-}
+                <div>
+                  <h3 className="text-xl font-bold text-white">
+                    Call Us
+                  </h3>
 
-/* MAIN */
-export default function Contact() {
-  const [titleRef, titleVisible] = useIntersectionObserver();
-  const [infoRef, infoVisible] = useIntersectionObserver();
-  const [formRef, formVisible] = useIntersectionObserver();
+                  <p className="text-gray-400 mt-2">
+                    +91 98765 43210
+                  </p>
 
-  return (
-    <section id="contact" className="contact-section">
-      <div className="contact-blob blob-1" />
-      <div className="contact-blob blob-2" />
+                  <p className="text-gray-400">
+                    +91 98765 43211
+                  </p>
+                </div>
 
-      <div ref={titleRef} className={`contact-title-wrap ${titleVisible ? "visible" : ""}`}>
-        <h2 className="contact-title">Get In <span>Touch</span></h2>
-      </div>
-
-      <div className="contact-layout">
-        <div ref={infoRef} className={`contact-info ${infoVisible ? "visible" : ""}`}>
-          {contactItems.map((item) => (
-            <a key={item.label} className="contact-item" href={item.href}>
-              <div className="item-icon">{item.icon}</div>
-              <div>
-                <strong>{item.label}</strong>
-                <p>{item.value}</p>
               </div>
-            </a>
-          ))}
 
-          <div className="social-row">
-            {socialLinks.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" className="social-btn">
-                {s.icon}
-              </a>
-            ))}
-          </div>
+              <div className="group flex gap-5 rounded-[28px] border border-white/10 bg-[#141922] p-6 transition-all duration-500 hover:-translate-y-2 hover:border-orange-500/40 hover:shadow-[0_0_35px_rgba(249,115,22,.18)]">
+
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10 transition group-hover:bg-orange-500">
+                  <Mail className="text-orange-400 group-hover:text-white transition" size={30} />
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-white">
+                    Email
+                  </h3>
+
+                  <p className="text-gray-400 mt-2">
+                    info@nagmatravels.com
+                  </p>
+
+                  <p className="text-gray-400">
+                    support@nagmatravels.com
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="group flex gap-5 rounded-[28px] border border-white/10 bg-[#141922] p-6 transition-all duration-500 hover:-translate-y-2 hover:border-orange-500/40 hover:shadow-[0_0_35px_rgba(249,115,22,.18)]">
+
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10 transition group-hover:bg-orange-500">
+                  <MapPin className="text-orange-400 group-hover:text-white transition" size={30} />
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-white">
+                    Office Address
+                  </h3>
+
+                  <p className="text-gray-400 mt-2">
+                    123 Travel Street,
+                  </p>
+
+                  <p className="text-gray-400">
+                    Chennai, Tamil Nadu, India
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="group flex gap-5 rounded-[28px] border border-white/10 bg-[#141922] p-6 transition-all duration-500 hover:-translate-y-2 hover:border-orange-500/40 hover:shadow-[0_0_35px_rgba(249,115,22,.18)]">
+
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10 transition group-hover:bg-orange-500">
+                  <Clock className="text-orange-400 group-hover:text-white transition" size={30} />
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-white">
+                    Working Hours
+                  </h3>
+
+                  <p className="text-gray-400 mt-2">
+                    Monday - Saturday
+                  </p>
+
+                  <p className="text-gray-400">
+                    09:00 AM - 07:00 PM
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: .6 }}
+            viewport={{ once: true }}
+          >
+            <div className="rounded-[30px] border border-white/10 bg-[#141922] p-10 shadow-2xl">
+
+              <h3 className="mb-8 text-3xl font-bold text-white">
+                Send Us a Message
+              </h3>
+
+              <form className="space-y-6">
+
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  className="w-full rounded-xl border border-white/10 bg-[#1B2230] px-5 py-4 text-white placeholder:text-gray-400 outline-none transition focus:border-orange-500"
+                />
+
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  className="w-full rounded-xl border border-white/10 bg-[#1B2230] px-5 py-4 text-white placeholder:text-gray-400 outline-none transition focus:border-orange-500"
+                />
+
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  className="w-full rounded-xl border border-white/10 bg-[#1B2230] px-5 py-4 text-white placeholder:text-gray-400 outline-none transition focus:border-orange-500"
+                />
+
+                <input
+                  type="text"
+                  placeholder="Destination"
+                  className="w-full rounded-xl border border-white/10 bg-[#1B2230] px-5 py-4 text-white placeholder:text-gray-400 outline-none transition focus:border-orange-500"
+                />
+
+                <textarea
+                  rows="5"
+                  placeholder="Tell us about your travel plan..."
+                  className="w-full resize-none rounded-xl border border-white/10 bg-[#1B2230] px-5 py-4 text-white placeholder:text-gray-400 outline-none transition focus:border-orange-500"
+                ></textarea>
+
+                <button
+                  type="submit"
+                  className="flex h-16 w-full items-center justify-center gap-3 rounded-2xl bg-orange-500 text-xl font-bold text-white transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/30"
+                >
+                  <Send size={20} />
+                  Send Message
+                </button>
+
+              </form>
+
+            </div>
+          </motion.div>
+
         </div>
 
-        <div ref={formRef}>
-          <ContactForm isVisible={formVisible} />
-        </div>
+        {/* Google Map */}
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: .3 }}
+          viewport={{ once: true }}
+          className="mt-20 overflow-hidden rounded-[30px] border border-white/10 shadow-2xl"
+        >
+          <iframe
+            title="Google Map"
+            src="https://www.google.com/maps?q=Chennai&output=embed"
+            className="w-full h-[500px] border-0"
+            loading="lazy"
+          ></iframe>
+        </motion.div>
+
       </div>
     </section>
   );
 }
+
+export default Contact;

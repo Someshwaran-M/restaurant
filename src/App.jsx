@@ -1,43 +1,75 @@
-import { Routes, Route } from "react-router-dom";
+// src/App.jsx
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Services from "./components/Services";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
+import Gallery from "./components/Gallery";
+import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
-import ServiceDetails from "./components/ServiceDetails";
-
-
-
-function Home() {
-  return (
-    <>
-      <Hero />
-      <About />
-      <Services />
-      <Skills />
-      <Projects />
-      <Contact />
-     
-    </>
-  );
-}
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import DestinationCards from "./components/DestinationCards";
+import ServiceAreas from "./components/ServiceAreas";
+import Faq from "./components/Faq";
+import { useState } from "react";
+import Tours from "./components/Tours";
 
 function App() {
+  const [showMore, setShowMore] = useState(false);
   return (
-    <>
+    <div className="bg-white overflow-x-hidden">
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
+
+      {/* Header */}
       <Navbar />
 
-      <Routes>
-        {/* ✅ Main Portfolio Page */}
-        <Route path="/" element={<Home />} />
+      {/* Main Content */}
+      <main>
+        <section id="home">
+          <Hero />
+        </section>
 
-        {/* ✅ Service Details Page */}
-        <Route path="/service/:id" element={<ServiceDetails />} />
-      </Routes>
-    </>
+        <section id="about">
+          <About />
+        </section>
+
+        <section id="destinationcards">
+          <DestinationCards />
+        </section>
+
+        <section id="services">
+          <Services />
+        </section>
+
+        <section id="serviceareas">
+          <ServiceAreas />
+        </section>
+
+
+        <section id="testimonials">
+          <Testimonials />
+        </section>
+
+        <section id="faq">
+          <Faq />
+        </section>
+
+
+
+  
+      <Tours />
+      <Gallery />
+   
+      <Contact />
+   
+
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }
 
