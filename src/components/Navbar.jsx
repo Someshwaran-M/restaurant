@@ -3,13 +3,15 @@ import {
   Menu,
   X,
   Moon,
+  Sun,
   Phone,
   MessageCircle,
 } from "lucide-react";
 
 
-function Navbar() {
+function Navbar({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  
 
   const navItems = [
     "Home",
@@ -20,9 +22,21 @@ function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50">
+    <header
+  className={`fixed top-0 left-0 w-full z-50 ${
+    darkMode
+      ? "bg-[#080C16] text-white"
+      : "bg-white text-gray-900 shadow-lg"
+  }`}
+>
 
-      <nav className="  border-b border-orange-500/20 shadow-lg shadow-black/30">
+      <nav
+  className={`border-b ${
+    darkMode
+      ? "border-orange-500/20 shadow-lg shadow-black/30"
+      : "border-gray-200 shadow-md"
+  }`}
+>
   <div className="max-w-7xl mx-auto px-6">
 
     <div className="h-20 flex items-center justify-between">
@@ -43,7 +57,9 @@ function Navbar() {
           <li key={item}>
             <a
               href={`#${item.toLowerCase()}`}
-              className="relative text-white font-semibold tracking-wide transition-all duration-300 hover:text-orange-400 after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full"
+              className={`relative font-semibold tracking-wide transition-all duration-300 hover:text-orange-500 after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}
             >
               {item}
             </a>
@@ -56,14 +72,29 @@ function Navbar() {
       <div className="hidden lg:flex items-center gap-4">
 
         {/* Dark Button */}
-        <button className="w-12 h-12 rounded-full border border-white/20 bg-white/5 hover:bg-orange-500 transition-all duration-300 flex items-center justify-center">
-          <Moon className="text-white" size={18} />
-        </button>
+        <button
+  onClick={() => setDarkMode(!darkMode)}
+  className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+    darkMode
+      ? "border border-white/20 bg-white/5 hover:bg-orange-500"
+      : "border border-gray-300 bg-gray-100 hover:bg-orange-500"
+  }`}
+>
+  {darkMode ? (
+    <Sun className="text-yellow-400" size={20} />
+  ) : (
+    <Moon className="text-gray-800" size={20} />
+  )}
+</button>
 
         {/* Call */}
         <a
           href="tel:+919999999999"
-          className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-white font-semibold hover:bg-orange-500 hover:border-orange-500 transition-all duration-300"
+          className={`flex items-center gap-2 rounded-full px-6 py-3 font-semibold transition-all duration-300 ${
+  darkMode
+    ? "border border-white/20 bg-white/10 text-white hover:bg-orange-500"
+    : "border border-gray-300 bg-white text-gray-900 hover:bg-orange-500 hover:text-white"
+}`}
         >
           <Phone size={18} />
           Call Now
@@ -96,7 +127,13 @@ function Navbar() {
 
   {/* Mobile Menu */}
   {menuOpen && (
-    <div className="lg:hidden bg-black/95 backdrop-blur-xl border-t border-orange-500/20">
+    <div
+  className={`lg:hidden backdrop-blur-xl border-t ${
+    darkMode
+      ? "bg-black/95 border-orange-500/20"
+      : "bg-white border-gray-200"
+  }`}
+>
 
       <div className="flex flex-col gap-5 p-6">
 
@@ -104,7 +141,9 @@ function Navbar() {
           <a
             key={item}
             href={`#${item.toLowerCase()}`}
-            className="text-white font-medium hover:text-orange-400 transition"
+           className={`font-medium hover:text-orange-500 transition ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}
           >
             {item}
           </a>

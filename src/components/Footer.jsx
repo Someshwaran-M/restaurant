@@ -1,49 +1,55 @@
-// src/components/Footer.jsx
-
 import {
   Car,
   Phone,
   Mail,
   MapPin,
 } from "lucide-react";
-
 import {
   FaWhatsapp,
   FaPhoneAlt,
 } from "react-icons/fa";
 
-function Footer() {
+function Footer({ darkMode }) {
+  console.log("Footer darkMode:", darkMode);
   return (
-    <footer className="relative overflow-hidden bg-[#080C16] text-white">
+    <footer
+  className={`relative overflow-hidden transition-all duration-500 ${
+    darkMode
+      ? "bg-[#080C16] text-white"
+      : "bg-white text-gray-900"
+  }`}
+>
 
-      {/* Background Glow */}
+      <div
+  className={`absolute left-0 top-0 h-80 w-80 rounded-full blur-[140px] ${
+    darkMode ? "bg-orange-500/10" : "bg-orange-300/20"
+  }`}
+/>
 
-      <div className="absolute left-0 top-0 h-80 w-80 rounded-full bg-orange-500/10 blur-[140px]" />
+<div
+  className={`absolute right-0 bottom-0 h-80 w-80 rounded-full blur-[140px] ${
+    darkMode ? "bg-amber-500/10" : "bg-yellow-300/20"
+  }`}
+/>
 
-      <div className="absolute right-0 bottom-0 h-80 w-80 rounded-full bg-amber-500/10 blur-[140px]" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-14">
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
-
-        <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-4">
-
-          {/* ================= COMPANY ================= */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 
           <div >
 
-            {/* Logo */}
-
             <div className="flex items-center gap-4">
 
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-amber-400">
+              <div className="flex h-10 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-amber-400">
 
                 <Car
-                  size={28}
+                  size={26}
                   className="text-[#080C16]"
                 />
 
               </div>
 
-              <h2 className="text-4xl font-extrabold">
+              <h2 className="text-2xl font-bold">
 
                 Nagma
 
@@ -55,28 +61,21 @@ function Footer() {
 
             </div>
 
-            {/* Description */}
-
-            <p className="mt-8 text-lg leading-9 text-gray-400">
+            <p className={`mt-5 text-lg leading-8 ${
+  darkMode ? "text-gray-400" : "text-gray-600"
+}`}>
 
               One Way & Outstation Cab Service across
               Tamil Nadu, Kerala, Karnataka and
               Pondicherry.
 
-              <br /><br />
-
-              Fixed Fare • No Hidden Charges •
-              24×7 Booking Support • Verified Drivers.
-
             </p>
 
-            {/* Buttons */}
-
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-wrap gap-4">
 
               <a
                 href="tel:+919888444952"
-                className="flex items-center gap-3 rounded-full border border-orange-500 px-7 py-3 font-semibold text-orange-400 transition-all duration-300 hover:bg-orange-500 hover:text-white"
+                className="flex items-center gap-3 rounded-full border border-orange-500 px-5 py-2.5 text-sm font-medium text-orange-400 transition-all duration-300 hover:bg-orange-500 hover:text-white"
               >
 
                 <FaPhoneAlt />
@@ -89,7 +88,7 @@ function Footer() {
                 href="https://wa.me/919888444952"
                 target="_blank"
                 rel="noreferrer"
-               className="flex items-center gap-3 rounded-full bg-orange-500 px-7 py-3 font-semibold text-white transition-all duration-300 hover:bg-orange-600"
+               className="flex items-center gap-3 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:bg-orange-600"
               >
 
                 <FaWhatsapp />
@@ -101,20 +100,21 @@ function Footer() {
             </div>
 
           </div>
-                    {/* ================= EXPLORE SERVICES ================= */}
 
           <div>
 
-            <h3 className="mb-8 text-2xl font-bold uppercase tracking-wide text-orange-400">
+            <h3 className="mb-5 text-xl font-bold uppercase tracking-wide text-orange-400">
               Explore Services
             </h3>
 
-            <ul className="space-y-5">
+            <ul className="space-y-3">
 
               <li>
                 <a
                   href="#services"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Book a Cab
                 </a>
@@ -123,7 +123,9 @@ function Footer() {
               <li>
                 <a
                   href="#services"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Taxi Fare & Pricing
                 </a>
@@ -132,7 +134,9 @@ function Footer() {
               <li>
                 <a
                   href="#services"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Available Cars
                 </a>
@@ -141,7 +145,9 @@ function Footer() {
               <li>
                 <a
                   href="#services"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   One Way Taxi Service
                 </a>
@@ -150,7 +156,9 @@ function Footer() {
               <li>
                 <a
                   href="#contact"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Contact & Booking
                 </a>
@@ -160,20 +168,20 @@ function Footer() {
 
           </div>
 
-          {/* ================= POPULAR ROUTES ================= */}
-
           <div>
 
-            <h3 className="mb-8 text-2xl font-bold uppercase tracking-wide text-orange-400">
+            <h3 className="mb-5 text-xl font-bold uppercase tracking-wide text-orange-400">
               Popular Routes
             </h3>
 
-            <ul className="space-y-5">
+            <ul className="space-y-3">
 
               <li>
                 <a
                   href="#"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Chennai to Madurai Taxi
                 </a>
@@ -182,7 +190,9 @@ function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                 className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Chennai to Coimbatore Taxi
                 </a>
@@ -191,7 +201,9 @@ function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                 className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Chennai to Bangalore Taxi
                 </a>
@@ -200,7 +212,9 @@ function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Coimbatore to Kochi Taxi
                 </a>
@@ -209,7 +223,9 @@ function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Madurai to Rameswaram Taxi
                 </a>
@@ -218,7 +234,9 @@ function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-lg text-gray-400 transition hover:text-orange-400"
+                  className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-400" : "text-gray-700"
+}`}
                 >
                   Trichy to Thanjavur Taxi
                 </a>
@@ -227,27 +245,26 @@ function Footer() {
             </ul>
 
           </div>
-                    {/* ================= CONTACT ================= */}
 
           <div>
 
-            <h3 className="mb-8 text-2xl font-bold uppercase tracking-wide text-orange-400">
+            <h3 className="mb-5 text-xl font-bold uppercase tracking-wide text-orange-400">
               Contact
             </h3>
 
-            <div className="space-y-8">
-
-              {/* Phone */}
+            <div className="space-y-5">
 
               <div className="flex items-start gap-4">
 
                 <div className="mt-1 text-orange-400">
-                  <Phone size={22} />
+                  <Phone size={18} />
                 </div>
 
                 <div>
 
-                  <p className="text-lg text-gray-300">
+                  <p className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-300" : "text-gray-700"
+}`}>
                     +91 98884 44952
                   </p>
 
@@ -255,17 +272,17 @@ function Footer() {
 
               </div>
 
-              {/* Email */}
-
               <div className="flex items-start gap-4">
 
                 <div className="mt-1 text-orange-400">
-                  <Mail size={22} />
+                  <Mail size={18} />
                 </div>
 
                 <div>
 
-                  <p className="break-all text-lg text-gray-300">
+                  <p className={`text-base transition hover:text-orange-500 ${
+  darkMode ? "text-gray-300" : "text-gray-700"
+}`}>
                     nonstopdroptaxi2026@gmail.com
                   </p>
 
@@ -273,17 +290,17 @@ function Footer() {
 
               </div>
 
-              {/* Address */}
-
               <div className="flex items-start gap-4">
 
                 <div className="mt-1 text-orange-400">
-                  <MapPin size={22} />
+                  <MapPin size={18} />
                 </div>
 
                 <div>
 
-                  <p className="text-lg leading-8 text-gray-300">
+                  <p className={`text-base  ${
+  darkMode ? "text-gray-300" : "text-gray-700"
+}`}>
                     Tamil Nadu • Kerala • Karnataka •
                     <br />
                     Pondicherry
@@ -300,18 +317,27 @@ function Footer() {
         </div>
 
       </div>
-            {/* ================= BOTTOM ================= */}
 
-      <div className="border-t border-orange-500/20">
+      <div
+  className={`border-t ${
+    darkMode
+      ? "border-orange-500/20"
+      : "border-orange-200"
+  }`}
+>
 
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-7 text-center md:flex-row">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-5 text-center md:flex-row">
 
-          <p className="text-base text-gray-500">
+          <p className={`text-sm ${
+  darkMode ? "text-gray-500" : "text-gray-600"
+}`}>
             © {new Date().getFullYear()} Nagma Tours&Travels.
             All Rights Reserved.
           </p>
 
-          <p className="text-base text-gray-500">
+          <p className={`text-sm ${
+  darkMode ? "text-gray-500" : "text-gray-600"
+}`}>
             • Fixed Fare • No Hidden Charges • 24/7 Booking Support
           </p>
 

@@ -17,13 +17,14 @@ import Tours from "./components/Tours";
 
 function App() {
   const [showMore, setShowMore] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+
   return (
     <div className="bg-white overflow-x-hidden">
       {/* Scroll to Top Button */}
       <ScrollToTop />
 
-      {/* Header */}
-      <Navbar />
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
       {/* Main Content */}
       <main>
@@ -67,8 +68,7 @@ function App() {
 
       </main>
 
-      {/* Footer */}
-      <Footer />
+      <Footer darkMode={darkMode} />
     </div>
   );
 }
