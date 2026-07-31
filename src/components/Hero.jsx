@@ -65,27 +65,6 @@ function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
-      {/* Floating Call / WhatsApp buttons */}
-      <div className="hidden lg:flex flex-col gap-4 fixed right-6 top-1/2 -translate-y-1/2 z-30">
-        <a
-          href="tel:+919888444952"
-          aria-label="Call us"
-          className="relative w-14 h-14 rounded-full bg-amber-400 flex items-center justify-center shadow-lg shadow-amber-500/40 transition hover:scale-105"
-        >
-          <span className="absolute inset-0 -z-10 rounded-full bg-amber-400/40 blur-xl" />
-          <Phone size={22} className="text-white" fill="white" />
-        </a>
-        <a
-          href="https://wa.me/919888444952"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp"
-          className="relative w-14 h-14 rounded-full bg-orange-600 flex items-center justify-center shadow-lg shadow-orange-600/40 transition hover:scale-105"
-        >
-          <span className="absolute inset-0 -z-10 rounded-full bg-orange-600/40 blur-xl" />
-          <MessageCircle size={22} className="text-white" fill="white" />
-        </a>
-      </div>
 
       {/* Background */}
       <div
