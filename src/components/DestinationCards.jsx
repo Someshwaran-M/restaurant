@@ -149,8 +149,6 @@ function DestinationCards({ darkMode }) {
 
     <div className="grid md:grid-cols-[46%_54%]">
 
-      {/* Left Image */}
-
       <div className="relative overflow-hidden h-[220px]">
 
         <img
@@ -159,11 +157,7 @@ function DestinationCards({ darkMode }) {
           className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
         />
 
-        {/* Dark Overlay */}
-
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-
-        {/* Badge */}
 
         <span
           className={`absolute top-4 left-4 ${item.badgeColor} text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg`}
@@ -172,8 +166,6 @@ function DestinationCards({ darkMode }) {
         </span>
 
       </div>
-
-      {/* Right Content */}
 
       <div className="flex flex-col justify-between p-3">
 
@@ -197,8 +189,6 @@ function DestinationCards({ darkMode }) {
 
         </div>
 
-                {/* Buttons */}
-
         <div className="mt-8 flex gap-4">
 
           <a
@@ -220,8 +210,6 @@ function DestinationCards({ darkMode }) {
           </a>
 
         </div>
-
-        {/* Bottom Info */}
 
         <p className={`mt-4 text-xs leading-6 ${
   darkMode ? "text-gray-500" : "text-gray-500"
