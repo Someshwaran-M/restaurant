@@ -61,10 +61,8 @@ function App() {
 
   
       <Tours />
-      <Gallery />
-   
-      <Contact />
-   
+      <Gallery darkMode={darkMode} />
+      <Contact darkMode={darkMode} />   
 
       </main>
 
