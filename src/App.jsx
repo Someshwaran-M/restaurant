@@ -57,10 +57,7 @@ function App() {
           <Faq />
         </section>
 
-
-
-  
-      <Tours />
+      <Tours darkMode={darkMode} />
       <Gallery darkMode={darkMode} />
       <Contact darkMode={darkMode} />   
 

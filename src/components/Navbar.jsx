@@ -25,8 +25,8 @@ function Navbar({ darkMode, setDarkMode }) {
     <header
   className={`fixed top-0 left-0 w-full z-50 ${
     darkMode
-      ? "bg-[#080C16] text-white"
-      : "bg-white text-gray-900 shadow-lg"
+      ? " text-white"
+      : " text-white"
   }`}
 >
 
@@ -34,7 +34,7 @@ function Navbar({ darkMode, setDarkMode }) {
   className={`border-b ${
     darkMode
       ? "border-orange-500/20 shadow-lg shadow-black/30"
-      : "border-gray-200 shadow-md"
+      : "border-orange-500/20 shadow-lg shadow-black/30"
   }`}
 >
   <div className="max-w-7xl mx-auto px-6">
@@ -44,7 +44,7 @@ function Navbar({ darkMode, setDarkMode }) {
       {/* Logo */}
       <div className="flex items-center">
         <img
-          src="/logo.png"
+          src="public/cars/logo.png"
           alt="Logo"
           className="h-16 w-auto"
         />
@@ -58,7 +58,7 @@ function Navbar({ darkMode, setDarkMode }) {
             <a
               href={`#${item.toLowerCase()}`}
               className={`relative font-semibold tracking-wide transition-all duration-300 hover:text-orange-500 after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full ${
-  darkMode ? "text-white" : "text-gray-900"
+  darkMode ? "text-white" : "text-white"
 }`}
             >
               {item}
@@ -93,7 +93,7 @@ function Navbar({ darkMode, setDarkMode }) {
           className={`flex items-center gap-2 rounded-full px-6 py-3 font-semibold transition-all duration-300 ${
   darkMode
     ? "border border-white/20 bg-white/10 text-white hover:bg-orange-500"
-    : "border border-gray-300 bg-white text-gray-900 hover:bg-orange-500 hover:text-white"
+    : "border border-white/20 bg-white/10 text-white hover:bg-orange-500"
 }`}
         >
           <Phone size={18} />

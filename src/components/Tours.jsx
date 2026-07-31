@@ -98,52 +98,62 @@ const tours = [
     ],
   },
 ];
-function Tours() {
+function Tours({ darkMode }) {
   return (
     
 <section
   id="tours"
-  className="relative overflow-hidden bg-[#0B101B] py-28"
+  className={`relative overflow-hidden py-32 transition-all duration-500 ${
+  darkMode ? "bg-[#0B101B]" : "bg-white"
+}`}
 >
-  {/* Background Glow */}
+  <div
+  className={`absolute left-0 top-40 h-80 w-80 rounded-full blur-[120px] ${
+    darkMode ? "bg-orange-500/10" : "bg-orange-300/20"
+  }`}
+/>
 
-  <div className="absolute left-0 top-40 h-96 w-96 rounded-full bg-orange-500/10 blur-[140px]" />
-
-  <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-orange-600/10 blur-[150px]" />
+<div
+  className={`absolute right-0 bottom-0 h-80 w-80 rounded-full blur-[120px] ${
+    darkMode ? "bg-orange-600/10" : "bg-yellow-300/20"
+  }`}
+/>
 
   <div className="relative z-10 mx-auto max-w-7xl px-6">
 
-    {/* Heading */}
-
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-      className="mx-auto mb-20 max-w-4xl text-center"
-    >
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  viewport={{ once: true }}
+  className="mx-auto mb-14 max-w-5xl text-center"
+>
+  <span className="text-sm font-bold uppercase tracking-[5px] text-orange-400">
+    TOUR PACKAGES
+  </span>
 
-      <span className="text-sm font-bold uppercase tracking-[6px] text-orange-400">
-        TOUR PACKAGES
-      </span>
+  <h3
+    className={`mt-4 text-4xl font-bold leading-tight md:text-6xl ${
+      darkMode ? "text-white" : "text-gray-900"
+    }`}
+  >
+    Explore{" "}
+    <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
+      Popular
+    </span>{" "}
+    Destinations
+  </h3>
 
-      <h2 className="mt-5 text-5xl font-extrabold text-white md:text-6xl">
-        Popular
-        <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
-          {" "}Weekend Tours
-        </span>
-      </h2>
+  <p
+    className={`mx-auto mt-6 max-w-3xl text-lg leading-8 ${
+      darkMode ? "text-gray-400" : "text-gray-600"
+    }`}
+  >
+  Curated travel packages with comfortable rides, fixed pricing, and hassle-free bookings.
+  </p>
+</motion.div>
 
-      <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-gray-400">
-        Affordable holiday packages with premium comfort,
-        verified drivers and transparent pricing.
-      </p>
-
-    </motion.div>
-
-    {/* Cards */}
-
-    <div className="grid gap-8 lg:grid-cols-3">
+    <div className="grid gap-4 lg:grid-cols-3">
 
       {tours.map((tour, index) => (
 
@@ -156,30 +166,28 @@ function Tours() {
             delay: index * 0.1,
           }}
           viewport={{ once: true }}
-          className="overflow-hidden rounded-[32px] border border-white/10 bg-[#171C27] shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-orange-500/40"
+          className={`overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-2 ${
+  darkMode
+    ? "border border-white/10 bg-[#171C27] hover:border-orange-500/40"
+    : "border border-gray-200 bg-white shadow-lg hover:border-orange-400"
+}`}
         >
-
-          {/* Image */}
 
           <div className="relative">
 
             <img
               src={tour.image}
               alt={tour.title}
-              className="h-64 w-full object-cover transition duration-700 hover:scale-105"
+              className="h-52 w-full object-cover transition duration-700 hover:scale-105"
             />
 
-            {/* Price */}
-
-            <div className="absolute left-5 top-5 rounded-full bg-orange-500 px-5 py-2 text-lg font-bold text-white shadow-lg">
+            <div className="absolute left-5 top-5 rounded-full bg-orange-500 px-4 py-1.5 text-base font-bold text-white shadow-lg">
 
               {tour.price}
 
             </div>
 
-            {/* Duration */}
-
-            <div className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-[#111827]/90 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
+            <div className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-[#111827]/90 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
 
               <Clock3 size={16} />
 
@@ -189,29 +197,31 @@ function Tours() {
 
           </div>
 
-          {/* Content */}
+          <div className="p-5">
 
-          <div className="p-7">
-
-            <h3 className="text-3xl font-bold text-white">
+            <h3 className={`text-2xl font-bold ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
 
               {tour.title}
 
             </h3>
 
-            <p className="mt-4 text-lg leading-8 text-gray-400">
+            <p className={`mt-3 text-base leading-7 ${
+  darkMode ? "text-gray-400" : "text-gray-600"
+}`}>
 
               {tour.description}
 
             </p>
 
-            {/* AC / NON AC */}
+            <div className={`mt-6 flex overflow-hidden rounded-xl ${
+  darkMode ? "bg-[#222733]" : "bg-gray-100"
+}`}>
 
-            <div className="mt-8 flex overflow-hidden rounded-2xl bg-[#222733]">
+              <div className="flex flex-1 items-center justify-center gap-2 bg-orange-500 py-3 font-bold text-white">
 
-              <div className="flex flex-1 items-center justify-center gap-2 bg-orange-500 py-4 font-bold text-white">
-
-                <Snowflake size={18} />
+                <Snowflake size={14} />
 
                 AC
 
@@ -219,36 +229,45 @@ function Tours() {
 
               </div>
 
-              <div className="flex flex-1 items-center justify-center gap-2 py-4 font-bold text-gray-300">
+              <div
+  className={`flex flex-1 items-center justify-center gap-2 py-3 font-bold transition-all duration-300 ${
+    darkMode
+      ? "text-gray-300"
+      : "text-gray-700"
+  }`}
+>
+  <Wind
+    size={14}
+    className={darkMode ? "text-gray-300" : "text-gray-700"}
+  />
 
-                <Wind size={18} />
+  Non-AC
 
-                Non-AC
-
-                <span>{tour.nonAc}</span>
-
-              </div>
+  <span>{tour.nonAc}</span>
+</div>
 
             </div>
 
-                        {/* Highlights */}
-
-            <div className="mt-8">
+            <div className="mt-6">
 
               <h4 className="text-xs font-bold uppercase tracking-[3px] text-gray-500">
                 Highlights
               </h4>
 
-              <div className="mt-4 flex flex-wrap gap-3">
+              <div className="mt-3 flex flex-wrap gap-3">
 
                 {tour.highlights.map((place, i) => (
 
                   <span
-                    key={i}
-                    className="rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-300"
-                  >
-                    {place}
-                  </span>
+  key={i}
+  className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
+    darkMode
+      ? "border border-orange-500/30 bg-orange-500/10 text-orange-300"
+      : "border border-orange-200 bg-orange-50 text-orange-600"
+  }`}
+>
+  {place}
+</span>
 
                 ))}
 
@@ -256,21 +275,23 @@ function Tours() {
 
             </div>
 
-            {/* Inclusions */}
+            <div className="mt-4">
 
-            <div className="mt-8">
-
-              <h4 className="text-xs font-bold uppercase tracking-[3px] text-gray-500">
+              <h4 className={`flex items-center gap-2 ${
+  darkMode ? "text-gray-300" : "text-gray-700"
+}`}>
                 Inclusions
               </h4>
 
-              <div className="mt-5 grid grid-cols-2 gap-y-4">
+              <div className="mt-3 grid grid-cols-2 gap-y-4">
 
                 {tour.inclusions.map((item, i) => (
 
                   <div
                     key={i}
-                    className="flex items-center gap-2 text-gray-300"
+                    className={`flex items-center gap-2 ${
+  darkMode ? "text-gray-300" : "text-gray-700"
+}`}
                   >
 
                     <CheckCircle2
@@ -288,13 +309,11 @@ function Tours() {
 
             </div>
 
-            {/* Book Button */}
-
             <a
               href="https://wa.me/919888444952"
               target="_blank"
               rel="noreferrer"
-              className="mt-10 flex h-16 w-full items-center justify-center gap-3 rounded-2xl bg-orange-500 text-xl font-bold text-white transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/30"
+              className="mt-8 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-orange-500 text-base font-semibold text-white transition-all duration-300 hover:bg-orange-600"
             >
 
               <MessageCircle size={24} />
@@ -310,18 +329,19 @@ function Tours() {
       ))}
 
     </div>
-        {/* Bottom Button */}
 
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="mt-20 flex justify-center"
+      className="mt-12 flex justify-center"
     >
 
       <button
-        className="rounded-full border-2 border-orange-500 px-10 py-4 text-lg font-bold text-orange-400 transition-all duration-300 hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/30"
+        className={`rounded-full border-2 border-orange-500 px-6 py-3 text-base font-semibold transition-all duration-300 hover:bg-orange-500 hover:text-white ${
+  darkMode ? "text-orange-400" : "text-orange-500"
+}`}
       >
         View All Packages
       </button>
