@@ -194,7 +194,7 @@ function Navbar({
                 </button>
 
                 <a
-                  href="tel:+919999999999"
+                  href="tel:+91 88844 49452"
                   className={`flex items-center gap-2 px-5 py-3 rounded-full font-semibold transition-all duration-300 ${
                     darkMode
                       ? "bg-white/10 text-white hover:bg-orange-500 text-gray-800"
@@ -206,7 +206,7 @@ function Navbar({
                 </a>
 
                 <a
-                  href="https://wa.me/919999999999"
+                  href="https://wa.me/+91 88844 49452"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-xl shadow-orange-500/40 hover:scale-105 transition-all duration-300"
@@ -266,7 +266,7 @@ function Navbar({
                   <div className="grid grid-cols-2 gap-3 pt-3">
 
                     <a
-                      href="tel:+919999999999"
+                      href="tel:+91 88844 49452"
                       className="flex items-center justify-center gap-2 rounded-2xl py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-lg shadow-orange-500/30"
                     >
                       <Phone size={18} />
@@ -274,7 +274,7 @@ function Navbar({
                     </a>
 
                     <a
-                      href="https://wa.me/919999999999"
+                      href="https://wa.me/+91 88844 49452"
                       target="_blank"
                       rel="noreferrer"
                       className="flex items-center justify-center gap-2 rounded-2xl py-4 bg-green-500 text-white font-semibold shadow-lg shadow-green-500/30"
@@ -340,11 +340,11 @@ function Navbar({
       </div>
 
       <a
-        href="tel:+919888844444"
+        href="tel:+91 88844 49452"
         className="flex items-center gap-2 font-semibold text-white hover:text-orange-400 transition-all duration-300 group"
       >
         <Phone className="h-4 w-4 text-orange-400 group-hover:animate-bounce" />
-        +91 98888 44444
+        +91 88844 49452
       </a>
 
       {/* Duplicate for Infinite Loop */}
@@ -381,11 +381,11 @@ function Navbar({
       </div>
 
       <a
-        href="tel:+919888844444"
+        href="tel:+91 88844 49452"
         className="flex items-center gap-2 font-semibold text-white"
       >
         <Phone className="h-4 w-4 text-orange-400" />
-        +91 98888 44444
+      +91 88844 49452
       </a>
 
     </div>
@@ -398,7 +398,7 @@ function Navbar({
       <div className="fixed bottom-6 right-6 z-[999] flex flex-col gap-4">
 
         <a
-          href="tel:+919888844444"
+          href="tel:+91 88844 49452"
           className="group w-16 h-16 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 shadow-2xl shadow-orange-500/40 flex items-center justify-center hover:scale-110 transition-all duration-300"
         >
           <Phone
@@ -408,7 +408,7 @@ function Navbar({
         </a>
 
         <a
-          href="https://wa.me/919888844444"
+          href="https://wa.me/+91 88844 49452"
           target="_blank"
           rel="noreferrer"
           className="group w-16 h-16 rounded-full bg-green-500 shadow-2xl shadow-green-500/40 flex items-center justify-center hover:scale-110 transition-all duration-300"
