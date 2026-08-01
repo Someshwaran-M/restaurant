@@ -224,7 +224,7 @@ function DestinationCards({ darkMode }) {
   className="relative"
 >
   {/* Cards */}
-  <div className="grid grid-cols-2 w-180 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+  <div className="grid grid-cols-2  sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
     {visibleCards.map((place) => (
 

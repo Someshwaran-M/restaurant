@@ -1,650 +1,378 @@
+import React from "react";
 import { motion } from "framer-motion";
 import {
   MapPin,
-  ArrowUpRight,
+  ArrowRight,
   Phone,
   MessageCircle,
-  Sparkles,
-  ShieldCheck,
-  Navigation,
-  Star,
 } from "lucide-react";
 
-const featuredCities = [
+// Featured cities split into two rows for the Marquee animation
+const row1Cities = [
+  { name: "Chennai", desc: "Airport • Outstation • Local Taxi" },
+  { name: "Coimbatore", desc: "Airport • Outstation • Local Taxi" },
+  { name: "Madurai", desc: "Temple • Airport • Outstation" },
+  { name: "Salem", desc: "One Way • Round Trip • Local" },
+  { name: "Tiruchirappalli", desc: "Airport • Local • Outstation" },
+];
+
+const row2Cities = [
+  { name: "Tirunelveli", desc: "City • Outstation • Airport" },
+  { name: "Bengaluru", desc: "IT Hub • Outstation • Airport" },
+  { name: "Puducherry", desc: "Beach • Local • Outstation" },
+  { name: "Erode", desc: "Industrial • One Way • Local" },
+  { name: "Tiruppur", desc: "Textile Hub • Airport • Local" },
+];
+
+// Top 12 key destinations with working reliable image links
+const top12Destinations = [
   {
     name: "Chennai",
-    desc: "Airport • Outstation • Local Taxi",
+    image:
+      "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=300",
   },
   {
     name: "Coimbatore",
-    desc: "Airport • Outstation • Local Taxi",
+    image:
+      "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&q=80&w=300",
   },
   {
     name: "Madurai",
-    desc: "Temple • Airport • Outstation",
+    image:
+      "https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=300",
   },
   {
-    name: "Salem",
-    desc: "One Way • Round Trip • Local",
+    name: "Kodaikanal",
+    image:
+      "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&q=80&w=300",
   },
   {
-    name: "Tiruchirappalli",
-    desc: "Airport • Local • Outstation",
+    name: "Ooty (Nilgiris)",
+    image:
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=300",
   },
   {
-    name: "Tirunelveli",
-    desc: "City • Outstation • Airport",
+    name: "Puducherry",
+    image:
+      "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&q=80&w=300",
   },
-];
-
-const allCities = [
-  "Ariyalur",
-  "Bengaluru",
-  "Chengalpattu",
-  "Cuddalore",
-  "Dharmapuri",
-  "Dindigul",
-  "Erode",
-  "Kallakurichi",
-  "Kanchipuram",
-  "Kanyakumari",
-  "Kodaikanal",
-  "Krishnagiri",
-  "Kumbakonam",
-  "Mayiladuthurai",
-  "Nagapattinam",
-  "Namakkal",
-  "Nilgiris",
-  "Perambalur",
-  "Puducherry",
-  "Pudukkottai",
-  "Ramanathapuram",
-  "Rameswaram",
-  "Ranipet",
-  "Sivaganga",
-  "Tenkasi",
-  "Thanjavur",
-  "Theni",
-  "Thoothukudi",
-  "Tiruppur",
-  "Tiruvallur",
-  "Tiruvannamalai",
-  "Tiruvarur",
-  "Vellore",
-  "Virudhunagar",
-  "Villupuram",
+  {
+    name: "Rameswaram",
+    image:
+      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=300",
+  },
+  {
+    name: "Bengaluru",
+    image:
+      "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&q=80&w=300",
+  },
+  {
+    name: "Kanyakumari",
+    image:
+      "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&q=80&w=300",
+  },
+  {
+    name: "Thanjavur",
+    image:
+      "https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=300",
+  },
+  {
+    name: "Tirupati",
+    image:
+      "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&q=80&w=300",
+  },
+  {
+    name: "Munnar",
+    image:
+      "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&q=80&w=300",
+  },
 ];
 
 function ServiceAreas({ darkMode }) {
-
-  const iconBtn =
-    "group flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:scale-110 hover:rotate-6 hover:border-orange-300 hover:bg-gradient-to-br hover:from-orange-500 hover:to-amber-500 hover:shadow-[0_0_28px_rgba(249,115,22,.55)]";
+  // Helper to render city cards inside marquee
+  const renderCityCard = (city, idx) => (
+    <div
+      key={idx}
+      className={`group w-[340px] shrink-0 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
+        darkMode
+          ? "border border-white/10 bg-[#141922] hover:border-orange-500/50 hover:shadow-[0_0_25px_rgba(249,115,22,.2)]"
+          : "border border-gray-200 bg-white shadow-md hover:border-orange-400"
+      }`}
+    >
+      <div className="flex items-start gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-500/10 transition group-hover:bg-orange-500">
+          <MapPin
+            size={24}
+            className="text-orange-400 group-hover:text-white"
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3
+            className={`text-xl font-bold truncate ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            {city.name}
+          </h3>
+          <p
+            className={`mt-1 text-sm truncate ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            {city.desc}
+          </p>
+          <button className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-orange-500 transition hover:text-orange-600">
+            View Taxi
+            <ArrowRight
+              size={16}
+              className="transition group-hover:translate-x-1"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-
-<section
-id="service-areas"
-className={`relative overflow-hidden py-24 ${
-darkMode
-? "bg-[#050914]"
-: "bg-gradient-to-b from-orange-50 via-white to-orange-100"
-}`}
->
-
-{/* Premium Background */}
-
-<div className="absolute inset-0 overflow-hidden">
-
-<div className="absolute -left-40 top-10 h-[420px] w-[420px] rounded-full bg-orange-500/15 blur-[170px]" />
-
-<div className="absolute -right-40 bottom-0 h-[420px] w-[420px] rounded-full bg-amber-400/15 blur-[170px]" />
-
-<div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[120px]" />
-
-</div>
-
-{/* Premium Grid */}
-
-<div
-className="absolute inset-0 opacity-[0.03]"
-style={{
-backgroundImage:
-"linear-gradient(to right,#fff 1px,transparent 1px),linear-gradient(to bottom,#fff 1px,transparent 1px)",
-backgroundSize:"70px 70px",
-}}
-/>
-
-<div className="relative z-10 mx-auto max-w-7xl px-5">
-
-<motion.div
-initial={{opacity:0,y:40}}
-whileInView={{opacity:1,y:0}}
-transition={{duration:.7}}
-viewport={{once:true}}
-className="mx-auto mb-16 max-w-3xl text-center"
->
-
-<div className="inline-flex items-center gap-2 rounded-full border border-orange-400/20 bg-white/10 px-5 py-2 backdrop-blur-xl">
-
-<Sparkles
-size={16}
-className="text-orange-400"
-/>
-
-<span className="text-[11px] font-bold uppercase tracking-[4px] text-orange-400">
-
-Service Areas
-
-</span>
-
-</div>
-
-<h2
-className={`mt-6 text-4xl font-black leading-tight md:text-5xl ${
-darkMode
-? "text-white"
-: "text-gray-900"
-}`}
->
-
-Travel Across
-
-<span className="block bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
-
-Tamil Nadu & South India
-
-</span>
-
-</h2>
-
-<p
-className={`mx-auto mt-5 max-w-2xl text-base leading-7 ${
-darkMode
-? "text-gray-400"
-: "text-gray-600"
-}`}
->
-
-Airport transfers, local rides, one-way trips and
-outstation taxis with professional drivers and fixed pricing.
-
-</p>
-
-</motion.div>
-
-{/* Premium City Cards */}
-
-<div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-
-{/* ===========================
-      PART 2
-=========================== */}
-{featuredCities.map((city, index) => (
-
-  <motion.div
-    key={index}
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    whileHover={{
-      y: -8,
-      scale: 1.02,
-    }}
-    transition={{
-      duration: 0.6,
-      delay: index * 0.08,
-    }}
-    viewport={{ once: true }}
-    className={`group relative overflow-hidden rounded-[26px] border transition-all duration-700 ${
-      darkMode
-        ? "border-white/10 bg-[#111827] hover:border-orange-500/40 hover:shadow-[0_25px_60px_rgba(249,115,22,.25)]"
-        : "border-orange-100 bg-white hover:border-orange-300 hover:shadow-[0_25px_60px_rgba(249,115,22,.18)]"
-    }`}
-  >
-
-    {/* Glow */}
-
-    <div className="absolute -left-16 -top-16 h-48 w-48 rounded-full bg-orange-500/20 blur-[90px] opacity-0 transition-all duration-700 group-hover:opacity-100" />
-
-    <div className="absolute -right-16 bottom-0 h-48 w-48 rounded-full bg-yellow-400/20 blur-[90px] opacity-0 transition-all duration-700 group-hover:opacity-100" />
-
-    <div className="relative p-5">
-
-      {/* Header */}
-
-      <div className="flex items-start justify-between">
-
-        <motion.div
-          whileHover={{
-            rotate: 10,
-            scale: 1.08,
-          }}
-          className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 shadow-xl"
-        >
-
-          <MapPin
-            size={26}
-            className="text-white"
-          />
-
-        </motion.div>
-
-        <div className="flex gap-2">
-
-          <motion.button
-            whileHover={{
-              rotate: 10,
-              scale: 1.1,
-            }}
-            whileTap={{
-              scale: 0.95,
-            }}
-            className={iconBtn}
-          >
-
-            <Navigation
-              size={16}
-              className="text-white"
-            />
-
-          </motion.button>
-
-          <motion.button
-            whileHover={{
-              rotate: -45,
-              scale: 1.1,
-            }}
-            whileTap={{
-              scale: 0.95,
-            }}
-            className={iconBtn}
-          >
-
-            <ArrowUpRight
-              size={16}
-              className="text-white"
-            />
-
-          </motion.button>
-
-        </div>
-
-      </div>
-
-      {/* City */}
-
-      <h3
-        className={`mt-5 text-2xl font-black ${
-          darkMode
-            ? "text-white"
-            : "text-gray-900"
+    <section
+      id="service-areas"
+      className={`relative overflow-hidden py-20 transition-all duration-500 ${
+        darkMode ? "bg-[#0A0F1A]" : "bg-white"
+      }`}
+    >
+      {/* Background Soft Ambient Lights */}
+      <div
+        className={`absolute left-0 top-40 h-80 w-80 rounded-full blur-[120px] pointer-events-none ${
+          darkMode ? "bg-orange-500/10" : "bg-orange-300/20"
         }`}
-      >
-
-        {city.name}
-
-      </h3>
-
-      <p
-        className={`mt-2 text-sm leading-7 ${
-          darkMode
-            ? "text-gray-400"
-            : "text-gray-600"
+      />
+      <div
+        className={`absolute right-0 bottom-20 h-80 w-80 rounded-full blur-[120px] pointer-events-none ${
+          darkMode ? "bg-orange-600/10" : "bg-yellow-300/20"
         }`}
-      >
-
-        {city.desc}
-
-      </p>
-
-      {/* Features */}
-
-      <div className="mt-5 flex flex-wrap gap-2">
-
-        {[
-          {
-            icon: ShieldCheck,
-            text: "Safe",
-          },
-          {
-            icon: Star,
-            text: "Premium",
-          },
-          {
-            icon: MapPin,
-            text: "24×7",
-          },
-        ].map((item, i) => {
-
-          const Icon = item.icon;
-
-          return (
-
-            <motion.div
-              key={i}
-              whileHover={{
-                y: -3,
-                scale: 1.05,
-              }}
-              className={`flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold transition-all duration-500 ${
-                darkMode
-                  ? "border-orange-500/20 bg-orange-500/10 text-orange-300 hover:bg-orange-500 hover:text-white"
-                  : "border-orange-200 bg-orange-50 text-orange-600 hover:bg-orange-500 hover:text-white"
-              }`}
-            >
-
-              <Icon size={13} />
-
-              {item.text}
-
-            </motion.div>
-
-          );
-
-        })}
-
-      </div>
-
-      {/* Button */}
-
-      <motion.button
-        whileHover={{
-          scale: 1.03,
-        }}
-        whileTap={{
-          scale: 0.96,
-        }}
-        className="group mt-6 flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 py-3 font-semibold text-white shadow-lg transition-all duration-500 hover:shadow-[0_0_35px_rgba(249,115,22,.45)]"
-      >
-
-        Explore City
-
-        <ArrowUpRight
-          size={18}
-          className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
-        />
-
-      </motion.button>
-
-    </div>
-
-  </motion.div>
-
-))}
-
-{/* ===========================
-      PART 3
-=========================== */}
-{/* ===========================
-      PREMIUM CITY CHIPS
-=========================== */}
-
-</div>
-
-<motion.div
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.7 }}
-  className="mt-14"
->
-
-  <div className="mb-8 text-center">
-
-    <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/20 bg-orange-500/10 px-5 py-2 backdrop-blur-xl">
-
-      <MapPin
-        size={15}
-        className="text-orange-400"
       />
 
-      <span className="text-xs font-bold uppercase tracking-[4px] text-orange-400">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mx-auto mb-14 max-w-4xl text-center"
+        >
+          <span className="text-sm font-bold uppercase tracking-[6px] text-orange-400">
+            SERVICE AREAS
+          </span>
 
-        We Also Serve
+          <h3
+            className={`mt-4 text-4xl font-extrabold leading-tight md:text-5xl ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            Taxi Services Across{" "}
+            <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300 bg-clip-text text-transparent">
+              Tamil Nadu
+            </span>{" "}
+            & South India
+          </h3>
 
-      </span>
+          <p
+            className={`mx-auto mt-5 max-w-3xl text-base leading-7 ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Safe, affordable and reliable taxi services for airport transfers,
+            one-way trips, round trips and outstation travel with professional
+            drivers.
+          </p>
+        </motion.div>
 
-    </div>
-
-  </div>
-
-  <div className="flex flex-wrap justify-center gap-3">
-
-    {allCities.map((city, index) => (
-
-      <motion.button
-        key={index}
-        initial={{
-          opacity: 0,
-          scale: .9,
-        }}
-        whileInView={{
-          opacity: 1,
-          scale: 1,
-        }}
-        whileHover={{
-          y: -4,
-          scale: 1.05,
-        }}
-        whileTap={{
-          scale: .95,
-        }}
-        transition={{
-          duration: .35,
-          delay: index * .02,
-        }}
-        viewport={{
-          once: true,
-        }}
-        className={`group relative overflow-hidden rounded-full border px-5 py-3 text-sm font-semibold transition-all duration-500 ${
-          darkMode
-            ? "border-white/10 bg-[#111827] text-gray-300 hover:border-orange-500/40 hover:text-white hover:shadow-[0_0_25px_rgba(249,115,22,.25)]"
-            : "border-orange-100 bg-white text-gray-700 hover:border-orange-300 hover:text-orange-600 hover:shadow-lg"
-        }`}
-      >
-
-        {/* Glow */}
-
-        <span className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 opacity-0 transition-all duration-500 group-hover:opacity-100" />
-
-        <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
-
-          <MapPin
-            size={14}
-            className="transition-all duration-500 group-hover:rotate-12"
-          />
-
-          {city}
-
-        </span>
-
-      </motion.button>
-
-    ))}
-
-  </div>
-
-</motion.div>
-
-{/* ===========================
-      PREMIUM CTA
-      PART 4
-=========================== */}
-{/* ===========================
-      PREMIUM CTA
-=========================== */}
-
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="mt-16"
-      >
-
-        <div className="relative overflow-hidden rounded-[30px] border border-orange-400/20 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 px-6 py-12 shadow-[0_35px_90px_rgba(249,115,22,.35)] md:px-10">
-
-          {/* Premium Glow */}
-
-          <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/20 blur-[120px]" />
-
-          <div className="absolute -right-20 -bottom-20 h-72 w-72 rounded-full bg-yellow-300/20 blur-[120px]" />
-
-          <div className="relative z-10">
-
-            {/* Floating Icon */}
-
+        {/* MARQUEE CITY TICKERS */}
+        <div className="space-y-6 overflow-hidden py-4">
+          
+          {/* Row 1: Moves Left */}
+          <div className="flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <motion.div
-              whileHover={{
-                rotate: 10,
-                scale: 1.08,
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                ease: "linear",
+                duration: 25,
+                repeat: Infinity,
               }}
-              className="mx-auto flex h-18 w-18 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-xl shadow-2xl"
+              className="flex gap-6 shrink-0"
             >
-
-              <Navigation
-                size={34}
-                className="text-white"
-              />
-
+              {[...row1Cities, ...row1Cities, ...row1Cities].map((city, idx) =>
+                renderCityCard(city, idx)
+              )}
             </motion.div>
+          </div>
 
-            <h2 className="mt-6 text-center text-4xl font-black text-white md:text-5xl">
-
-              Ready To Travel
-
-              <span className="block">
-
-                Anywhere In South India?
-
-              </span>
-
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-3xl text-center text-base leading-7 text-orange-50">
-
-              Airport pickup, local taxi, one-way trips,
-              round trips and outstation rides with
-              premium vehicles, professional drivers and
-              transparent pricing.
-
-            </p>
-
-            {/* Premium Highlights */}
-
-            <div className="mt-10 grid gap-4 md:grid-cols-4">
-
-              {[
-                {
-                  icon: ShieldCheck,
-                  title: "Verified",
-                },
-                {
-                  icon: Star,
-                  title: "Top Rated",
-                },
-                {
-                  icon: MapPin,
-                  title: "100+ Cities",
-                },
-                {
-                  icon: Navigation,
-                  title: "24×7",
-                },
-              ].map((item, index) => {
-
-                const Icon = item.icon;
-
-                return (
-
-                  <motion.div
-                    key={index}
-                    whileHover={{
-                      y: -6,
-                      scale: 1.05,
-                    }}
-                    className="flex flex-col items-center rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-xl transition-all duration-500"
-                  >
-
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15">
-
-                      <Icon
-                        size={22}
-                        className="text-white"
-                      />
-
-                    </div>
-
-                    <p className="mt-3 text-sm font-semibold text-white">
-
-                      {item.title}
-
-                    </p>
-
-                  </motion.div>
-
-                );
-
-              })}
-
-            </div>
-
-            {/* Buttons */}
-
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 md:flex-row">
-
-              <motion.a
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.96,
-                }}
-                href="tel:+918884449452"
-                className="group flex h-14 items-center justify-center gap-3 rounded-full border border-white bg-white/10 px-8 font-bold text-white backdrop-blur-xl transition-all duration-500 hover:bg-white hover:text-orange-600"
-              >
-
-                <Phone
-                  size={20}
-                  className="transition-transform duration-500 group-hover:rotate-12"
-                />
-
-                Call Now
-
-              </motion.a>
-
-              <motion.a
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.96,
-                }}
-                href="https://wa.me/918884449452"
-                target="_blank"
-                rel="noreferrer"
-                className="group flex h-14 items-center justify-center gap-3 rounded-full bg-[#0B101B] px-8 font-bold text-white shadow-xl transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,0,0,.45)]"
-              >
-
-                <MessageCircle
-                  size={20}
-                  className="transition-transform duration-500 group-hover:rotate-12"
-                />
-
-                Get Instant Fare
-
-              </motion.a>
-
-            </div>
-
+          {/* Row 2: Moves Right */}
+          <div className="flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <motion.div
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{
+                ease: "linear",
+                duration: 25,
+                repeat: Infinity,
+              }}
+              className="flex gap-6 shrink-0"
+            >
+              {[...row2Cities, ...row2Cities, ...row2Cities].map((city, idx) =>
+                renderCityCard(city, idx)
+              )}
+            </motion.div>
           </div>
 
         </div>
 
-      </motion.div>
+        {/* ADVANCE DESTINATION SEARCH CARD */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-16"
+        >
+          <div
+            className={`rounded-[2.5rem] p-8 md:p-12 transition-all duration-500 shadow-2xl ${
+              darkMode
+                ? "bg-[#141922] border border-white/10 text-white"
+                : "bg-white border border-gray-100 text-gray-900"
+            }`}
+          >
+            <h3 className="text-center text-2xl font-extrabold text-orange-500 md:text-3xl mb-10">
+              Advance destination search
+            </h3>
 
-    </div>
+            {/* 12 Cities 3-Column Grid */}
+            <div className="grid grid-cols-1 gap-y-8 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+              {top12Destinations.map((destination, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-4 group cursor-pointer transition-transform hover:translate-x-1"
+                >
+                  {/* City Circular Thumbnail */}
+                  <div className={`h-14 w-14 shrink-0 rounded-full overflow-hidden border-2 transition-colors ${
+                    darkMode ? "border-orange-500/30" : "border-orange-100"
+                  }`}>
+                    <img
+                      src={destination.image}
+                      alt={destination.name}
+                      className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      onError={(e) => {
+                        // Fallback image in case network blocks external link
+                        e.target.src =
+                          "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=300";
+                      }}
+                    />
+                  </div>
 
-  </section>
+                  {/* Text Container */}
+                  <div>
+                    <span className={`text-xs font-semibold block tracking-wide ${
+                      darkMode ? "text-gray-400" : "text-gray-400"
+                    }`}>
+                      Things To Do In
+                    </span>
+                    <h4 className={`text-base font-bold transition-colors ${
+                      darkMode 
+                        ? "text-gray-100 group-hover:text-orange-400" 
+                        : "text-gray-800 group-hover:text-orange-600"
+                    }`}>
+                      {destination.name}
+                    </h4>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom Button */}
+            <div className={`mt-12 text-center pt-6 border-t ${
+              darkMode ? "border-white/10" : "border-gray-100"
+            }`}>
+              <button className={`inline-flex items-center gap-2 text-base font-bold transition-colors ${
+                darkMode
+                  ? "text-white hover:text-orange-400"
+                  : "text-gray-900 hover:text-orange-600"
+              }`}>
+                Discover All Destination
+                <ArrowRight size={20} className="-rotate-45" />
+              </button>
+            </div>
+
+          </div>
+        </motion.div>
+
+        {/* INSTANT BOOKING BANNER */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-14"
+        >
+          <div
+            className={`relative overflow-hidden rounded-3xl px-6 py-10 md:px-12 ${
+              darkMode
+                ? "border border-white/10 bg-[#101827]"
+                : "border border-gray-200 bg-gray-50 shadow-lg"
+            }`}
+          >
+            <div
+              className={`absolute -left-20 top-0 h-48 w-48 rounded-full blur-[100px] pointer-events-none ${
+                darkMode ? "bg-orange-500/20" : "bg-orange-300/20"
+              }`}
+            />
+
+            <div className="relative z-10 flex flex-col items-center text-center">
+              <h2
+                className={`text-2xl font-bold md:text-4xl ${
+                  darkMode ? "text-white" : "text-gray-900"
+                }`}
+              >
+                Book Taxi from Any City Instantly
+              </h2>
+
+              <p
+                className={`mt-3 text-sm md:text-base ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Fixed fare • No hidden charges • Instant confirmation
+              </p>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <a
+                  href="tel:+918884449452"
+                  className={`flex items-center justify-center gap-2 rounded-full px-7 py-3 text-base font-semibold transition-all duration-300 ${
+                    darkMode
+                      ? "border border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white"
+                      : "border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
+                  }`}
+                >
+                  <Phone size={18} />
+                  Call Now
+                </a>
+
+                <a
+                  href="https://wa.me/918884449452"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-3 text-base font-semibold text-white transition-all duration-300 hover:bg-orange-600"
+                >
+                  <MessageCircle size={18} />
+                  Get Instant Fare on Whatsapp
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+      </div>
+    </section>
   );
 }
 
