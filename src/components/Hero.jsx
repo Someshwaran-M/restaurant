@@ -58,52 +58,49 @@ function Hero({ darkMode }) {
     : "border-gray-300 bg-gray-100 text-gray-900 hover:border-orange-400 hover:bg-orange-50";
 
   function Field({ label, icon: Icon, ...props }) {
-  return (
-    <div>
-      <label className={fieldLabel}>{label}</label>
+    return (
+      <div>
+        <label className={fieldLabel}>{label}</label>
 
-      <div className="relative">
-        <Icon size={15} className={fieldIcon} />
-        <input className={fieldInput} {...props} />
+        <div className="relative">
+          <Icon size={15} className={fieldIcon} />
+          <input className={fieldInput} {...props} />
+        </div>
       </div>
-    </div>
-  );
-}
-
+    );
+  }
 
   return (
-    <section id="home" className="relative min-h-[850px] overflow-hidden bg-[#0b0f19]">
-
+    <section
+      id="home"
+      className="relative min-h-[850px] overflow-hidden bg-[#0b0f19]"
+    >
+      <div
+        className="absolute top-0 left-0 w-full h-[850px] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
 
       <div
-  className="absolute top-0 left-0 w-full h-[850px] bg-cover bg-center bg-no-repeat"
-  style={{ backgroundImage: `url(${heroBg})` }}
-/>
+        className={`absolute inset-0 transition-colors duration-500 ${
+          darkMode ? "bg-black/65" : "bg-white/35"
+        }`}
+      />
 
-<div
-  className={`absolute inset-0 transition-colors duration-500 ${
-    darkMode
-      ? "bg-black/65"
-      : "bg-white/35"
-  }`}
-/>
-     
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-40 pb-12">
-        <div className="grid lg:grid-cols-2 gap-14 items-start">
-        
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 lg:pt-40 pb-12">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <motion.div
             initial={{ opacity: 0, x: -70 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-orange-400 bg-orange-500/10 backdrop-blur-xl">
+            <div className="inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border border-orange-400 bg-orange-500/10 backdrop-blur-xl">
               <span className="w-3 h-3 rounded-full bg-orange-400 animate-pulse" />
-              <span className="text-orange-200 font-semibold tracking-wide uppercase">
+              <span className="text-orange-200 font-semibold tracking-wide uppercase text-xs sm:text-sm">
                 One Way & Outstation Cab Service
               </span>
             </div>
 
-            <h3 className="mt-8 text-5xl xl:text-6xl font-extrabold leading-tight text-white">
+            <h3 className="mt-6 sm:mt-8 text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-tight text-white">
               Book
               <span className="text-orange-400"> One Way</span>
               <br />
@@ -112,72 +109,84 @@ function Hero({ darkMode }) {
               <span className="text-orange-300">South India</span>
             </h3>
 
-            <p className="mt-6 max-w-xl text-lg leading-7 text-gray-200">
+            <p className="mt-6 max-w-xl text-base sm:text-lg leading-7 text-gray-200">
               Travel anywhere in Tamil Nadu, Kerala & Karnataka with reliable
               taxi service. Fixed fare, clean vehicles and professional drivers
               for safe outstation and airport rides.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
-  {[
-    { icon: BadgeDollarSign, text: "Fixed Fare" },
-    { icon: ShieldCheck, text: "No Hidden Charges" },
-    { icon: Clock3, text: "24/7 Booking Support" },
-    { icon: MapPin, text: "Verified Drivers" },
-  ].map(({ icon: Icon, text }) => (
-    <div
-      key={text}
-      className="flex items-center gap-2 rounded-full
+              {[
+                { icon: BadgeDollarSign, text: "Fixed Fare" },
+                { icon: ShieldCheck, text: "No Hidden Charges" },
+                { icon: Clock3, text: "24/7 Booking Support" },
+                { icon: MapPin, text: "Verified Drivers" },
+              ].map(({ icon: Icon, text }) => (
+                <div
+                  key={text}
+                  className="flex items-center gap-2 rounded-full
       border border-white/10
       bg-black/40
       backdrop-blur-xl
-      px-6 py-3
-      text-[14px] font-semibold
+      px-4 sm:px-6 py-2.5 sm:py-3
+      text-[13px] sm:text-[14px] font-semibold
       text-white
       shadow-[0_8px_25px_rgba(0,0,0,0.25)]
       transition-all duration-300
       hover:border-orange-500/40
       hover:bg-black/60
       hover:-translate-y-0.5"
-    >
-      <Icon
-        size={10}
-        className="text-orange-400"
-        strokeWidth={2.2}
-      />
-      <span>{text}</span>
-    </div>
-  ))}
-</div>
+                >
+                  <Icon
+                    size={10}
+                    className="text-orange-400"
+                    strokeWidth={2.2}
+                  />
+                  <span>{text}</span>
+                </div>
+              ))}
+            </div>
 
             <div className="grid grid-cols-3 gap-2 mt-8 border-t border-white/10 pt-10">
               <div className="flex items-center gap-2">
-                <div className="w-12 h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center">
-                  <MapPin className="text-orange-400" />
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center shrink-0">
+                  <MapPin className="text-orange-400" size={20} />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-white">10,000+</h2>
-                  <p className="text-gray-300">Happy Trips</p>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                    10,000+
+                  </h2>
+                  <p className="text-gray-300 text-xs sm:text-base">
+                    Happy Trips
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center">
-                  <ShieldCheck className="text-orange-400" />
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="text-orange-400" size={20} />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-white">55+</h2>
-                  <p className="text-gray-300">Cities Covered</p>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                    55+
+                  </h2>
+                  <p className="text-gray-300 text-xs sm:text-base">
+                    Cities Covered
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center">
-                  <Star className="text-orange-400" />
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center shrink-0">
+                  <Star className="text-orange-400" size={20} />
                 </div>
                 <div>
-                  <h2 className="text-4xl font-bold text-white">5★</h2>
-                  <p className="text-gray-300">Average Rating</p>
+                  <h2 className="text-2xl sm:text-4xl font-bold text-white">
+                    5★
+                  </h2>
+                  <p className="text-gray-300 text-xs sm:text-base">
+                    Average Rating
+                  </p>
                 </div>
               </div>
             </div>
@@ -188,38 +197,41 @@ function Hero({ darkMode }) {
             </div>
           </motion.div>
 
-          
           <motion.div
             initial={{ opacity: 0, x: 70 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-           className={`w-[600px] rounded-[28px] p-5 shadow-2xl backdrop-blur-sm transition-all duration-500 ${
-  darkMode
-    ? "border border-gray-700 "
-    : "border border-gray-200 bg-white/90 shadow-xl"
-}`}
+            className={`w-full max-w-[600px] mx-auto lg:mx-0 rounded-[28px] p-4 sm:p-5 shadow-2xl backdrop-blur-sm transition-all duration-500 ${
+              darkMode
+                ? "border border-gray-700 "
+                : "border border-gray-200 bg-white/90 shadow-xl"
+            }`}
           >
-            <h2 className={`text-3xl font-bold ${
-  darkMode ? "text-white" : "text-gray-900"
-}`}>
+            <h2
+              className={`text-2xl sm:text-3xl font-bold ${
+                darkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
               Quick Taxi Booking
             </h2>
-            <p className={`mt-1 text-sm ${
-  darkMode ? "text-gray-300" : "text-gray-600"
-}`}>
+            <p
+              className={`mt-1 text-sm ${
+                darkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
               One Way • Outstation • Airport Drop
             </p>
 
-            <div className="grid md:grid-cols-2 gap-3 mt-6">
+            <div className="grid sm:grid-cols-2 gap-3 mt-6">
               <Field
-  label="Pickup Location"
-  icon={MapPin}
-  type="text"
-  placeholder="Enter pickup location"
-  fieldLabel={fieldLabel}
-  fieldInput={fieldInput}
-  fieldIcon={fieldIcon}
-/>
+                label="Pickup Location"
+                icon={MapPin}
+                type="text"
+                placeholder="Enter pickup location"
+                fieldLabel={fieldLabel}
+                fieldInput={fieldInput}
+                fieldIcon={fieldIcon}
+              />
               <Field
                 label="Drop Location"
                 icon={Flag}
@@ -228,11 +240,10 @@ function Hero({ darkMode }) {
                 fieldLabel={fieldLabel}
                 fieldInput={fieldInput}
                 fieldIcon={fieldIcon}
-
               />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-3 mt-3">
+            <div className="grid sm:grid-cols-2 gap-3 mt-3">
               <Field
                 label="Full Name"
                 icon={User}
@@ -253,10 +264,23 @@ function Hero({ darkMode }) {
               />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-3 mt-3">
-              
-              <Field label="Pickup Date" icon={Calendar} type="date" fieldLabel={fieldLabel} fieldInput={fieldInput} fieldIcon={fieldIcon} />
-              <Field label="Pickup Time" icon={Clock} type="time" fieldLabel={fieldLabel} fieldInput={fieldInput} fieldIcon={fieldIcon} />
+            <div className="grid sm:grid-cols-2 gap-3 mt-3">
+              <Field
+                label="Pickup Date"
+                icon={Calendar}
+                type="date"
+                fieldLabel={fieldLabel}
+                fieldInput={fieldInput}
+                fieldIcon={fieldIcon}
+              />
+              <Field
+                label="Pickup Time"
+                icon={Clock}
+                type="time"
+                fieldLabel={fieldLabel}
+                fieldInput={fieldInput}
+                fieldIcon={fieldIcon}
+              />
             </div>
 
             <AnimatePresence>
@@ -266,7 +290,7 @@ function Hero({ darkMode }) {
                   animate={{ opacity: 1, height: "auto", marginTop: 12 }}
                   exit={{ opacity: 0, height: 0, marginTop: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="grid md:grid-cols-2 gap-3 overflow-hidden"
+                  className="grid sm:grid-cols-2 gap-3 overflow-hidden"
                 >
                   <Field label="Return Date" icon={Calendar} type="date" />
                 </motion.div>
@@ -286,16 +310,20 @@ function Hero({ darkMode }) {
                   <div className="flex items-center gap-2">
                     <ArrowRight size={10} className="text-orange-400" />
                     <h3
-  className={`text-base font-bold ${
-    darkMode ? "text-white" : "text-gray-900"
-  }`}
->One Way</h3>
+                      className={`text-sm sm:text-base font-bold ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                    >
+                      One Way
+                    </h3>
                   </div>
                   <p
-  className={`mt-0.5 text-xs ${
-    darkMode ? "text-gray-400" : "text-gray-600"
-  }`}
->Min 150 KM</p>
+                    className={`mt-0.5 text-[11px] sm:text-xs ${
+                      darkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Min 150 KM
+                  </p>
                 </button>
 
                 <button
@@ -307,19 +335,19 @@ function Hero({ darkMode }) {
                 >
                   <div className="flex items-center gap-2">
                     <ArrowLeftRight size={15} className="text-orange-400" />
-                   <h3
-  className={`text-base font-bold ${
-    darkMode ? "text-white" : "text-gray-900"
-  }`}
->
+                    <h3
+                      className={`text-sm sm:text-base font-bold ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                    >
                       Round Trip
                     </h3>
                   </div>
-                 <p
-  className={`mt-0.5 text-xs ${
-    darkMode ? "text-gray-400" : "text-gray-600"
-  }`}
->
+                  <p
+                    className={`mt-0.5 text-[11px] sm:text-xs ${
+                      darkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
                     Min 300 KM / Day
                   </p>
                 </button>
@@ -330,42 +358,42 @@ function Hero({ darkMode }) {
               <label className={fieldLabel}>AC / Non-AC</label>
               <div className="grid grid-cols-2 gap-3 mt-1.5">
                 <button
-  type="button"
-  onClick={() => setAcType("ac")}
-  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
-    acType === "ac" ? toggleSelected : toggleIdle
-  }`}
->
-  <Snowflake size={15} className="text-orange-500" />
-  AC
-</button>
+                  type="button"
+                  onClick={() => setAcType("ac")}
+                  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
+                    acType === "ac" ? toggleSelected : toggleIdle
+                  }`}
+                >
+                  <Snowflake size={15} className="text-orange-500" />
+                  AC
+                </button>
 
-<button
-  type="button"
-  onClick={() => setAcType("nonac")}
-  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
-    acType === "nonac" ? toggleSelected : toggleIdle
-  }`}
->
-  Non AC
-</button>
+                <button
+                  type="button"
+                  onClick={() => setAcType("nonac")}
+                  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
+                    acType === "nonac" ? toggleSelected : toggleIdle
+                  }`}
+                >
+                  Non AC
+                </button>
               </div>
             </div>
 
             <div className="mt-2">
               <label className={fieldLabel}>Select Vehicle</label>
-              <div className="grid grid-cols-3 gap-2 mt-1.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1.5">
                 {vehicles.map((v) => (
                   <div
                     key={v.id}
                     onClick={() => setVehicle(v.id)}
-                   className={`rounded-xl border cursor-pointer p-2 text-center transition duration-300 ${
-  vehicle === v.id
-    ? "border-orange-500 bg-orange-500/10"
-    : darkMode
-    ? "border-white/10 bg-white/5 hover:border-orange-400"
-    : "border-gray-200 bg-gray-50 hover:border-orange-400 hover:bg-orange-50"
-}`}
+                    className={`rounded-xl border cursor-pointer p-2 text-center transition duration-300 ${
+                      vehicle === v.id
+                        ? "border-orange-500 bg-orange-500/10"
+                        : darkMode
+                          ? "border-white/10 bg-white/5 hover:border-orange-400"
+                          : "border-gray-200 bg-gray-50 hover:border-orange-400 hover:bg-orange-50"
+                    }`}
                   >
                     <img
                       src={v.img}
@@ -375,9 +403,11 @@ function Hero({ darkMode }) {
                     <p className="text-orange-400 font-bold mt-1.5 text-xs">
                       {v.price}
                     </p>
-                    <h4 className={`mt-0.5 text-[10px] font-semibold leading-tight ${
-  darkMode ? "text-white" : "text-gray-900"
-}`}>
+                    <h4
+                      className={`mt-0.5 text-[10px] font-semibold leading-tight ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                    >
                       {v.name}
                     </h4>
                   </div>
@@ -403,22 +433,32 @@ function Hero({ darkMode }) {
             </a>
 
             <div className="my-4 flex items-center gap-4">
-              <div className={`h-px flex-1 ${
-  darkMode ? "bg-white/10" : "bg-gray-300"
-}`}></div>
-              <span className={`text-xs ${
-  darkMode ? "text-gray-400" : "text-gray-600"
-}`}>or call directly</span>
-              <div className="h-px flex-1 bg-white/10"></div>
+              <div
+                className={`h-px flex-1 ${
+                  darkMode ? "bg-white/10" : "bg-gray-300"
+                }`}
+              ></div>
+              <span
+                className={`text-xs ${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                or call directly
+              </span>
+              <div
+                className={`h-px flex-1 ${
+                  darkMode ? "bg-white/10" : "bg-gray-300"
+                }`}
+              ></div>
             </div>
 
             <a
               href="tel:+919888444952"
               className={`flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-orange-500 text-lg font-bold transition-all duration-300 hover:bg-orange-500 hover:text-white ${
-  darkMode
-    ? "bg-orange-500/5 text-orange-400"
-    : "bg-orange-50 text-orange-600"
-}`}
+                darkMode
+                  ? "bg-orange-500/5 text-orange-400"
+                  : "bg-orange-50 text-orange-600"
+              }`}
             >
               <span>+918884449452</span>
             </a>
@@ -426,21 +466,21 @@ function Hero({ darkMode }) {
         </div>
 
         <div className="mt-8 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-3 backdrop-blur-xl">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-orange-100">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-orange-100">
             <div className="flex items-center gap-2">
-              <ShieldCheck size={12} className="text-orange-400" />
+              <ShieldCheck size={14} className="text-orange-400 shrink-0" />
               <span>No Hidden Charges</span>
             </div>
             <div className="flex items-center gap-2">
-              <ShieldCheck size={16} className="text-orange-400" />
+              <ShieldCheck size={14} className="text-orange-400 shrink-0" />
               <span>Verified Drivers</span>
             </div>
             <div className="flex items-center gap-2">
-              <ShieldCheck size={16} className="text-orange-400" />
+              <ShieldCheck size={14} className="text-orange-400 shrink-0" />
               <span>Instant Confirmation</span>
             </div>
             <div className="flex items-center gap-2">
-              <ShieldCheck size={16} className="text-orange-400" />
+              <ShieldCheck size={14} className="text-orange-400 shrink-0" />
               <span>Pay Driver Directly</span>
             </div>
           </div>

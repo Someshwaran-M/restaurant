@@ -7,9 +7,14 @@ import {
   Phone,
   MessageCircle,
 } from "lucide-react";
+import logo from "../assets/images/logo.png";
 
 
-function Navbar({ darkMode, setDarkMode }) {
+function Navbar({
+  darkMode,
+  setDarkMode,
+  setActiveSection,
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   
 
@@ -20,7 +25,47 @@ function Navbar({ darkMode, setDarkMode }) {
     "Gallery",
     "Contact",
   ];
+const handleNavClick = (item) => {
+  if (item === "Tours") {
+    setActiveSection("tours");
 
+    setTimeout(() => {
+      document.getElementById("tours")?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 100);
+
+    return;
+  }
+
+  if (item === "Gallery") {
+    setActiveSection("gallery");
+
+    setTimeout(() => {
+      document.getElementById("gallery")?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 100);
+
+    return;
+  }
+
+  if (item === "Contact") {
+    setActiveSection("contact");
+
+    setTimeout(() => {
+      document.getElementById("contact")?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 100);
+
+    return;
+  }
+
+  document.getElementById(item.toLowerCase())?.scrollIntoView({
+    behavior: "smooth",
+  });
+};
 const [scrolled, setScrolled] = useState(false);
 
 useEffect(() => {
@@ -57,7 +102,7 @@ useEffect(() => {
 
       <div className="flex items-center">
         <img
-          src="public/cars/logo.png"
+          src={logo}
           alt="Logo"
           className="h-16 w-auto"
         />
@@ -67,17 +112,17 @@ useEffect(() => {
       <ul className="hidden lg:flex items-center gap-10">
 
         {navItems.map((item) => (
-          <li key={item}>
-            <a
-              href={`#${item.toLowerCase()}`}
-              className={`relative font-semibold tracking-wide transition-all duration-300 hover:text-orange-500 after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full ${
-  darkMode ? "text-white" : "text-gray-900"
-}`}
-            >
-              {item}
-            </a>
-          </li>
-        ))}
+  <li key={item}>
+    <button
+      onClick={() => handleNavClick(item)}
+      className={`relative font-semibold tracking-wide transition-all duration-300 hover:text-orange-500 after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full ${
+        darkMode ? "text-white" : "text-gray-900"
+      }`}
+    >
+      {item}
+    </button>
+  </li>
+))}
 
       </ul>
 
@@ -143,34 +188,35 @@ useEffect(() => {
 >
 
       <div className="flex flex-col gap-5 p-6">
+  {navItems.map((item) => (
+    <button
+      key={item}
+      onClick={() => {
+        handleNavClick(item);
+        setMenuOpen(false);
+      }}
+      className={`text-left font-medium hover:text-orange-500 transition ${
+        darkMode ? "text-white" : "text-gray-900"
+      }`}
+    >
+      {item}
+    </button>
+  ))}
 
-        {navItems.map((item) => (
-          <a
-            key={item}
-            href={`#${item.toLowerCase()}`}
-           className={`font-medium hover:text-orange-500 transition ${
-  darkMode ? "text-white" : "text-gray-900"
-}`}
-          >
-            {item}
-          </a>
-        ))}
+  <a
+    href="tel:+919999999999"
+    className="bg-orange-500 rounded-full py-3 text-center font-semibold text-white"
+  >
+    Call Now
+  </a>
 
-        <a
-          href="tel:+919999999999"
-          className="bg-orange-500 rounded-full py-3 text-center font-semibold text-white"
-        >
-          Call Now
-        </a>
-
-        <a
-          href="https://wa.me/919999999999"
-          className="bg-orange-600 rounded-full py-3 text-center font-semibold text-white"
-        >
-          WhatsApp
-        </a>
-
-      </div>
+  <a
+    href="https://wa.me/919999999999"
+    className="bg-orange-600 rounded-full py-3 text-center font-semibold text-white"
+  >
+    WhatsApp
+  </a>
+</div>
 
     </div>
   )}

@@ -18,17 +18,18 @@ import Tours from "./components/Tours";
 function App() {
   const [showMore, setShowMore] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
-  const [showTours, setShowTours] = useState(false);
-  const [showGallery, setShowGallery] = useState(false);
-  const [showContact, setShowContact] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
 
   return (
     <div className="bg-white overflow-x-hidden">
-      {/* Scroll to Top Button */}
+      
       <ScrollToTop />
 
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-
+     <Navbar
+  darkMode={darkMode}
+  setDarkMode={setDarkMode}
+  setActiveSection={setActiveSection}
+/>
       <main>
         <section id="home">
           <Hero darkMode={darkMode} />
@@ -59,9 +60,25 @@ function App() {
           <Faq darkMode={darkMode}/>
         </section>
 
-      <Tours darkMode={darkMode} />
-      <Gallery darkMode={darkMode} />
-      <Contact darkMode={darkMode} />   
+      {activeSection === "tours" && (
+  <section id="tours">
+    <Tours darkMode={darkMode} />
+  </section>
+)}
+
+{activeSection === "gallery" && (
+  <section id="gallery">
+    <Gallery darkMode={darkMode} />
+  </section>
+)}
+
+{activeSection === "contact" && (
+  <section id="contact">
+    <Contact darkMode={darkMode} />
+  </section>
+)}
+      
+       
 
       </main>
 
