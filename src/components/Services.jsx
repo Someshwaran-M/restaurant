@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import passengerImage from "../assets/images/carmobile.jpeg";
 import {
   ArrowRight,
   RotateCcw,
@@ -257,7 +258,7 @@ function Services({ darkMode }) {
           >
             <div className="relative overflow-hidden rounded-[2.5rem] shadow-2xl border border-gray-100 dark:border-white/10 max-w-lg w-full">
               <img
-                src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000"
+                src={passengerImage}
                 alt="Passenger riding taxi"
                 className="h-[390px] w-full object-cover"
               />

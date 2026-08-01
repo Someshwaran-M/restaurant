@@ -72,8 +72,8 @@ function Navbar({ darkMode, setDarkMode, setActiveSection }) {
           <nav
             className={`rounded-full border transition-all duration-500 ${
               darkMode
-                ? "backdrop-blur-sm border-white/10 shadow-2xl shadow-black/30"
-                : "backdrop-blur-sm border-gray-200 shadow-xl shadow-gray-200/70"
+                ? " bg-black backdrop-blur-sm border-white/10 shadow-2xl shadow-black/30"
+                : "bg-white backdrop-blur-sm border-gray-200 shadow-xl shadow-gray-200/70"
             }`}
           >
             <div className="flex items-center justify-between px-6 lg:px-8 h-20">
