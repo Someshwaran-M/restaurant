@@ -7,7 +7,9 @@ import {
   Phone,
   MessageCircle,
 } from "lucide-react";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/Logo.png";
+
+
 
 
 function Navbar({
@@ -101,9 +103,8 @@ useEffect(() => {
     <div className="h-20 flex items-center justify-between">
 
       <div className="flex items-center">
-        <img
-          src={logo}
-          alt="Logo"
+        <img src={logo} alt="Logo"
+        
           className="h-16 w-auto"
         />
       </div>
