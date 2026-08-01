@@ -10,33 +10,44 @@ import {
 } from "react-icons/fa";
 
 function Footer({ darkMode }) {
-  console.log("Footer darkMode:", darkMode);
+  
   return (
     <footer
-  className={`relative overflow-hidden transition-all duration-500 ${
+  className={`relative overflow-hidden transition-all duration-700 ${
     darkMode
-      ? "bg-[#080C16] text-white"
-      : "bg-white text-gray-900"
+      ? "bg-gradient-to-br from-[#04070F] via-[#0D1324] to-[#060A14] text-white"
+      : "bg-gradient-to-br from-orange-50 via-white to-orange-100 text-gray-900"
+      
   }`}
+  
 >
-
-      <div
-  className={`absolute left-0 top-0 h-80 w-80 rounded-full blur-[140px] ${
-    darkMode ? "bg-orange-500/10" : "bg-orange-300/20"
-  }`}
+<div
+className={`absolute -left-32 -top-32 h-[420px] w-[420px] rounded-full blur-[170px] animate-pulse ${
+darkMode
+? "bg-orange-500/15"
+: "bg-orange-300/30"
+}`}
 />
 
 <div
-  className={`absolute right-0 bottom-0 h-80 w-80 rounded-full blur-[140px] ${
-    darkMode ? "bg-amber-500/10" : "bg-yellow-300/20"
-  }`}
+className={`absolute -right-32 -bottom-32 h-[420px] w-[420px] rounded-full blur-[170px] animate-pulse ${
+darkMode
+? "bg-amber-500/15"
+: "bg-yellow-300/30"
+}`}
 />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-14">
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 
-          <div >
+          <div
+className={`group rounded-3xl border backdrop-blur-xl p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_70px_rgba(249,115,22,.25)] ${
+darkMode
+? "border-white/10 bg-white/5"
+: "border-orange-200 bg-white/70"
+}`}
+>
 
             <div className="flex items-center gap-4">
 
@@ -71,7 +82,7 @@ function Footer({ darkMode }) {
 
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-4">
+            <div className="mt-4 flex flex-wrap gap-2">
 
               <a
                 href="tel:+919888444952"
@@ -88,7 +99,7 @@ function Footer({ darkMode }) {
                 href="https://wa.me/919888444952"
                 target="_blank"
                 rel="noreferrer"
-               className="flex items-center gap-3 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:bg-orange-600"
+               className="flex items-center gap-3 rounded-full bg-orange-500 px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-orange-600"
               >
 
                 <FaWhatsapp />
@@ -101,7 +112,13 @@ function Footer({ darkMode }) {
 
           </div>
 
-          <div>
+          <div
+className={`group rounded-3xl border backdrop-blur-xl p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_70px_rgba(249,115,22,.25)] ${
+darkMode
+? "border-white/10 bg-white/5"
+: "border-orange-200 bg-white/70"
+}`}
+>
 
             <h3 className="mb-5 text-xl font-bold uppercase tracking-wide text-orange-400">
               Explore Services
@@ -168,7 +185,13 @@ function Footer({ darkMode }) {
 
           </div>
 
-          <div>
+          <div
+className={`group rounded-3xl border backdrop-blur-xl p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_70px_rgba(249,115,22,.25)] ${
+darkMode
+? "border-white/10 bg-white/5"
+: "border-orange-200 bg-white/70"
+}`}
+>
 
             <h3 className="mb-5 text-xl font-bold uppercase tracking-wide text-orange-400">
               Popular Routes
@@ -246,7 +269,13 @@ function Footer({ darkMode }) {
 
           </div>
 
-          <div>
+          <div
+className={`group rounded-3xl border backdrop-blur-xl p-7 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_70px_rgba(249,115,22,.25)] ${
+darkMode
+? "border-white/10 bg-white/5"
+: "border-orange-200 bg-white/70"
+}`}
+>
 
             <h3 className="mb-5 text-xl font-bold uppercase tracking-wide text-orange-400">
               Contact
@@ -275,7 +304,7 @@ function Footer({ darkMode }) {
               <div className="flex items-start gap-4">
 
                 <div className="mt-1 text-orange-400">
-                  <Mail size={18} />
+                  <Mail size={16} />
                 </div>
 
                 <div>
@@ -283,7 +312,7 @@ function Footer({ darkMode }) {
                   <p className={`text-base transition hover:text-orange-500 ${
   darkMode ? "text-gray-300" : "text-gray-700"
 }`}>
-                    nonstopdroptaxi2026@gmail.com
+                    taxi2026@gmail.com
                   </p>
 
                 </div>
