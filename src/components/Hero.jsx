@@ -11,481 +11,399 @@ import {
   Calendar,
   ArrowRight,
   ArrowLeftRight,
-  Snowflake,
-  Star,
-  Flag,
-  MessageCircle,
+  X,
+  Send,
 } from "lucide-react";
 
-const heroBg = "/cars/Herobg.png";
+const heroCar = "/images/Herobg.png";
+
 const vehicles = [
-  { id: 1, name: "MINI", price: "₹15/km", img: "/cars/Car1.png" },
-  { id: 2, name: "SEDAN", price: "₹16/km", img: "/cars/Car2.png" },
-  { id: 3, name: "ERTIGA", price: "₹21/km", img: "/cars/Car3.png" },
-  { id: 4, name: "INNOVA", price: "₹22/km", img: "/cars/Car4.png" },
-  { id: 5, name: "INNOVA CRYSTA", price: "₹25/km", img: "/cars/Car5.png" },
-  { id: 6, name: "TEMPO TRAVELLER", price: "₹30/km", img: "/cars/Car6.png" },
-  { id: 7, name: "FORCE URBANIA", price: "₹35/km", img: "/cars/Car7.png" },
+  { id: 1, name: "MINI", price: "₹15/km", img: "/images/Car1.png" },
+  { id: 2, name: "SEDAN", price: "₹16/km", img: "/images/Car2.png" },
+  { id: 3, name: "ERTIGA", price: "₹21/km", img: "/images/Car3.png" },
+  { id: 4, name: "INNOVA", price: "₹22/km", img: "/images/Car4.png" },
+  { id: 5, name: "INNOVA CRYSTA", price: "₹25/km", img: "/images/Car5.png" },
+  { id: 6, name: "TEMPO TRAVELLER", price: "₹30/km", img: "/images/Car6.png" },
+  { id: 7, name: "FORCE URBANIA", price: "₹35/km", img: "/images/Car7.png" },
 ];
 
-function Hero({ darkMode }) {
+function Hero({ darkMode = true }) {
+  const [showBookingModal, setShowBookingModal] = useState(false);
   const [tripType, setTripType] = useState("oneway");
   const [acType, setAcType] = useState("ac");
   const [vehicle, setVehicle] = useState(2);
+  const [pickup, setPickup] = useState("");
+  const [drop, setDrop] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [pickupDate, setPickupDate] = useState("");
+  const [pickupTime, setPickupTime] = useState("");
+  const [returnDate, setReturnDate] = useState("");
 
-  const fieldLabel = `block mb-1.5 text-[11px] font-semibold uppercase tracking-wide ${
-    darkMode ? "text-gray-400" : "text-gray-700"
-  }`;
+  const selectedVehicleObj = vehicles.find((v) => v.id === vehicle) || vehicles[1];
 
-  const fieldInput = `w-full h-10 rounded-lg border pl-9 pr-3 text-sm outline-none transition-all duration-300 ${
-    darkMode
-      ? "border-gray-700  text-white placeholder:text-gray-500 focus:border-orange-500 focus:bg-[#111827]"
-      : "border-gray-300 bg-white text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:bg-orange-50"
-  }`;
+  const handleWhatsAppBooking = (e) => {
+    e?.preventDefault();
+    const msg = `*NEW TAXI BOOKING REQUEST*%0A` +
+      `----------------------------------%0A` +
+      `📍 *Pickup:* ${pickup || "Not specified"}%0A` +
+      `🏁 *Drop:* ${drop || "Not specified"}%0A` +
+      `👤 *Name:* ${name || "Not specified"}%0A` +
+      `📞 *Phone:* ${phone || "Not specified"}%0A` +
+      `📅 *Date:* ${pickupDate || "Not specified"} ${pickupTime ? `at ${pickupTime}` : ""}%0A` +
+      (tripType === "roundtrip" ? `🔄 *Return Date:* ${returnDate || "Not specified"}%0A` : "") +
+      `🚖 *Trip Type:* ${tripType === "oneway" ? "One Way" : "Round Trip"}%0A` +
+      `❄️ *AC Option:* ${acType.toUpperCase()}%0A` +
+      `🚗 *Vehicle:* ${selectedVehicleObj.name} (${selectedVehicleObj.price})%0A` +
+      `----------------------------------`;
 
-  const fieldIcon = `pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 ${
-    darkMode ? "text-orange-400" : "text-orange-500"
-  }`;
+    window.open(`https://wa.me/919888444952?text=${msg}`, "_blank");
+  };
 
-  const toggleBase =
-    "rounded-xl border px-3 py-2 text-left transition-all duration-300";
-
-  const toggleSelected =
-    "border-orange-500 bg-orange-500/10 text-orange-500 shadow-md shadow-orange-500/20";
-
-  const toggleIdle = darkMode
-    ? "border-white/10 bg-white/5 text-white hover:border-orange-400 hover:bg-orange-500/5"
-    : "border-gray-300 bg-gray-100 text-gray-900 hover:border-orange-400 hover:bg-orange-50";
-
-  function Field({ label, icon: Icon, ...props }) {
-    return (
-      <div>
-        <label className={fieldLabel}>{label}</label>
-
-        <div className="relative">
-          <Icon size={15} className={fieldIcon} />
-          <input className={fieldInput} {...props} />
-        </div>
-      </div>
-    );
-  }
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section
       id="home"
-      className="relative min-h-[850px] overflow-hidden bg-[#0b0f19]"
+      className={`relative w-full min-h-screen transition-colors duration-500 overflow-hidden flex flex-col justify-between pt-4 pb-8 px-4 sm:px-8 lg:px-14 font-outfit ${
+        darkMode ? "bg-[#111115] text-white" : "bg-[#f8fafc] text-slate-900"
+      }`}
     >
-      <div
-        className="absolute top-0 left-0 w-full h-[850px] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      />
+      {/* Background SVG Curve & Concentric Rings */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <svg
+          className="w-full h-full"
+          viewBox="0 0 1440 900"
+          preserveAspectRatio="none"
+        >
+          {/* Vibrant Orange Curved Left Block */}
+          <path
+            d="M 0,0 L 480,0 C 740,260 740,640 430,900 L 0,900 Z"
+            fill="#f95400"
+          />
 
-      <div
-        className={`absolute inset-0 transition-colors duration-500 ${
-          darkMode ? "bg-black/65" : "bg-white/35"
-        }`}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 lg:pt-40 pb-12">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -70 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border border-orange-400 bg-orange-500/10 backdrop-blur-xl">
-              <span className="w-3 h-3 rounded-full bg-orange-400 animate-pulse" />
-              <span className="text-orange-200 font-semibold tracking-wide uppercase text-xs sm:text-sm">
-                One Way & Outstation Cab Service
-              </span>
-            </div>
-
-            <h3 className="mt-6 sm:mt-8 text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-tight text-white">
-              Book
-              <span className="text-orange-400"> One Way</span>
-              <br />
-              Taxi Across
-              <br />
-              <span className="text-orange-300">South India</span>
-            </h3>
-
-            <p className="mt-6 max-w-xl text-base sm:text-lg leading-7 text-gray-200">
-              Travel anywhere in Tamil Nadu, Kerala & Karnataka with reliable
-              taxi service. Fixed fare, clean vehicles and professional drivers
-              for safe outstation and airport rides.
-            </p>
-
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              {[
-                { icon: BadgeDollarSign, text: "Fixed Fare" },
-                { icon: ShieldCheck, text: "No Hidden Charges" },
-                { icon: Clock3, text: "24/7 Booking Support" },
-                { icon: MapPin, text: "Verified Drivers" },
-              ].map(({ icon: Icon, text }) => (
-                <div
-                  key={text}
-                  className="flex items-center gap-2 rounded-full
-      border border-white/10
-      bg-black/40
-      backdrop-blur-xl
-      px-4 sm:px-6 py-2.5 sm:py-3
-      text-[13px] sm:text-[14px] font-semibold
-      text-white
-      shadow-[0_8px_25px_rgba(0,0,0,0.25)]
-      transition-all duration-300
-      hover:border-orange-500/40
-      hover:bg-black/60
-      hover:-translate-y-0.5"
-                >
-                  <Icon
-                    size={10}
-                    className="text-orange-400"
-                    strokeWidth={2.2}
-                  />
-                  <span>{text}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 mt-8 border-t border-white/10 pt-10">
-              <div className="flex items-center gap-2">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center shrink-0">
-                  <MapPin className="text-orange-400" size={20} />
-                </div>
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white">
-                    10,000+
-                  </h2>
-                  <p className="text-gray-300 text-xs sm:text-base">
-                    Happy Trips
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 sm:gap-4">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center shrink-0">
-                  <ShieldCheck className="text-orange-400" size={20} />
-                </div>
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white">
-                    55+
-                  </h2>
-                  <p className="text-gray-300 text-xs sm:text-base">
-                    Cities Covered
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 sm:gap-4">
-                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center shrink-0">
-                  <Star className="text-orange-400" size={20} />
-                </div>
-                <div>
-                  <h2 className="text-2xl sm:text-4xl font-bold text-white">
-                    5★
-                  </h2>
-                  <p className="text-gray-300 text-xs sm:text-base">
-                    Average Rating
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 flex items-center gap-3 text-gray-300">
-              <span className="animate-bounce text-2xl">↓</span>
-              Scroll to explore
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 70 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className={`w-full max-w-[600px] mx-auto lg:mx-0 rounded-[28px] p-4 sm:p-5 shadow-2xl backdrop-blur-sm transition-all duration-500 ${
-              darkMode
-                ? "border border-gray-700 "
-                : "border border-gray-200 bg-white/90 shadow-xl"
-            }`}
-          >
-            <h2
-              className={`text-2xl sm:text-3xl font-bold ${
-                darkMode ? "text-white" : "text-gray-900"
-              }`}
-            >
-              Quick Taxi Booking
-            </h2>
-            <p
-              className={`mt-1 text-sm ${
-                darkMode ? "text-gray-300" : "text-gray-600"
-              }`}
-            >
-              One Way • Outstation • Airport Drop
-            </p>
-
-            <div className="grid sm:grid-cols-2 gap-3 mt-6">
-              <Field
-                label="Pickup Location"
-                icon={MapPin}
-                type="text"
-                placeholder="Enter pickup location"
-                fieldLabel={fieldLabel}
-                fieldInput={fieldInput}
-                fieldIcon={fieldIcon}
-              />
-              <Field
-                label="Drop Location"
-                icon={Flag}
-                type="text"
-                placeholder="Enter drop location"
-                fieldLabel={fieldLabel}
-                fieldInput={fieldInput}
-                fieldIcon={fieldIcon}
-              />
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-3 mt-3">
-              <Field
-                label="Full Name"
-                icon={User}
-                type="text"
-                placeholder="Enter your name"
-                fieldLabel={fieldLabel}
-                fieldInput={fieldInput}
-                fieldIcon={fieldIcon}
-              />
-              <Field
-                label="Mobile Number"
-                icon={Phone}
-                type="tel"
-                placeholder="Enter mobile number"
-                fieldLabel={fieldLabel}
-                fieldInput={fieldInput}
-                fieldIcon={fieldIcon}
-              />
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-3 mt-3">
-              <Field
-                label="Pickup Date"
-                icon={Calendar}
-                type="date"
-                fieldLabel={fieldLabel}
-                fieldInput={fieldInput}
-                fieldIcon={fieldIcon}
-              />
-              <Field
-                label="Pickup Time"
-                icon={Clock}
-                type="time"
-                fieldLabel={fieldLabel}
-                fieldInput={fieldInput}
-                fieldIcon={fieldIcon}
-              />
-            </div>
-
-            <AnimatePresence>
-              {tripType === "roundtrip" && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                  animate={{ opacity: 1, height: "auto", marginTop: 12 }}
-                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="grid sm:grid-cols-2 gap-3 overflow-hidden"
-                >
-                  <Field label="Return Date" icon={Calendar} type="date" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <div className="mt-2">
-              <label className={fieldLabel}>Trip Type</label>
-              <div className="grid grid-cols-2 gap-3 mt-1.5">
-                <button
-                  type="button"
-                  onClick={() => setTripType("oneway")}
-                  className={`${toggleBase} ${
-                    tripType === "oneway" ? toggleSelected : toggleIdle
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <ArrowRight size={10} className="text-orange-400" />
-                    <h3
-                      className={`text-sm sm:text-base font-bold ${
-                        darkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      One Way
-                    </h3>
-                  </div>
-                  <p
-                    className={`mt-0.5 text-[11px] sm:text-xs ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    Min 150 KM
-                  </p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setTripType("roundtrip")}
-                  className={`${toggleBase} ${
-                    tripType === "roundtrip" ? toggleSelected : toggleIdle
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <ArrowLeftRight size={15} className="text-orange-400" />
-                    <h3
-                      className={`text-sm sm:text-base font-bold ${
-                        darkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      Round Trip
-                    </h3>
-                  </div>
-                  <p
-                    className={`mt-0.5 text-[11px] sm:text-xs ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    Min 300 KM / Day
-                  </p>
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-2">
-              <label className={fieldLabel}>AC / Non-AC</label>
-              <div className="grid grid-cols-2 gap-3 mt-1.5">
-                <button
-                  type="button"
-                  onClick={() => setAcType("ac")}
-                  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
-                    acType === "ac" ? toggleSelected : toggleIdle
-                  }`}
-                >
-                  <Snowflake size={15} className="text-orange-500" />
-                  AC
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setAcType("nonac")}
-                  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
-                    acType === "nonac" ? toggleSelected : toggleIdle
-                  }`}
-                >
-                  Non AC
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-2">
-              <label className={fieldLabel}>Select Vehicle</label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1.5">
-                {vehicles.map((v) => (
-                  <div
-                    key={v.id}
-                    onClick={() => setVehicle(v.id)}
-                    className={`rounded-xl border cursor-pointer p-2 text-center transition duration-300 ${
-                      vehicle === v.id
-                        ? "border-orange-500 bg-orange-500/10"
-                        : darkMode
-                          ? "border-white/10 bg-white/5 hover:border-orange-400"
-                          : "border-gray-200 bg-gray-50 hover:border-orange-400 hover:bg-orange-50"
-                    }`}
-                  >
-                    <img
-                      src={v.img}
-                      alt={v.name}
-                      className="h-12 w-full mx-auto object-contain"
-                    />
-                    <p className="text-orange-400 font-bold mt-1.5 text-xs">
-                      {v.price}
-                    </p>
-                    <h4
-                      className={`mt-0.5 text-[10px] font-semibold leading-tight ${
-                        darkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      {v.name}
-                    </h4>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <a
-              href="https://wa.me/919888444952"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 flex h-[52px] w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-lg font-bold text-white shadow-lg shadow-orange-500/30 transition hover:from-orange-600 hover:to-orange-700"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M20.52 3.48A11.8 11.8 0 0 0 12.06 0C5.52 0 .18 5.34.18 11.88c0 2.1.54 4.14 1.62 5.94L0 24l6.36-1.68a11.85 11.85 0 0 0 5.7 1.44h.06c6.54 0 11.88-5.34 11.88-11.88 0-3.18-1.26-6.18-3.48-8.4zm-8.46 18.3a9.9 9.9 0 0 1-5.04-1.38l-.36-.18-3.78.96 1.02-3.66-.24-.42A9.88 9.88 0 0 1 2.1 11.88c0-5.46 4.5-9.96 9.96-9.96 2.64 0 5.16 1.02 7.02 2.94a9.82 9.82 0 0 1 2.94 7.02c0 5.46-4.44 9.9-9.96 9.9zm5.46-7.44c-.3-.18-1.8-.9-2.1-.96-.24-.12-.48-.12-.66.18-.18.24-.72.9-.9 1.08-.18.18-.3.18-.6.06-.3-.18-1.2-.42-2.28-1.38-.84-.72-1.44-1.62-1.62-1.92-.18-.3 0-.42.12-.6.12-.12.3-.3.42-.48.12-.12.18-.3.3-.48.06-.18 0-.36-.06-.54-.06-.18-.66-1.62-.9-2.22-.24-.54-.48-.48-.66-.48h-.54c-.18 0-.48.06-.72.3-.24.24-.96.9-.96 2.16s.96 2.46 1.08 2.64c.18.18 1.92 2.94 4.68 4.08.66.3 1.2.48 1.62.6.72.24 1.38.18 1.92.12.6-.12 1.8-.72 2.04-1.44.24-.66.24-1.26.18-1.44-.12-.18-.3-.24-.6-.42z" />
-              </svg>
-              <span>Send Booking via WhatsApp</span>
-            </a>
-
-            <div className="my-4 flex items-center gap-4">
-              <div
-                className={`h-px flex-1 ${
-                  darkMode ? "bg-white/10" : "bg-gray-300"
-                }`}
-              ></div>
-              <span
-                className={`text-xs ${
-                  darkMode ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                or call directly
-              </span>
-              <div
-                className={`h-px flex-1 ${
-                  darkMode ? "bg-white/10" : "bg-gray-300"
-                }`}
-              ></div>
-            </div>
-
-            <a
-              href="tel:+919888444952"
-              className={`flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-orange-500 text-lg font-bold transition-all duration-300 hover:bg-orange-500 hover:text-white ${
-                darkMode
-                  ? "bg-orange-500/5 text-orange-400"
-                  : "bg-orange-50 text-orange-600"
-              }`}
-            >
-              <span>+918884449452</span>
-            </a>
-          </motion.div>
-        </div>
-
-        <div className="mt-8 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-3 backdrop-blur-xl">
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-orange-100">
-            <div className="flex items-center gap-2">
-              <ShieldCheck size={14} className="text-orange-400 shrink-0" />
-              <span>No Hidden Charges</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck size={14} className="text-orange-400 shrink-0" />
-              <span>Verified Drivers</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck size={14} className="text-orange-400 shrink-0" />
-              <span>Instant Confirmation</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck size={14} className="text-orange-400 shrink-0" />
-              <span>Pay Driver Directly</span>
-            </div>
-          </div>
-        </div>
+          {/* Concentric Subtle Line Rings on the right side */}
+          <path
+            d="M 530,0 C 790,260 790,640 480,900"
+            fill="none"
+            stroke={darkMode ? "rgba(255, 255, 255, 0.07)" : "rgba(0, 0, 0, 0.08)"}
+            strokeWidth="1.5"
+          />
+          <path
+            d="M 590,0 C 850,260 850,640 540,900"
+            fill="none"
+            stroke={darkMode ? "rgba(255, 255, 255, 0.04)" : "rgba(0, 0, 0, 0.05)"}
+            strokeWidth="1.5"
+          />
+          <path
+            d="M 650,0 C 910,260 910,640 600,900"
+            fill="none"
+            stroke={darkMode ? "rgba(255, 255, 255, 0.025)" : "rgba(0, 0, 0, 0.03)"}
+            strokeWidth="1.5"
+          />
+        </svg>
       </div>
+
+      {/* Top Header / Navigation */}
+      <header className="relative z-20 flex items-center justify-between w-full max-w-7xl mx-auto pt-2">
+        {/* Brand Logo - THE TAXI
+        <div className="flex items-center">
+          <h1 className="text-2xl sm:text-3xl font-black tracking-widest text-black uppercase cursor-pointer select-none">
+            THE TAXI
+          </h1>
+        </div> */}
+
+        {/* Right Nav Links */}
+        <nav className={`flex items-center gap-4 sm:gap-10 text-xs sm:text-sm font-semibold transition-colors ${
+          darkMode ? "text-gray-300" : "text-slate-700"
+        }`}>
+          <button
+            onClick={() => scrollToSection("about")}
+            className="hover:text-orange-500 transition cursor-pointer"
+          >
+            About Us
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="hover:text-orange-500 transition cursor-pointer"
+          >
+            Contact Us
+          </button>
+          <button
+            onClick={() => scrollToSection("services")}
+            className="hover:text-orange-500 transition cursor-pointer hidden sm:block"
+          >
+            How It Works
+          </button>
+
+          <button
+            onClick={() => setShowBookingModal(true)}
+            className="px-4 sm:px-7 py-2 sm:py-2.5 rounded-lg border border-orange-500 text-orange-500 font-bold text-xs uppercase tracking-wider hover:bg-orange-500 hover:text-white transition duration-300 cursor-pointer shadow-md shadow-orange-500/20"
+          >
+            BOOK NOW
+          </button>
+        </nav>
+      </header>
+
+      {/* Main Hero Content Area */}
+      <div className="relative z-10 max-w-7xl mx-auto w-full my-auto py-6 sm:py-10 lg:py-16 flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-6 items-center">
+        
+        {/* Car Image — shows BELOW text on mobile, left column on desktop */}
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="order-2 lg:order-1 lg:col-span-6 relative flex flex-col items-center justify-center"
+        >
+          {/* Animated Floating Car */}
+          <div className="relative w-full max-w-[300px] sm:max-w-[440px] lg:max-w-[600px] mx-auto">
+            <motion.img
+              animate={{ y: [-5, 5, -5] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              src={heroCar}
+              alt="The Taxi Car"
+              className="w-full h-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.5)]"
+            />
+            {/* Subtle Tire Shadow */}
+            <motion.div
+              animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="w-[75%] h-5 sm:h-6 bg-black/60 blur-lg rounded-[100%] mx-auto -mt-6 sm:-mt-8"
+            />
+          </div>
+        </motion.div>
+
+        {/* Right Side: Headline, Description & Feature Pills */}
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="order-1 lg:order-2 lg:col-span-6 lg:pl-6 flex flex-col justify-center text-left"
+        >
+          <h2 className={`text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.2] ${
+            darkMode ? "text-white" : "text-slate-900"
+          }`}>
+            Book One Way Taxi
+            <br />
+            Across{" "}
+            <span className="font-caveat text-orange-500 font-bold relative inline-block text-3xl sm:text-5xl lg:text-6xl pl-1 tracking-normal">
+              South India
+              <svg className="absolute -bottom-2 left-0 w-full h-3 text-orange-500" viewBox="0 0 120 12" fill="none">
+                <path d="M3 9C30 3 90 3 117 9" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+              </svg>
+            </span>
+          </h2>
+
+          {/* Subtitle / Paragraph Description in Exactly Two Lines */}
+          <div className={`mt-4 sm:mt-5 text-sm sm:text-base max-w-xl leading-relaxed space-y-1 ${
+            darkMode ? "text-gray-300" : "text-slate-700 font-medium"
+          }`}>
+            <p>Travel anywhere in Tamil Nadu, Kerala & Karnataka with reliable taxi service.</p>
+            <p>Fixed fare, clean vehicles and professional drivers for safe outstation and airport rides.</p>
+          </div>
+
+          {/* Feature Pills — wrap on mobile, single line on desktop */}
+          <div className="mt-4 flex items-center justify-start gap-1.5 sm:gap-2 flex-wrap w-full py-1">
+            {[
+              { icon: BadgeDollarSign, text: "Fixed Fare" },
+              { icon: ShieldCheck, text: "No Hidden Charges" },
+              { icon: Clock3, text: "24/7 Support" },
+              { icon: MapPin, text: "Verified Drivers" },
+            ].map(({ icon: Icon, text }) => (
+              <div
+                key={text}
+                className={`flex items-center gap-1 sm:gap-1.5 rounded-full border px-2.5 sm:px-3.5 py-1.5 text-[10px] sm:text-xs font-semibold whitespace-nowrap shadow-sm transition shrink-0 ${
+                  darkMode
+                    ? "border-white/10 bg-black/40 backdrop-blur-md text-white hover:border-orange-500/40"
+                    : "border-orange-200 bg-white text-slate-800 shadow-orange-500/5 hover:border-orange-400"
+                }`}
+              >
+                <Icon size={12} className="text-orange-500 shrink-0" />
+                <span>{text}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* QUICK BOOKING MODAL */}
+      <AnimatePresence>
+        {showBookingModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-xl rounded-3xl border border-gray-800 bg-[#14161d] p-6 sm:p-8 text-white shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowBookingModal(false)}
+                className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition cursor-pointer"
+              >
+                <X size={20} />
+              </button>
+
+              <h3 className="text-2xl font-bold text-white">Quick Taxi Booking</h3>
+              <p className="text-xs text-gray-400 mt-1">One Way • Outstation • Airport Drop</p>
+
+              <form onSubmit={handleWhatsAppBooking} className="mt-6 space-y-4">
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Pickup Location</label>
+                    <div className="relative">
+                      <MapPin size={16} className="absolute left-3 top-3 text-orange-400" />
+                      <input
+                        type="text"
+                        placeholder="Enter pickup"
+                        value={pickup}
+                        onChange={(e) => setPickup(e.target.value)}
+                        className="w-full h-10 rounded-xl border border-gray-700 bg-gray-900 pl-9 pr-3 text-sm text-white focus:border-orange-500 outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Drop Location</label>
+                    <div className="relative">
+                      <MapPin size={16} className="absolute left-3 top-3 text-orange-400" />
+                      <input
+                        type="text"
+                        placeholder="Enter drop"
+                        value={drop}
+                        onChange={(e) => setDrop(e.target.value)}
+                        className="w-full h-10 rounded-xl border border-gray-700 bg-gray-900 pl-9 pr-3 text-sm text-white focus:border-orange-500 outline-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Full Name</label>
+                    <div className="relative">
+                      <User size={16} className="absolute left-3 top-3 text-orange-400" />
+                      <input
+                        type="text"
+                        placeholder="Your name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-full h-10 rounded-xl border border-gray-700 bg-gray-900 pl-9 pr-3 text-sm text-white focus:border-orange-500 outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Mobile Number</label>
+                    <div className="relative">
+                      <Phone size={16} className="absolute left-3 top-3 text-orange-400" />
+                      <input
+                        type="tel"
+                        placeholder="Mobile number"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="w-full h-10 rounded-xl border border-gray-700 bg-gray-900 pl-9 pr-3 text-sm text-white focus:border-orange-500 outline-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Pickup Date</label>
+                    <div className="relative">
+                      <Calendar size={16} className="absolute left-3 top-3 text-orange-400" />
+                      <input
+                        type="date"
+                        value={pickupDate}
+                        onChange={(e) => setPickupDate(e.target.value)}
+                        className="w-full h-10 rounded-xl border border-gray-700 bg-gray-900 pl-9 pr-3 text-sm text-white focus:border-orange-500 outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Pickup Time</label>
+                    <div className="relative">
+                      <Clock size={16} className="absolute left-3 top-3 text-orange-400" />
+                      <input
+                        type="time"
+                        value={pickupTime}
+                        onChange={(e) => setPickupTime(e.target.value)}
+                        className="w-full h-10 rounded-xl border border-gray-700 bg-gray-900 pl-9 pr-3 text-sm text-white focus:border-orange-500 outline-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Trip Type */}
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Trip Type</label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setTripType("oneway")}
+                      className={`p-2.5 rounded-xl border text-left cursor-pointer transition ${
+                        tripType === "oneway" ? "border-orange-500 bg-orange-500/10 text-orange-400" : "border-gray-800 bg-gray-900 text-gray-300"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 font-bold text-xs">
+                        <ArrowRight size={14} /> One Way
+                      </div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTripType("roundtrip")}
+                      className={`p-2.5 rounded-xl border text-left cursor-pointer transition ${
+                        tripType === "roundtrip" ? "border-orange-500 bg-orange-500/10 text-orange-400" : "border-gray-800 bg-gray-900 text-gray-300"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 font-bold text-xs">
+                        <ArrowLeftRight size={14} /> Round Trip
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Vehicle Selection */}
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 uppercase mb-1">Select Vehicle</label>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                    {vehicles.map((v) => (
+                      <div
+                        key={v.id}
+                        onClick={() => setVehicle(v.id)}
+                        className={`p-2 rounded-xl border cursor-pointer text-center transition ${
+                          vehicle === v.id ? "border-orange-500 bg-orange-500/20" : "border-gray-800 bg-gray-900"
+                        }`}
+                      >
+                        <img src={v.img} alt={v.name} className="h-8 w-full object-contain mx-auto" />
+                        <p className="text-[10px] font-bold text-orange-400 mt-1">{v.price}</p>
+                        <p className="text-[9px] font-semibold text-gray-300 truncate">{v.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  className="w-full h-12 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 font-bold text-white shadow-lg shadow-orange-500/30 hover:from-orange-600 hover:to-orange-700 transition cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <Send size={18} />
+                  <span>Send Booking via WhatsApp</span>
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

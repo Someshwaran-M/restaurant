@@ -1,321 +1,333 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
-  Phone,
-  MessageCircle,
-  Star,
+  ChevronLeft,
+  ChevronRight,
   MapPin,
-  ShieldCheck,
-  Clock3,
   ArrowRight,
 } from "lucide-react";
 
 const destinations = [
   {
     id: 1,
-    title: "Chennai One Way Taxi",
-    subtitle: "Airport & City Travel",
-    badge: "CITY",
+    title: "Ooty",
+    category: "Queen of Hills",
+    description:
+      "Experience lush tea gardens, misty mountains and cool weather.",
     image:
-      "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
-    trips: "12K+ Trips",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 2,
-    title: "Bangalore One Way Taxi",
-    subtitle: "Business & Airport Transfer",
-    badge: "BUSINESS",
+    title: "Kodaikanal",
+    category: "Princess of Hills",
+    description:
+      "Beautiful lakes, pine forests and breathtaking viewpoints.",
     image:
-      "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1200&q=80",
-    trips: "18K+ Trips",
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 3,
-    title: "Coimbatore One Way Taxi",
-    subtitle: "Industrial & City Ride",
-    badge: "CITY",
+    title: "Yercaud",
+    category: "Coffee Paradise",
+    description:
+      "A peaceful hill station surrounded by coffee plantations.",
     image:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
-    trips: "9K+ Trips",
   },
   {
     id: 4,
-    title: "Madurai One Way Taxi",
-    subtitle: "Temple & Family Tour",
-    badge: "TEMPLE",
+    title: "Kanyakumari",
+    category: "Sunrise Point",
+    description:
+      "Witness the magical sunrise where three seas meet together.",
     image:
-      "https://images.unsplash.com/photo-1589308454676-5a88f0df1f44?auto=format&fit=crop&w=1200&q=80",
-    trips: "15K+ Trips",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 5,
-    title: "Ooty One Way Taxi",
-    subtitle: "Hill Station Journey",
-    badge: "HILL",
+    title: "Mahabalipuram",
+    category: "Heritage",
+    description:
+      "Explore UNESCO temples and ancient rock-cut sculptures.",
     image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-    trips: "20K+ Trips",
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 6,
-    title: "Kodaikanal One Way Taxi",
-    subtitle: "Lake & Nature Tour",
-    badge: "HILL",
+    title: "Rameswaram",
+    category: "Spiritual Journey",
+    description:
+      "Famous temple town with scenic sea bridges and beaches.",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
-    trips: "13K+ Trips",
-  },
-  {
-    id: 7,
-    title: "Pondicherry One Way Taxi",
-    subtitle: "Beach Vacation",
-    badge: "BEACH",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-    trips: "11K+ Trips",
-  },
-  {
-    id: 8,
-    title: "Mysore One Way Taxi",
-    subtitle: "Palace Heritage Ride",
-    badge: "HERITAGE",
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
-    trips: "14K+ Trips",
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
 function DestinationCards({ darkMode }) {
+  const [startIndex, setStartIndex] = useState(0);
+
+  const visibleCards = destinations.slice(startIndex, startIndex + 3);
+
+  const nextSlide = () => {
+    if (startIndex < destinations.length - 3) {
+      setStartIndex(startIndex + 1);
+    } else {
+      setStartIndex(0);
+    }
+  };
+
+  const prevSlide = () => {
+    if (startIndex > 0) {
+      setStartIndex(startIndex - 1);
+    } else {
+      setStartIndex(destinations.length - 3);
+    }
+  };
+
   return (
     <section
-      className={`relative overflow-hidden py-24 ${
+      className={`relative overflow-hidden py-16 ${
         darkMode
-          ? "bg-gradient-to-b from-[#050816] via-[#0B1120] to-[#050816]"
-          : "bg-gradient-to-b from-orange-50 via-white to-orange-50"
+          ? "bg-[#0b1018]"
+          : "bg-gradient-to-br from-orange-50 via-white to-orange-100"
       }`}
     >
-      {/* Background Glow */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-orange-500/20 blur-[130px]" />
-      <div className="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-orange-400/10 blur-[150px]" />
+      {/* Orange Background Glow */}
+      <div className="absolute -left-40 top-0 w-96 h-96 bg-orange-500/20 blur-[120px] rounded-full"></div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center max-w-4xl mx-auto"
-        >
-          <span className="inline-flex px-5 py-2 rounded-full bg-orange-500/10 text-orange-500 font-bold tracking-[4px] uppercase border border-orange-500/20">
-            Premium Destinations
-          </span>
+      <div className="absolute right-0 bottom-0 w-96 h-96 bg-orange-400/20 blur-[140px] rounded-full"></div>
 
-          <h2
-            className={`mt-6 text-5xl lg:text-6xl font-black leading-tight ${
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+     {/* ================= LEFT SIDE ================= */}
+
+<motion.div
+  initial={{ opacity: 0, x: -80 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+  className="relative z-10"
+>
+  {/* Small Label */}
+  <span className="inline-block px-4 py-2 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-500 text-xs font-bold tracking-[4px] uppercase">
+    Premium Tour
+  </span>
+
+  {/* Heading */}
+  <h1
+    className={`mt-6 font-black leading-none ${
+      darkMode ? "text-white" : "text-gray-900"
+    }`}
+  >
+    <span className="block text-5xl lg:text-6xl">
+      EXPLORE
+    </span>
+
+    <span className="block mt-2 text-5xl lg:text-6xl">
+      DREAM
+    </span>
+
+    <span className="block mt-3 text-4xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400">
+      DESTINATION
+    </span>
+  </h1>
+
+  {/* Orange Line */}
+  <div className="w-28 h-1 rounded-full bg-gradient-to-r from-orange-500 to-yellow-400 mt-6"></div>
+
+  {/* Description */}
+  <p
+    className={`mt-7 max-w-md leading-8 text-base ${
+      darkMode ? "text-gray-300" : "text-gray-600"
+    }`}
+  >
+    Discover Tamil Nadu's most beautiful destinations with
+    comfortable travel, premium service, and unforgettable
+    experiences. Every journey is designed to create memories
+    you'll cherish forever.
+  </p>
+
+  {/* Buttons */}
+  <div className="flex gap-4 mt-8">
+
+    <button
+      className="px-7 h-12 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-lg shadow-orange-500/30 hover:scale-105 transition duration-300"
+    >
+      Book Now
+    </button>
+
+    <button
+      className={`px-7 h-12 rounded-xl border transition duration-300 ${
+        darkMode
+          ? "border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white"
+          : "border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white"
+      }`}
+    >
+      Explore
+    </button>
+
+  </div>
+
+  {/* Small Statistics */}
+  <div className="flex gap-10 mt-12">
+
+    <div>
+      <h2 className="text-3xl font-bold text-orange-500">
+        150+
+      </h2>
+      <p
+        className={`text-sm ${
+          darkMode ? "text-gray-400" : "text-gray-500"
+        }`}
+      >
+        Destinations
+      </p>
+    </div>
+
+    <div>
+      <h2 className="text-3xl font-bold text-orange-500">
+        50K+
+      </h2>
+      <p
+        className={`text-sm ${
+          darkMode ? "text-gray-400" : "text-gray-500"
+        }`}
+      >
+        Happy Travelers
+      </p>
+    </div>
+
+    <div>
+      <h2 className="text-3xl font-bold text-orange-500">
+        24×7
+      </h2>
+      <p
+        className={`text-sm ${
+          darkMode ? "text-gray-400" : "text-gray-500"
+        }`}
+      >
+        Support
+      </p>
+    </div>
+
+  </div>
+
+</motion.div>
+{/* ================= RIGHT SIDE ================= */}
+
+<motion.div
+  initial={{ opacity: 0, x: 80 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+  className="relative"
+>
+  {/* Cards */}
+  <div className="grid grid-cols-2 w-180 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    {visibleCards.map((place) => (
+
+      <motion.div
+        key={place.id}
+        whileHover={{
+          y: -10,
+          scale: 1.03,
+        }}
+        transition={{ duration: 0.3 }}
+        className={`group overflow-hidden rounded-2xl border shadow-xl ${
+          darkMode
+            ? "bg-white/5 border-white/10 backdrop-blur-xl"
+            : "bg-white border-orange-100"
+        }`}
+      >
+
+        {/* Image */}
+        <div className="relative h-48 overflow-hidden">
+
+          <img
+            src={place.image}
+            alt={place.title}
+            className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+          />
+
+          {/* Orange Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+          {/* Category */}
+          <div className="absolute top-4 left-4">
+
+            <span className="px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-bold">
+              {place.category}
+            </span>
+
+          </div>
+
+        </div>
+
+        {/* Content */}
+        <div className="p-5">
+
+          <div className="flex items-center gap-2 text-orange-500 text-sm font-semibold">
+
+            <MapPin size={16} />
+
+            {place.title}
+
+          </div>
+
+          <h3
+            className={`mt-3 text-xl font-bold ${
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            One Way Taxi Across
-            <span className="block bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-              Tamil Nadu • Karnataka • Kerala
-            </span>
-          </h2>
+            {place.title}
+          </h3>
 
           <p
-            className={`mt-6 text-lg leading-8 ${
+            className={`mt-3 text-sm leading-7 ${
               darkMode ? "text-gray-400" : "text-gray-600"
             }`}
           >
-            Travel with professional chauffeurs, luxury vehicles,
-            transparent pricing and 24×7 customer support.
+            {place.description}
           </p>
-        </motion.div>
 
-        {/* Cards */}
-        <div className="grid lg:grid-cols-2 gap-8 mt-16">
-          {destinations.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.08,
-              }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className={`group rounded-3xl overflow-hidden border transition-all duration-500 ${
-                darkMode
-                  ? "bg-white/5 border-white/10 backdrop-blur-xl hover:border-orange-500/40"
-                  : "bg-white border-orange-100 shadow-xl hover:shadow-2xl"
-              }`}
-            >
-              {/* Image */}
-              <div className="relative h-72 overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
-                />
+          <button className="mt-5 inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-3 transition-all">
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+            Read More
 
-                {/* Shine */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000" />
+            <ArrowRight size={18} />
 
-                {/* Badge */}
-                <div className="absolute top-5 left-5">
-                  <span className="px-4 py-2 rounded-full bg-orange-500 text-white text-xs font-bold tracking-widest shadow-lg">
-                    {item.badge}
-                  </span>
-                </div>
+          </button>
 
-                {/* Rating */}
-                <div className="absolute top-5 right-5 flex items-center gap-1 px-3 py-2 rounded-full bg-black/50 backdrop-blur-md text-white">
-                  <Star
-                    size={15}
-                    className="fill-yellow-400 text-yellow-400"
-                  />
-                  <span className="text-sm font-semibold">4.9</span>
-                </div>
+        </div>
 
-                {/* Bottom Info */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="text-white text-3xl font-bold">
-                    {item.title}
-                  </h3>
+      </motion.div>
 
-                  <div className="flex items-center gap-2 text-orange-300 mt-2">
-                    <MapPin size={16} />
-                    <span>{item.subtitle}</span>
-                  </div>
-                </div>
-              </div>
+    ))}
 
-              {/* Content */}
-              <div className="p-6">
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  <div
-                    className={`rounded-2xl p-4 text-center ${
-                      darkMode ? "bg-white/5" : "bg-orange-50"
-                    }`}
-                  >
-                    <Star
-                      size={20}
-                      className="mx-auto text-orange-500 mb-2"
-                    />
-                    <p
-                      className={`font-bold ${
-                        darkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      4.9
-                    </p>
-                    <p className="text-xs text-gray-500">Rating</p>
-                  </div>
+  </div>
 
-                  <div
-                    className={`rounded-2xl p-4 text-center ${
-                      darkMode ? "bg-white/5" : "bg-orange-50"
-                    }`}
-                  >
-                    <ShieldCheck
-                      size={20}
-                      className="mx-auto text-green-500 mb-2"
-                    />
-                    <p
-                      className={`font-bold ${
-                        darkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      Safe
-                    </p>
-                    <p className="text-xs text-gray-500">Verified</p>
-                  </div>
+  {/* Navigation Buttons */}
+  <div className="flex justify-center items-center gap-4 mt-8">
 
-                  <div
-                    className={`rounded-2xl p-4 text-center ${
-                      darkMode ? "bg-white/5" : "bg-orange-50"
-                    }`}
-                  >
-                    <Clock3
-                      size={20}
-                      className="mx-auto text-blue-500 mb-2"
-                    />
-                    <p
-                      className={`font-bold ${
-                        darkMode ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      24×7
-                    </p>
-                    <p className="text-xs text-gray-500">Support</p>
-                  </div>
-                </div>
+    <button
+      onClick={prevSlide}
+      className="w-11 h-11 rounded-full bg-orange-500 text-white flex items-center justify-center hover:bg-orange-600 transition"
+    >
+      <ChevronLeft size={20} />
+    </button>
 
-                {/* Route */}
-                <div
-                  className={`rounded-2xl border p-4 ${
-                    darkMode
-                      ? "border-white/10 bg-white/5"
-                      : "border-orange-100 bg-orange-50"
-                  }`}
-                >
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="text-xs text-gray-500">
-                        Completed Trips
-                      </p>
+    <button
+      onClick={nextSlide}
+      className="w-11 h-11 rounded-full bg-orange-500 text-white flex items-center justify-center hover:bg-orange-600 transition"
+    >
+      <ChevronRight size={20} />
+    </button>
 
-                      <h4
-                        className={`text-xl font-bold ${
-                          darkMode ? "text-white" : "text-gray-900"
-                        }`}
-                      >
-                        {item.trips}
-                      </h4>
-                    </div>
+  </div>
 
-                    <ArrowRight
-                      className="text-orange-500"
-                      size={30}
-                    />
-                  </div>
-                </div>
-
-                {/* Buttons */}
-                <div className="grid grid-cols-2 gap-4 mt-6">
-                  <a
-                    href="tel:+919888444952"
-                    className="h-14 rounded-2xl bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 text-white font-bold shadow-xl shadow-orange-500/30"
-                  >
-                    <Phone size={18} />
-                    Call Now
-                  </a>
-
-                  <a
-                    href="https://wa.me/919888444952"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="h-14 rounded-2xl border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-3 font-bold"
-                  >
-                    <MessageCircle size={18} />
-                    WhatsApp
-                  </a>
-                </div>
-
-                <p
-                  className={`mt-5 text-center text-sm ${
-                    darkMode ? "text-gray-500" : "text-gray-500"
-                  }`}
-                >
-                  ✓ Fixed Fare &nbsp; • &nbsp; ✓ No Hidden Charges &nbsp; •
-                  &nbsp; ✓ Instant Confirmation
-                </p>
-              </div>
-            </motion.div>
-          ))}
+</motion.div>
         </div>
       </div>
     </section>

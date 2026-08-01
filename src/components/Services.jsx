@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -8,20 +9,82 @@ import {
   Mountain,
   BadgeCheck,
   ShieldCheck,
-  Sparkles,
-  ArrowUpRight,
   CheckCircle2,
-  Crown,
-   Phone,
+  Clock,
+  Shield,
+  Smile,
+  MapPin,
+  Handshake,
   MessageCircle,
+  PieChart,
+  CarTaxiFront,
+  Cog,
 } from "lucide-react";
 
+// Section Data (Your Original Content Preserved)
+const ourServicesList = [
+  {
+    icon: Clock,
+    title: "Excellence in Service",
+    description:
+      "We aim for the best in every ride, providing professional, trustable, and comfortable service that goes beyond expectations.",
+  },
+  {
+    icon: Shield,
+    title: "Safety First",
+    description:
+      "The safety of our passengers and drivers are our top-most priority. We ensure it with well-maintained cabs, trained drivers, and strict safety rules.",
+  },
+  {
+    icon: Smile,
+    title: "Integrity & Transparency",
+    description:
+      "We stay true to our word with clear communication, fair prices, and trust in every ride.",
+  },
+];
 
+const chauffeurPoints = [
+  {
+    icon: Clock,
+    title: "Reliability & Punctuality",
+    description: "We deliver on time, every time, valuing your schedule and time.",
+  },
+  {
+    icon: Handshake,
+    title: "Customer-Centric Approach",
+    description:
+      "We listen to your needs and keep improving our service for a smooth and comfortable ride.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Professional Development",
+    description:
+      "We invest in your needs and keep improving our service for a smooth and comfortable ride. Our drivers and staff get regular training program to provide professional and high-quality service.",
+  },
+];
 
-/* Keep your existing services[] and whyChooseUs[] arrays */
+const professionalism3Es = [
+  {
+    icon: PieChart,
+    title: "Equitable Service",
+    description:
+      "We make sure everyone gets trusted rides with fair prices and great service quality.",
+  },
+  {
+    icon: CarTaxiFront,
+    title: "Essential Mobility",
+    description:
+      "We know rides are important, whether for work, medical needs, or more. We're committed to providing giving you the best service.",
+  },
+  {
+    icon: Cog,
+    title: "Ethical Operations",
+    description:
+      "Our service is built on fairness, honesty, and care in every ride for everyone.",
+  },
+];
 
-function Services({ darkMode }) {
-  const services = [
+const mainTaxiServices = [
   {
     icon: ArrowRight,
     title: "One Way Drop Taxi",
@@ -71,785 +134,417 @@ const whyChooseUs = [
     icon: Plane,
     title: "Flexible Pickup",
     description:
-      "Schedule your ride anytime based on your convenience.",
+      "Schedule your ride anytime based on your convenience — early morning or late night.",
   },
   {
     icon: ShieldCheck,
     title: "Verified Drivers",
     description:
-      "Experienced drivers focused on safe travel.",
+      "Experienced drivers focused on safe, secure and comfortable travel.",
   },
   {
     icon: Mountain,
     title: "Wide Route Coverage",
     description:
-      "Serving Tamil Nadu, Kerala, Karnataka and Pondicherry.",
+      "Serving major cities and destinations across Tamil Nadu, Kerala, Karnataka and Pondicherry.",
   },
   {
     icon: BadgeCheck,
     title: "Transparent Pricing",
     description:
-      "No hidden charges or surge pricing.",
+      "Fixed pricing with no hidden charges, surge fares or unexpected costs.",
   },
   {
     icon: Building2,
     title: "24/7 Booking Support",
     description:
-      "Call or WhatsApp us anytime.",
+      "Call or WhatsApp us anytime. Our team confirms every booking personally.",
   },
 ];
-  const iconButton =
-    "group flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:scale-110 hover:rotate-6 hover:border-orange-400 hover:bg-gradient-to-br hover:from-orange-500 hover:to-amber-500 hover:shadow-[0_0_25px_rgba(249,115,22,.55)]";
+
+function Services({ darkMode }) {
+  const [activeValueIndex, setActiveValueIndex] = useState(1); // Default hover box on item 2 like ref
+  const [activeChauffeurIndex, setActiveChauffeurIndex] = useState(null);
 
   return (
     <section
       id="services"
-      className={`relative overflow-hidden py-20 ${
-        darkMode
-          ? "bg-[#050914]"
-          : "bg-gradient-to-b from-orange-50 via-white to-orange-100"
+      className={`relative overflow-hidden py-20 transition-colors duration-500 ${
+        darkMode ? "bg-[#080C16] text-white" : "bg-white text-gray-900"
       }`}
     >
-      {/* Background */}
-
-      <div className="absolute inset-0 overflow-hidden">
-
-        <div className="absolute -left-36 top-0 h-[380px] w-[380px] rounded-full bg-orange-500/15 blur-[150px]" />
-
-        <div className="absolute -right-36 bottom-0 h-[380px] w-[380px] rounded-full bg-amber-400/15 blur-[150px]" />
-
-        <div className="absolute left-1/2 top-1/2 h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[100px]" />
-
-      </div>
-
-      {/* Grid */}
-
+      {/* Background Soft Glows */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right,#fff 1px,transparent 1px),linear-gradient(to bottom,#fff 1px,transparent 1px)",
-          backgroundSize: "65px 65px",
-        }}
+        className={`absolute left-0 top-36 h-96 w-96 rounded-full blur-[140px] pointer-events-none ${
+          darkMode ? "bg-orange-500/10" : "bg-orange-200/40"
+        }`}
+      />
+      <div
+        className={`absolute right-0 bottom-36 h-96 w-96 rounded-full blur-[140px] pointer-events-none ${
+          darkMode ? "bg-red-600/10" : "bg-red-100/50"
+        }`}
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 space-y-28">
 
-        {/* Premium Heading */}
-
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: .7 }}
-          className="mx-auto mb-14 max-w-3xl text-center"
-        >
-
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/20 bg-white/10 px-4 py-2 backdrop-blur-xl">
-
-            <Crown
-              size={15}
-              className="text-orange-400"
-            />
-
-            <span className="text-[11px] font-bold uppercase tracking-[4px] text-orange-400">
-
-              Our Services
-
-            </span>
-
-          </div>
-
-          <h2
-            className={`mt-5 text-4xl font-black leading-tight md:text-5xl ${
-              darkMode
-                ? "text-white"
-                : "text-gray-900"
-            }`}
+        {/* ========================================================
+            1. OUR SERVICES (REPLACED OUR VALUES & ADDED HOVER CARD EFFECT)
+           ======================================================== */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+          
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-6 space-y-6"
           >
+            <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl">
+              Our <span className="text-red-600 dark:text-orange-500">Services</span>
+            </h2>
 
-            Complete
+            <div className="space-y-4">
+              {ourServicesList.map((item, index) => {
+                const Icon = item.icon;
+                const isHovered = activeValueIndex === index;
 
-            <span className="block bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
+                return (
+                  <div
+                    key={index}
+                    onMouseEnter={() => setActiveValueIndex(index)}
+                    className={`flex items-start gap-5 p-5 rounded-2xl transition-all duration-300 cursor-pointer ${
+                      isHovered
+                        ? darkMode
+                          ? "bg-[#141922] border border-white/10 shadow-xl"
+                          : "bg-white border border-gray-100 shadow-xl shadow-gray-200/60"
+                        : "bg-transparent border border-transparent"
+                    }`}
+                  >
+                    <div className="shrink-0 mt-1">
+                      <Icon
+                        size={38}
+                        strokeWidth={1.5}
+                        className={`${
+                          darkMode ? "text-orange-400" : "text-gray-900"
+                        }`}
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-red-600 dark:text-orange-500">
+                        {item.title}
+                      </h3>
+                      <p
+                        className={`mt-1.5 text-sm leading-relaxed ${
+                          darkMode ? "text-gray-300" : "text-gray-600"
+                        }`}
+                      >
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
 
-              Taxi Solutions
-
-            </span>
-
-          </h2>
-
-          <p
-            className={`mx-auto mt-5 max-w-2xl text-base leading-7 ${
-              darkMode
-                ? "text-gray-400"
-                : "text-gray-600"
-            }`}
+          {/* Right Banner Photo */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-6 flex justify-center"
           >
+            <div className="relative overflow-hidden rounded-[2.5rem] shadow-2xl border border-gray-100 dark:border-white/10 max-w-lg w-full">
+              <img
+                src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000"
+                alt="Passenger riding taxi"
+                className="h-[390px] w-full object-cover"
+              />
+            </div>
+          </motion.div>
 
-            Premium taxi services with verified drivers,
-            transparent pricing and luxury vehicles for
-            airport, local and outstation travel.
+        </div>
 
-          </p>
+        {/* ========================================================
+            2. 100% TRAINED CHAUFFEURS (ROUTE CONNECTOR + HOVER CARDS)
+           ======================================================== */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+          
+          {/* Left Layered Image Composition with Moving Car */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-6 relative flex justify-center items-center py-6"
+          >
+            <div className="relative w-full max-w-md h-[380px] flex items-center justify-center">
+              
+              {/* Red Curved Accent */}
+              <div className="absolute bottom-4 right-2 w-[270px] h-[230px] rounded-[2.5rem] bg-gradient-to-tr from-red-600 to-orange-500 shadow-xl transform rotate-6" />
 
-          {/* Stats */}
+              {/* Driver Photo */}
+              <div className="absolute top-0 left-2 w-[280px] h-[270px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800 -rotate-6 z-10">
+                <img
+                  src="https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=800"
+                  alt="Driver Chauffeur"
+                  className="h-full w-full object-cover"
+                />
+              </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-
-            {[
-              { value: "24×7", label: "Support" },
-              { value: "100%", label: "Safe Ride" },
-              { value: "25K+", label: "Trips" },
-            ].map((item, index) => (
-
+              {/* Transparent Car - Animated Forward / Backward */}
               <motion.div
-                key={index}
-                whileHover={{
-                  y: -4,
-                  scale: 1.05,
+                animate={{ x: [-22, 22, -22] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
                 }}
-                className={`rounded-2xl border px-5 py-3 transition-all duration-500 ${
-                  darkMode
-                    ? "border-white/10 bg-white/5 backdrop-blur-xl"
-                    : "border-orange-100 bg-white shadow-lg"
-                }`}
+                className="absolute bottom-0 right-0 w-[270px] z-20 drop-shadow-[0_20px_15px_rgba(0,0,0,0.35)]"
               >
-
-                <h4 className="text-xl font-black text-orange-500">
-
-                  {item.value}
-
-                </h4>
-
-                <p
-                  className={`text-xs ${
-                    darkMode
-                      ? "text-gray-400"
-                      : "text-gray-600"
-                  }`}
-                >
-
-                  {item.label}
-
-                </p>
-
+                <img
+                  src="https://pngimg.com/uploads/suzuki/suzuki_PNG12290.png"
+                  alt="Moving Cab"
+                  className="w-full h-auto object-contain"
+                />
               </motion.div>
 
-            ))}
+            </div>
+          </motion.div>
 
-          </div>
-
-        </motion.div>
-
-        {/* Premium Service Cards */}
-
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-
-          {/* ========= PART 2 ========= */}
-
-          {services.map((service, index) => {
-
-  const Icon = service.icon;
-
-  return (
-
-    <motion.div
-      key={index}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{
-        y: -6,
-        scale: 1.02,
-      }}
-      transition={{
-        duration: 0.55,
-        delay: index * 0.08,
-      }}
-      viewport={{ once: true }}
-      className={`group relative overflow-hidden rounded-[22px] border transition-all duration-700 ${
-        darkMode
-          ? "border-white/10 bg-white/5 backdrop-blur-xl hover:border-orange-500/40 hover:shadow-[0_20px_50px_rgba(249,115,22,.22)]"
-          : "border-orange-100 bg-white hover:border-orange-300 hover:shadow-[0_18px_45px_rgba(249,115,22,.18)]"
-      }`}
-    >
-
-      {/* Hover Glow */}
-
-      <div className="absolute -left-16 -top-16 h-44 w-44 rounded-full bg-orange-500/20 blur-[80px] opacity-0 transition-all duration-700 group-hover:opacity-100" />
-
-      <div className="relative p-5">
-
-        {/* Header */}
-
-        <div className="flex items-start justify-between">
-
+          {/* Right Text Block */}
           <motion.div
-            whileHover={{
-              rotate: 8,
-              scale: 1.08,
-            }}
-            className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 shadow-lg"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-6 space-y-6"
           >
+            <div>
+              <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl leading-tight">
+                100% Trained
+                <span className="block text-red-600 dark:text-orange-500">Chauffeurs</span>
+              </h2>
+              <p className={`mt-4 text-base leading-relaxed ${
+                darkMode ? "text-gray-300" : "text-gray-700"
+              }`}>
+                Red Taxi provides the <strong className="underline decoration-red-500">Best Cab Service</strong> in the city with skilled and well trained drivers. They follow high-quality service to give smooth and comfortable ride for the customers.
+              </p>
+            </div>
 
-            <Icon
-              size={22}
-              className="text-white"
-            />
+            {/* List with Dashed Route Line & Map Pin Marker Details */}
+            <div className="relative space-y-4 pt-2">
+              
+              {/* Dashed Route SVG Connector between Map Pins */}
+              <div className="absolute left-[20px] top-[40px] bottom-[40px] w-6 pointer-events-none hidden sm:block z-0">
+                <svg className="h-full w-full" fill="none">
+                  <path
+                    d="M 12 0 C 30 50, -10 100, 12 150 C 30 180, -10 220, 12 260"
+                    stroke="#EF4444"
+                    strokeWidth="2"
+                    strokeDasharray="4 4"
+                  />
+                </svg>
+              </div>
+
+              {chauffeurPoints.map((point, index) => {
+                const Icon = point.icon;
+                const isHovered = activeChauffeurIndex === index;
+
+                return (
+                  <div
+                    key={index}
+                    onMouseEnter={() => setActiveChauffeurIndex(index)}
+                    onMouseLeave={() => setActiveChauffeurIndex(null)}
+                    className={`relative z-10 flex items-start gap-4 p-4 rounded-2xl transition-all duration-300 cursor-pointer ${
+                      isHovered
+                        ? darkMode
+                          ? "bg-[#141922] border border-white/10 shadow-xl"
+                          : "bg-white border border-gray-100 shadow-xl shadow-gray-200/60"
+                        : "bg-transparent border border-transparent"
+                    }`}
+                  >
+                    {/* Location Pin with Overlay Icon */}
+                    <div className="relative shrink-0 mt-1">
+                      <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-red-600 text-white shadow-md">
+                        <Icon size={20} />
+                        {/* Red Location Badge Marker */}
+                        <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow">
+                          <MapPin size={12} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-bold text-red-600 dark:text-orange-500">
+                        {point.title}
+                      </h3>
+                      <p className={`mt-1 text-sm leading-relaxed ${
+                        darkMode ? "text-gray-400" : "text-gray-600"
+                      }`}>
+                        {point.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
           </motion.div>
 
-          <motion.button
-            whileHover={{
-              rotate: -45,
-              scale: 1.1,
-            }}
-            whileTap={{
-              scale: .95,
-            }}
-            className={iconButton}
-          >
-
-            <ArrowUpRight
-              size={16}
-              className="text-white"
-            />
-
-          </motion.button>
-
         </div>
 
-        {/* Title */}
-
-        <h3
-          className={`mt-5 text-xl font-black ${
-            darkMode
-              ? "text-white"
-              : "text-gray-900"
-          }`}
-        >
-
-          {service.title}
-
-        </h3>
-
-        {/* Description */}
-
-        <p
-          className={`mt-3 text-sm leading-7 ${
-            darkMode
-              ? "text-gray-400"
-              : "text-gray-600"
-          }`}
-        >
-
-          {service.description}
-
-        </p>
-
-        {/* Feature Badges */}
-
-        <div className="mt-5 flex flex-wrap gap-2">
-
-          {[
-            "Verified",
-            "24×7",
-            "Premium",
-          ].map((item) => (
-
-            <motion.span
-              key={item}
-              whileHover={{
-                y: -2,
-                scale: 1.04,
-              }}
-              className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-all duration-500 ${
-                darkMode
-                  ? "border-orange-500/20 bg-orange-500/10 text-orange-300 hover:bg-orange-500 hover:text-white"
-                  : "border-orange-200 bg-orange-50 text-orange-600 hover:bg-orange-500 hover:text-white"
-              }`}
-            >
-
-              {item}
-
-            </motion.span>
-
-          ))}
-
-        </div>
-
-        {/* Footer */}
-
-        <div className="mt-6 flex items-center justify-between">
-
-          <span className="text-sm font-semibold text-orange-500">
-
-            Explore Service
-
-          </span>
-
-          <motion.button
-            whileHover={{
-              scale: 1.1,
-              rotate: -45,
-            }}
-            whileTap={{
-              scale: .95,
-            }}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg transition-all duration-500 hover:shadow-[0_0_25px_rgba(249,115,22,.45)]"
-          >
-
-            <ArrowRight size={18} />
-
-          </motion.button>
-
-        </div>
-
-      </div>
-
-    </motion.div>
-
-  );
-
-})}
-
-{/* ===========================
-      PART 3
-=========================== */}
-
-</div>
-
-{/* =====================================
-        PREMIUM HOW IT WORKS
-===================================== */}
-<motion.div
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.7 }}
-  viewport={{ once: true }}
-  className="mt-20"
->
-
-  {/* Heading */}
-
-  <div className="mx-auto mb-14 max-w-3xl text-center">
-
-    <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-5 py-2 backdrop-blur-xl">
-
-      <Sparkles
-        size={15}
-        className="text-orange-400"
-      />
-
-      <span className="text-[11px] font-bold uppercase tracking-[4px] text-orange-400">
-
-        How It Works
-
-      </span>
-
-    </div>
-
-    <h2
-      className={`mt-5 text-4xl font-black ${
-        darkMode ? "text-white" : "text-gray-900"
-      }`}
-    >
-      Book Your Taxi
-
-      <span className="block bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
-
-        In Just 4 Steps
-
-      </span>
-    </h2>
-
-    <p
-      className={`mx-auto mt-4 max-w-2xl text-sm leading-7 ${
-        darkMode ? "text-gray-400" : "text-gray-600"
-      }`}
-    >
-      Fast booking process with verified drivers and instant confirmation.
-    </p>
-
-  </div>
-
-  {/* Steps */}
-
-  <div className="grid gap-5 lg:grid-cols-4">
-
-    {[
-      {
-        icon: Phone,
-        title: "Contact Us",
-        desc: "Call or WhatsApp anytime.",
-      },
-      {
-        icon: Car,
-        title: "Choose Vehicle",
-        desc: "Select Sedan, SUV or Traveller.",
-      },
-      {
-        icon: BadgeCheck,
-        title: "Confirm Booking",
-        desc: "Receive fixed fare instantly.",
-      },
-      {
-        icon: ShieldCheck,
-        title: "Enjoy Ride",
-        desc: "Safe, comfortable journey.",
-      },
-    ].map((step, index) => {
-
-      const Icon = step.icon;
-
-      return (
-
+        {/* ========================================================
+            3. REPLACED SECTION: DIRECT CONNECTIONS & THE 3E'S OF PROFESSIONALISM
+           ======================================================== */}
         <motion.div
-          key={index}
-          whileHover={{
-            y: -8,
-            scale: 1.03,
-          }}
-          transition={{
-            duration: .3,
-          }}
-          className={`group relative overflow-hidden rounded-3xl border p-6 ${
-            darkMode
-              ? "border-white/10 bg-white/5 backdrop-blur-xl hover:border-orange-500/40 hover:shadow-[0_20px_45px_rgba(249,115,22,.25)]"
-              : "border-orange-100 bg-white hover:border-orange-300 hover:shadow-xl"
-          }`}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center space-y-12"
         >
-
-          {/* Glow */}
-
-          <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-orange-500/20 blur-[90px] opacity-0 transition-all duration-500 group-hover:opacity-100" />
-
-          {/* Number */}
-
-          <div className="absolute right-5 top-5 text-5xl font-black text-orange-500/10">
-
-            0{index + 1}
-
-          </div>
-
-          {/* Icon */}
-
-          <motion.div
-            whileHover={{
-              rotate: 8,
-              scale: 1.1,
-            }}
-            className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 shadow-xl"
-          >
-
-            <Icon
-              size={26}
-              className="text-white"
-            />
-
-          </motion.div>
-
-          {/* Title */}
-
-          <h3
-            className={`mt-6 text-xl font-black ${
-              darkMode ? "text-white" : "text-gray-900"
-            }`}
-          >
-
-            {step.title}
-
-          </h3>
-
-          {/* Description */}
-
-          <p
-            className={`mt-3 text-sm leading-7 ${
-              darkMode ? "text-gray-400" : "text-gray-600"
-            }`}
-          >
-
-            {step.desc}
-
-          </p>
-
-          {/* Bottom Line */}
-
-          <div className="mt-6 h-1 w-14 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 transition-all duration-500 group-hover:w-24" />
-
-        </motion.div>
-
-      );
-
-    })}
-
-  </div>
-
-</motion.div>
-{/* =====================================
-          WHY CHOOSE US
-          PART 4
-===================================== */}
-{/* =====================================
-          WHY CHOOSE US
-===================================== */}
-
-<motion.section
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.7 }}
-  viewport={{ once: true }}
-  className="relative mt-24"
->
-  {/* Heading */}
-
-  <div className="mx-auto mb-16 max-w-3xl text-center">
-
-    <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-5 py-2 backdrop-blur-xl">
-
-      <BadgeCheck
-        size={16}
-        className="text-orange-400"
-      />
-
-      <span className="text-xs font-bold uppercase tracking-[4px] text-orange-400">
-
-        Why Choose Us
-
-      </span>
-
-    </div>
-
-    <h2
-      className={`mt-6 text-4xl font-black md:text-5xl ${
-        darkMode
-          ? "text-white"
-          : "text-gray-900"
-      }`}
-    >
-
-      Premium Travel
-
-      <span className="block bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
-
-        Experience
-
-      </span>
-
-    </h2>
-
-    <p
-      className={`mx-auto mt-5 max-w-2xl text-base leading-7 ${
-        darkMode
-          ? "text-gray-400"
-          : "text-gray-600"
-      }`}
-    >
-
-      Thousands of customers trust our professional drivers,
-      transparent pricing and premium travel experience.
-
-    </p>
-
-  </div>
-
-  {/* Cards */}
-
-  <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-
-    {whyChooseUs.map((item, index) => {
-
-      const Icon = item.icon;
-
-      return (
-
-        <motion.div
-          key={index}
-          initial={{
-            opacity: 0,
-            y: 40,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          whileHover={{
-            y: -10,
-          }}
-          transition={{
-            duration: .45,
-            delay: index * .08,
-          }}
-          viewport={{
-            once: true,
-          }}
-          className={`group relative overflow-hidden rounded-[28px] border p-6 transition-all duration-700 ${
-            darkMode
-              ? "border-white/10 bg-[#111827] hover:border-orange-500/40 hover:shadow-[0_25px_60px_rgba(249,115,22,.30)]"
-              : "border-orange-100 bg-white hover:border-orange-300 hover:shadow-[0_25px_60px_rgba(249,115,22,.18)]"
-          }`}
-        >
-
-          {/* Glow */}
-
-          <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-orange-500/20 blur-[90px] opacity-0 transition-all duration-700 group-hover:opacity-100" />
-
-          {/* Premium Badge */}
-
-          <div className="absolute right-5 top-5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[2px] text-white shadow-lg">
-
-            Premium
-
-          </div>
-
-          {/* Icon */}
-
-          <motion.div
-            whileHover={{
-              rotate: 10,
-              scale: 1.1,
-            }}
-            className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 shadow-xl"
-          >
-
-            <Icon
-              size={28}
-              className="text-white"
-            />
-
-          </motion.div>
-
-          {/* Title */}
-
-          <h3
-            className={`mt-6 text-xl font-black ${
-              darkMode
-                ? "text-white"
-                : "text-gray-900"
-            }`}
-          >
-
-            {item.title}
-
-          </h3>
-
-          {/* Description */}
-
-          <p
-            className={`mt-3 text-sm leading-7 ${
-              darkMode
-                ? "text-gray-400"
-                : "text-gray-600"
-            }`}
-          >
-
-            {item.description}
-
-          </p>
-
-          {/* Bottom */}
-
-          <div className="mt-6">
-
-            <div className="flex items-center justify-between">
-
-              <span className="text-sm font-semibold text-orange-500">
-
-                Trusted Service
-
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-extrabold md:text-4xl">
+              Direct connections{" "}
+              <span className="block text-red-600 dark:text-orange-500 mt-1">
+                for clarity and choice
               </span>
+            </h2>
+            <p className={`mt-4 text-base ${
+              darkMode ? "text-gray-400" : "text-gray-600"
+            }`}>
+              Our platform is dedicated to delivering essential transportation services that fulfill fundamental mobility needs while upholding core values and ethical business practices.
+            </p>
 
-              <ArrowUpRight
-                size={18}
-                className="text-orange-500 transition duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"
-              />
-
-            </div>
-
-            <div className="mt-4 h-1 overflow-hidden rounded-full bg-orange-100 dark:bg-white/10">
-
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                transition={{
-                  duration: 1.2,
-                  delay: index * .15,
-                }}
-                className="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-400"
-              />
-
-            </div>
-
+            <h3 className="mt-8 text-2xl font-bold">
+              The <span className="text-red-600 dark:text-orange-500">3E's</span> of Professionalism
+            </h3>
           </div>
 
+          <div className="grid gap-8 md:grid-cols-3">
+            {professionalism3Es.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={index}
+                  className={`flex flex-col items-center text-center p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2 ${
+                    darkMode
+                      ? "bg-[#141922] border border-white/10 hover:border-orange-500/40"
+                      : "bg-white border border-gray-100 shadow-xl shadow-gray-200/50 hover:border-red-400"
+                  }`}
+                >
+                  <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-red-500/10 text-red-600 dark:text-orange-400">
+                    <Icon size={36} strokeWidth={1.5} />
+                  </div>
+                  <h4 className="text-xl font-bold text-red-600 dark:text-orange-500">
+                    {item.title}
+                  </h4>
+                  <p className={`mt-3 text-sm leading-relaxed ${
+                    darkMode ? "text-gray-400" : "text-gray-600"
+                  }`}>
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </motion.div>
 
-      );
-
-    })}
-
-  </div>
-
-  {/* Bottom Stats */}
-
-  <div className="mt-16 grid gap-5 md:grid-cols-4">
-
-    {[
-      {
-        value: "25K+",
-        label: "Happy Riders",
-      },
-      {
-        value: "4.9★",
-        label: "Customer Rating",
-      },
-      {
-        value: "24×7",
-        label: "Support",
-      },
-      {
-        value: "100%",
-        label: "Safe Journey",
-      },
-    ].map((item, index) => (
-
-      <motion.div
-        key={index}
-        whileHover={{
-          y: -5,
-          scale: 1.03,
-        }}
-        className={`rounded-3xl border p-6 text-center transition-all duration-500 ${
-          darkMode
-            ? "border-white/10 bg-white/5 backdrop-blur-xl hover:border-orange-500/40"
-            : "border-orange-100 bg-white shadow-lg hover:border-orange-300"
-        }`}
-      >
-
-        <h3 className="text-3xl font-black text-orange-500">
-
-          {item.value}
-
-        </h3>
-
-        <p
-          className={`mt-2 text-sm ${
+        {/* ========================================================
+            4. IMPROVED UI: BOOKED IN 4 EASY STEPS
+           ======================================================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className={`rounded-3xl p-10 lg:p-14 border ${
             darkMode
-              ? "text-gray-400"
-              : "text-gray-600"
+              ? "bg-[#0c1221] border-white/10"
+              : "bg-gray-900 text-white border-gray-800 shadow-2xl"
           }`}
         >
+          <div className="text-center">
+            <span className="text-xs font-extrabold uppercase tracking-[6px] text-orange-400">
+              HOW IT WORKS
+            </span>
+            <h2 className="mt-3 text-3xl font-extrabold text-white md:text-4xl">
+              Booked In{" "}
+              <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
+                4 Easy Steps
+              </span>
+            </h2>
+          </div>
 
-          {item.label}
+          <div className="relative mt-16">
+            {/* Step Horizontal Line */}
+            <div className="absolute left-10 right-10 top-11 hidden h-[2px] bg-gradient-to-r from-orange-500/20 via-orange-500 to-orange-500/20 lg:block" />
 
-        </p>
+            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+              
+              {/* Step 1 */}
+              <div className="group relative flex flex-col items-center text-center">
+                <div className="relative mb-6 flex h-22 w-22 items-center justify-center rounded-3xl border border-orange-500/30 bg-orange-500/10 transition-all duration-300 group-hover:bg-orange-500 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.4)]">
+                  <Car size={32} className="text-orange-400 group-hover:text-white transition-colors" />
+                  <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 text-xs font-black text-white ring-4 ring-[#0c1221]">
+                    1
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white">Choose Route</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-400">
+                  Select pickup and destination to receive an instant fare.
+                </p>
+              </div>
 
-      </motion.div>
+              {/* Step 2 */}
+              <div className="group relative flex flex-col items-center text-center">
+                <div className="relative mb-6 flex h-22 w-22 items-center justify-center rounded-3xl border border-orange-500/30 bg-orange-500/10 transition-all duration-300 group-hover:bg-orange-500 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.4)]">
+                  <Plane size={32} className="text-orange-400 group-hover:text-white transition-colors" />
+                  <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 text-xs font-black text-white ring-4 ring-[#0c1221]">
+                    2
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white">Confirm Booking</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-400">
+                  Confirm your booking with transparent pricing and no hidden fees.
+                </p>
+              </div>
 
-    ))}
+              {/* Step 3 */}
+              <div className="group relative flex flex-col items-center text-center">
+                <div className="relative mb-6 flex h-22 w-22 items-center justify-center rounded-3xl border border-orange-500/30 bg-orange-500/10 transition-all duration-300 group-hover:bg-orange-500 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.4)]">
+                  <BadgeCheck size={32} className="text-orange-400 group-hover:text-white transition-colors" />
+                  <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 text-xs font-black text-white ring-4 ring-[#0c1221]">
+                    3
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white">Driver Assigned</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-400">
+                  A professional verified driver will be assigned to your trip.
+                </p>
+              </div>
 
-  </div>
+              {/* Step 4 */}
+              <div className="group relative flex flex-col items-center text-center">
+                <div className="relative mb-6 flex h-22 w-22 items-center justify-center rounded-3xl border border-orange-500/30 bg-orange-500/10 transition-all duration-300 group-hover:bg-orange-500 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.4)]">
+                  <ShieldCheck size={32} className="text-orange-400 group-hover:text-white transition-colors" />
+                  <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 text-xs font-black text-white ring-4 ring-[#0c1221]">
+                    4
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white">Enjoy Your Ride</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-400">
+                  Relax and travel comfortably with safe, reliable and on-time service.
+                </p>
+              </div>
 
-</motion.section>
+            </div>
+          </div>
+        </motion.div>
+
+       
 
       </div>
     </section>
