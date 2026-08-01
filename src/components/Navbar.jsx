@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Menu,
   X,
@@ -21,6 +21,18 @@ function Navbar({ darkMode, setDarkMode }) {
     "Contact",
   ];
 
+const [scrolled, setScrolled] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 20);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
   return (
     <header
   className={`fixed top-0 left-0 w-full z-50 ${
@@ -31,17 +43,18 @@ function Navbar({ darkMode, setDarkMode }) {
 >
 
       <nav
-  className={`border-b ${
-    darkMode
-      ? "border-orange-500/20 shadow-lg shadow-black/30"
-      : "border-orange-500/20 shadow-lg shadow-black/30"
+  className={`border-b transition-all duration-500 ${
+    scrolled
+      ? darkMode
+        ? " backdrop-blur-sm border-orange-500/20 shadow-lg shadow-black/30"
+        : "backdrop-blur-sm border-gray-200 shadow-lg shadow-gray-300/40"
+      : "bg-transparent border-transparent"
   }`}
 >
   <div className="max-w-7xl mx-auto px-6">
 
     <div className="h-20 flex items-center justify-between">
 
-      {/* Logo */}
       <div className="flex items-center">
         <img
           src="public/cars/logo.png"
@@ -50,7 +63,7 @@ function Navbar({ darkMode, setDarkMode }) {
         />
       </div>
 
-      {/* Desktop Menu */}
+
       <ul className="hidden lg:flex items-center gap-10">
 
         {navItems.map((item) => (
@@ -58,7 +71,7 @@ function Navbar({ darkMode, setDarkMode }) {
             <a
               href={`#${item.toLowerCase()}`}
               className={`relative font-semibold tracking-wide transition-all duration-300 hover:text-orange-500 after:absolute after:left-0 after:-bottom-2 after:h-[2px] after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full ${
-  darkMode ? "text-white" : "text-black"
+  darkMode ? "text-white" : "text-gray-900"
 }`}
             >
               {item}
@@ -68,10 +81,8 @@ function Navbar({ darkMode, setDarkMode }) {
 
       </ul>
 
-      {/* Right Buttons */}
       <div className="hidden lg:flex items-center gap-4">
 
-        {/* Dark Button */}
         <button
   onClick={() => setDarkMode(!darkMode)}
   className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
@@ -87,20 +98,18 @@ function Navbar({ darkMode, setDarkMode }) {
   )}
 </button>
 
-        {/* Call */}
         <a
           href="tel:+919999999999"
           className={`flex items-center gap-2 rounded-full px-6 py-3 font-semibold transition-all duration-300 ${
   darkMode
     ? "border border-white/20 bg-white/10 text-white hover:bg-orange-500"
-    : "border border-white/20 bg-white/10 text-white hover:bg-orange-500"
+    : "border  bg-gray-100 text-orange-500 hover:bg-orange-100"
 }`}
         >
           <Phone size={18} />
           Call Now
         </a>
 
-        {/* WhatsApp */}
         <a
           href="https://wa.me/919999999999"
           target="_blank"
@@ -113,7 +122,6 @@ function Navbar({ darkMode, setDarkMode }) {
 
       </div>
 
-      {/* Mobile Button */}
       <button
         onClick={() => setMenuOpen(!menuOpen)}
         className="lg:hidden text-white"
@@ -125,7 +133,6 @@ function Navbar({ darkMode, setDarkMode }) {
 
   </div>
 
-  {/* Mobile Menu */}
   {menuOpen && (
     <div
   className={`lg:hidden backdrop-blur-xl border-t ${
@@ -169,7 +176,7 @@ function Navbar({ darkMode, setDarkMode }) {
   )}
 
 </nav>
-{/* Top Information Bar */}
+
 <div className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 text-white border-b border-orange-300/20 overflow-hidden">
 
   <div className="marquee">
@@ -194,7 +201,7 @@ function Navbar({ darkMode, setDarkMode }) {
       <span>🚖 One Way & Outstation Cab Service</span>
       <span>◆</span>
 
-      {/* Duplicate for seamless loop */}
+
 
       <span>✔ Instant Booking</span>
       <span>◆</span>
@@ -218,7 +225,6 @@ function Navbar({ darkMode, setDarkMode }) {
   </div>
 <div className="fixed bottom-6 right-6 z-[999] flex flex-col gap-5">
 
-  {/* Call */}
   <a
     href="tel:+919888844444"
     className="floating-btn bg-gradient-to-r from-orange-500 to-orange-600 shadow-xl shadow-orange-500/50 hover:scale-110 transition-all duration-300"
@@ -229,7 +235,6 @@ function Navbar({ darkMode, setDarkMode }) {
     />
   </a>
 
-  {/* WhatsApp */}
   <a
     href="https://wa.me/919888844444"
     target="_blank"

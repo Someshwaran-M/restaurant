@@ -18,6 +18,9 @@ import Tours from "./components/Tours";
 function App() {
   const [showMore, setShowMore] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
+  const [showTours, setShowTours] = useState(false);
+  const [showGallery, setShowGallery] = useState(false);
+  const [showContact, setShowContact] = useState(false);
 
   return (
     <div className="bg-white overflow-x-hidden">
@@ -26,14 +29,13 @@ function App() {
 
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-      {/* Main Content */}
       <main>
         <section id="home">
-          <Hero />
+          <Hero darkMode={darkMode} />
         </section>
 
         <section id="about">
-          <About />
+          <About darkMode={darkMode}/>
         </section>
 
         <section id="destinationcards">

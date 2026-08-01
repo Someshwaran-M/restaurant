@@ -17,11 +17,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-// Background: public/cars/Herobg.png -> served from root as /cars/Herobg.png
 const heroBg = "/cars/Herobg.png";
-
-// Vehicle list -- order matches the reference grid (3 columns).
-// Edit names / prices here; images from public/cars/Car1.png ... Car7.png
 const vehicles = [
   { id: 1, name: "MINI", price: "₹15/km", img: "/cars/Car1.png" },
   { id: 2, name: "SEDAN", price: "₹16/km", img: "/cars/Car2.png" },
@@ -32,18 +28,40 @@ const vehicles = [
   { id: 7, name: "FORCE URBANIA", price: "₹35/km", img: "/cars/Car7.png" },
 ];
 
-// ---- Shared style tokens so every field/box is exactly the same size ----
-const fieldLabel =
-  "block text-[11px] font-semibold uppercase tracking-wide text-gray-400 mb-1.5";
-const fieldInput =
-  "w-full h-11 rounded-lg border border-white/10 bg-white/5 pl-9 pr-3 text-[15px] text-white placeholder:text-gray-500 outline-none transition focus:border-orange-500/60 focus:bg-white/10";
-const fieldIcon =
-  "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-orange-400";
+function Hero({ darkMode }) {
+  const [tripType, setTripType] = useState("oneway");
+  const [acType, setAcType] = useState("ac");
+  const [vehicle, setVehicle] = useState(2);
 
-function Field({ label, icon: Icon, ...props }) {
+  const fieldLabel = `block mb-1.5 text-[11px] font-semibold uppercase tracking-wide ${
+    darkMode ? "text-gray-400" : "text-gray-700"
+  }`;
+
+  const fieldInput = `w-full h-10 rounded-lg border pl-9 pr-3 text-sm outline-none transition-all duration-300 ${
+    darkMode
+      ? "border-gray-700  text-white placeholder:text-gray-500 focus:border-orange-500 focus:bg-[#111827]"
+      : "border-gray-300 bg-white text-gray-900 placeholder:text-gray-500 focus:border-orange-500 focus:bg-orange-50"
+  }`;
+
+  const fieldIcon = `pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 ${
+    darkMode ? "text-orange-400" : "text-orange-500"
+  }`;
+
+  const toggleBase =
+    "rounded-xl border px-3 py-2 text-left transition-all duration-300";
+
+  const toggleSelected =
+    "border-orange-500 bg-orange-500/10 text-orange-500 shadow-md shadow-orange-500/20";
+
+  const toggleIdle = darkMode
+    ? "border-white/10 bg-white/5 text-white hover:border-orange-400 hover:bg-orange-500/5"
+    : "border-gray-300 bg-gray-100 text-gray-900 hover:border-orange-400 hover:bg-orange-50";
+
+  function Field({ label, icon: Icon, ...props }) {
   return (
     <div>
       <label className={fieldLabel}>{label}</label>
+
       <div className="relative">
         <Icon size={15} className={fieldIcon} />
         <input className={fieldInput} {...props} />
@@ -52,32 +70,27 @@ function Field({ label, icon: Icon, ...props }) {
   );
 }
 
-function Hero() {
-  const [tripType, setTripType] = useState("oneway");
-  const [acType, setAcType] = useState("ac");
-  const [vehicle, setVehicle] = useState(2);
-
-  const toggleBase =
-    "rounded-xl border px-4 py-3.5 text-left transition duration-150";
-  const toggleSelected = "border-orange-500/60 bg-orange-500/10 text-white";
-  const toggleIdle =
-    "border-white/10 bg-white/5 text-gray-300 hover:bg-white/10 hover:border-white/20";
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden">
+    <section id="home" className="relative min-h-[850px] overflow-hidden bg-[#0b0f19]">
 
-      {/* Background */}
+
       <div
-        className="absolute top-0 left-0 w-full h-[850px] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      />
-      <div className="absolute inset-0 bg-black/65" />
-      <div className="absolute inset-0 bg-gradient-to-r from-orange-900/60 via-black/30 to-black/60" />
+  className="absolute top-0 left-0 w-full h-[850px] bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: `url(${heroBg})` }}
+/>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-40 pb-20">
+<div
+  className={`absolute inset-0 transition-colors duration-500 ${
+    darkMode
+      ? "bg-black/65"
+      : "bg-white/35"
+  }`}
+/>
+     
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-40 pb-12">
         <div className="grid lg:grid-cols-2 gap-14 items-start">
-          {/* LEFT SIDE */}
+        
           <motion.div
             initial={{ opacity: 0, x: -70 }}
             animate={{ opacity: 1, x: 0 }}
@@ -90,57 +103,70 @@ function Hero() {
               </span>
             </div>
 
-            <h1 className="mt-10 text-6xl xl:text-7xl font-extrabold leading-none text-white">
+            <h3 className="mt-8 text-5xl xl:text-6xl font-extrabold leading-tight text-white">
               Book
               <span className="text-orange-400"> One Way</span>
               <br />
               Taxi Across
               <br />
               <span className="text-orange-300">South India</span>
-            </h1>
+            </h3>
 
-            <p className="mt-8 max-w-xl text-lg leading-9 text-gray-200">
+            <p className="mt-6 max-w-xl text-lg leading-7 text-gray-200">
               Travel anywhere in Tamil Nadu, Kerala & Karnataka with reliable
               taxi service. Fixed fare, clean vehicles and professional drivers
               for safe outstation and airport rides.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-2">
-              <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-lg text-white">
-                <BadgeDollarSign size={18} className="text-orange-400" />
-                Fixed Fare
-              </div>
-              <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-lg text-white">
-                <ShieldCheck size={18} className="text-orange-400" />
-                No Hidden Charges
-              </div>
-              <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-lg text-white">
-                <Clock3 size={18} className="text-orange-400" />
-                24/7 Booking Support
-              </div>
-              <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-lg text-white">
-                <MapPin size={18} className="text-orange-400" />
-                Verified Drivers
-              </div>
-            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+  {[
+    { icon: BadgeDollarSign, text: "Fixed Fare" },
+    { icon: ShieldCheck, text: "No Hidden Charges" },
+    { icon: Clock3, text: "24/7 Booking Support" },
+    { icon: MapPin, text: "Verified Drivers" },
+  ].map(({ icon: Icon, text }) => (
+    <div
+      key={text}
+      className="flex items-center gap-2 rounded-full
+      border border-white/10
+      bg-black/40
+      backdrop-blur-xl
+      px-6 py-3
+      text-[14px] font-semibold
+      text-white
+      shadow-[0_8px_25px_rgba(0,0,0,0.25)]
+      transition-all duration-300
+      hover:border-orange-500/40
+      hover:bg-black/60
+      hover:-translate-y-0.5"
+    >
+      <Icon
+        size={10}
+        className="text-orange-400"
+        strokeWidth={2.2}
+      />
+      <span>{text}</span>
+    </div>
+  ))}
+</div>
 
             <div className="grid grid-cols-3 gap-2 mt-8 border-t border-white/10 pt-10">
               <div className="flex items-center gap-2">
-                <div className="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center">
                   <MapPin className="text-orange-400" />
                 </div>
                 <div>
-                  <h2 className="text-4xl font-bold text-white">10,000+</h2>
+                  <h2 className="text-3xl font-bold text-white">10,000+</h2>
                   <p className="text-gray-300">Happy Trips</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center">
                   <ShieldCheck className="text-orange-400" />
                 </div>
                 <div>
-                  <h2 className="text-4xl font-bold text-white">55+</h2>
+                  <h2 className="text-3xl font-bold text-white">55+</h2>
                   <p className="text-gray-300">Cities Covered</p>
                 </div>
               </div>
@@ -156,65 +182,83 @@ function Hero() {
               </div>
             </div>
 
-            <div className="mt-14 flex items-center gap-3 text-gray-300">
+            <div className="mt-4 flex items-center gap-3 text-gray-300">
               <span className="animate-bounce text-2xl">↓</span>
               Scroll to explore
             </div>
           </motion.div>
 
-          {/* RIGHT SIDE — Quick Taxi Booking Card */}
+          
           <motion.div
             initial={{ opacity: 0, x: 70 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="rounded-[32px] border border-white/10 bg-white/10 backdrop-blur-2xl p-6 shadow-2xl"
+           className={`w-[600px] rounded-[28px] p-5 shadow-2xl backdrop-blur-sm transition-all duration-500 ${
+  darkMode
+    ? "border border-gray-700 "
+    : "border border-gray-200 bg-white/90 shadow-xl"
+}`}
           >
-            <h2 className="text-3xl font-bold text-white">
+            <h2 className={`text-3xl font-bold ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
               Quick Taxi Booking
             </h2>
-            <p className="text-gray-300 mt-1 text-sm">
+            <p className={`mt-1 text-sm ${
+  darkMode ? "text-gray-300" : "text-gray-600"
+}`}>
               One Way • Outstation • Airport Drop
             </p>
 
-            {/* Pickup / Drop */}
             <div className="grid md:grid-cols-2 gap-3 mt-6">
               <Field
-                label="Pickup Location"
-                icon={MapPin}
-                type="text"
-                placeholder="Enter pickup location"
-              />
+  label="Pickup Location"
+  icon={MapPin}
+  type="text"
+  placeholder="Enter pickup location"
+  fieldLabel={fieldLabel}
+  fieldInput={fieldInput}
+  fieldIcon={fieldIcon}
+/>
               <Field
                 label="Drop Location"
                 icon={Flag}
                 type="text"
                 placeholder="Enter drop location"
+                fieldLabel={fieldLabel}
+                fieldInput={fieldInput}
+                fieldIcon={fieldIcon}
+
               />
             </div>
 
-            {/* Name / Mobile */}
             <div className="grid md:grid-cols-2 gap-3 mt-3">
               <Field
                 label="Full Name"
                 icon={User}
                 type="text"
                 placeholder="Enter your name"
+                fieldLabel={fieldLabel}
+                fieldInput={fieldInput}
+                fieldIcon={fieldIcon}
               />
               <Field
                 label="Mobile Number"
                 icon={Phone}
                 type="tel"
                 placeholder="Enter mobile number"
+                fieldLabel={fieldLabel}
+                fieldInput={fieldInput}
+                fieldIcon={fieldIcon}
               />
             </div>
 
-            {/* Date / Time */}
             <div className="grid md:grid-cols-2 gap-3 mt-3">
-              <Field label="Pickup Date" icon={Calendar} type="date" />
-              <Field label="Pickup Time" icon={Clock} type="time" />
+              
+              <Field label="Pickup Date" icon={Calendar} type="date" fieldLabel={fieldLabel} fieldInput={fieldInput} fieldIcon={fieldIcon} />
+              <Field label="Pickup Time" icon={Clock} type="time" fieldLabel={fieldLabel} fieldInput={fieldInput} fieldIcon={fieldIcon} />
             </div>
 
-            {/* Return Date — only appears for Round Trip */}
             <AnimatePresence>
               {tripType === "roundtrip" && (
                 <motion.div
@@ -229,8 +273,7 @@ function Hero() {
               )}
             </AnimatePresence>
 
-            {/* Trip Type */}
-            <div className="mt-4">
+            <div className="mt-2">
               <label className={fieldLabel}>Trip Type</label>
               <div className="grid grid-cols-2 gap-3 mt-1.5">
                 <button
@@ -241,10 +284,18 @@ function Hero() {
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <ArrowRight size={15} className="text-orange-400" />
-                    <h3 className="text-white text-base font-bold">One Way</h3>
+                    <ArrowRight size={10} className="text-orange-400" />
+                    <h3
+  className={`text-base font-bold ${
+    darkMode ? "text-white" : "text-gray-900"
+  }`}
+>One Way</h3>
                   </div>
-                  <p className="text-xs mt-0.5 text-gray-400">Min 150 KM</p>
+                  <p
+  className={`mt-0.5 text-xs ${
+    darkMode ? "text-gray-400" : "text-gray-600"
+  }`}
+>Min 150 KM</p>
                 </button>
 
                 <button
@@ -256,56 +307,65 @@ function Hero() {
                 >
                   <div className="flex items-center gap-2">
                     <ArrowLeftRight size={15} className="text-orange-400" />
-                    <h3 className="text-white text-base font-bold">
+                   <h3
+  className={`text-base font-bold ${
+    darkMode ? "text-white" : "text-gray-900"
+  }`}
+>
                       Round Trip
                     </h3>
                   </div>
-                  <p className="text-xs mt-0.5 text-gray-400">
+                 <p
+  className={`mt-0.5 text-xs ${
+    darkMode ? "text-gray-400" : "text-gray-600"
+  }`}
+>
                     Min 300 KM / Day
                   </p>
                 </button>
               </div>
             </div>
 
-            {/* AC Selection */}
-            <div className="mt-4">
+            <div className="mt-2">
               <label className={fieldLabel}>AC / Non-AC</label>
               <div className="grid grid-cols-2 gap-3 mt-1.5">
                 <button
-                  type="button"
-                  onClick={() => setAcType("ac")}
-                  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
-                    acType === "ac" ? toggleSelected : toggleIdle
-                  }`}
-                >
-                  <Snowflake size={15} className="text-orange-400" />
-                  AC
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setAcType("nonac")}
-                  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
-                    acType === "nonac" ? toggleSelected : toggleIdle
-                  }`}
-                >
-                  Non AC
-                </button>
+  type="button"
+  onClick={() => setAcType("ac")}
+  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
+    acType === "ac" ? toggleSelected : toggleIdle
+  }`}
+>
+  <Snowflake size={15} className="text-orange-500" />
+  AC
+</button>
+
+<button
+  type="button"
+  onClick={() => setAcType("nonac")}
+  className={`${toggleBase} flex items-center justify-center gap-2 py-3 font-bold ${
+    acType === "nonac" ? toggleSelected : toggleIdle
+  }`}
+>
+  Non AC
+</button>
               </div>
             </div>
 
-            {/* Vehicle Selection */}
-            <div className="mt-4">
+            <div className="mt-2">
               <label className={fieldLabel}>Select Vehicle</label>
-              <div className="grid grid-cols-3 gap-2.5 mt-1.5">
+              <div className="grid grid-cols-3 gap-2 mt-1.5">
                 {vehicles.map((v) => (
                   <div
                     key={v.id}
                     onClick={() => setVehicle(v.id)}
-                    className={`rounded-xl border cursor-pointer p-2.5 text-center transition duration-150 ${
-                      vehicle === v.id
-                        ? "border-orange-500/60 bg-orange-500/10"
-                        : "border-white/10 bg-white/5 hover:border-orange-400/40 hover:bg-orange-500/5"
-                    }`}
+                   className={`rounded-xl border cursor-pointer p-2 text-center transition duration-300 ${
+  vehicle === v.id
+    ? "border-orange-500 bg-orange-500/10"
+    : darkMode
+    ? "border-white/10 bg-white/5 hover:border-orange-400"
+    : "border-gray-200 bg-gray-50 hover:border-orange-400 hover:bg-orange-50"
+}`}
                   >
                     <img
                       src={v.img}
@@ -315,7 +375,9 @@ function Hero() {
                     <p className="text-orange-400 font-bold mt-1.5 text-xs">
                       {v.price}
                     </p>
-                    <h4 className="text-white font-semibold mt-0.5 text-[10px] leading-tight">
+                    <h4 className={`mt-0.5 text-[10px] font-semibold leading-tight ${
+  darkMode ? "text-white" : "text-gray-900"
+}`}>
                       {v.name}
                     </h4>
                   </div>
@@ -323,7 +385,6 @@ function Hero() {
               </div>
             </div>
 
-            {/* WhatsApp Button */}
             <a
               href="https://wa.me/919888444952"
               target="_blank"
@@ -342,25 +403,32 @@ function Hero() {
             </a>
 
             <div className="my-4 flex items-center gap-4">
-              <div className="h-px flex-1 bg-white/10"></div>
-              <span className="text-xs text-gray-400">or call directly</span>
+              <div className={`h-px flex-1 ${
+  darkMode ? "bg-white/10" : "bg-gray-300"
+}`}></div>
+              <span className={`text-xs ${
+  darkMode ? "text-gray-400" : "text-gray-600"
+}`}>or call directly</span>
               <div className="h-px flex-1 bg-white/10"></div>
             </div>
 
             <a
               href="tel:+919888444952"
-              className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-orange-500 bg-orange-500/5 text-orange-400 text-lg font-bold transition-all duration-300 hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/30"
+              className={`flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-orange-500 text-lg font-bold transition-all duration-300 hover:bg-orange-500 hover:text-white ${
+  darkMode
+    ? "bg-orange-500/5 text-orange-400"
+    : "bg-orange-50 text-orange-600"
+}`}
             >
               <span>+918884449452</span>
             </a>
           </motion.div>
         </div>
 
-        {/* Trust Bar */}
-        <div className="mt-8 rounded-full border border-orange-500/30 bg-orange-500/10 px-6 py-5 backdrop-blur-xl">
-          <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-orange-100">
+        <div className="mt-8 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-3 backdrop-blur-xl">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-orange-100">
             <div className="flex items-center gap-2">
-              <ShieldCheck size={16} className="text-orange-400" />
+              <ShieldCheck size={12} className="text-orange-400" />
               <span>No Hidden Charges</span>
             </div>
             <div className="flex items-center gap-2">
