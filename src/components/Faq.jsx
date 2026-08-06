@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
   Phone,
-  MessageCircle,
+  CalendarDays,
   HelpCircle,
-  ShieldCheck,
+  UtensilsCrossed,
   Clock3,
   Star,
   Sparkles,
@@ -13,76 +13,69 @@ import {
 
 const faqs = [
   {
-    question: "How does the booking work?",
+    question: "Do I need a reservation?",
     answer:
-      "Simply call us or send your pickup and drop locations on WhatsApp. We instantly confirm your fare and assign a verified professional driver.",
+      "Reservations are recommended during weekends and holidays. Walk-in guests are also welcome based on table availability.",
   },
   {
-    question: "Do I need to pay any advance?",
+    question: "What cuisines do you serve?",
     answer:
-      "No. Most bookings require no advance payment. You can pay directly to the driver after your journey unless informed otherwise.",
+      "We serve South Indian, North Indian, Chinese, Tandoori, Desserts, Mocktails and Chef Special dishes.",
   },
   {
-    question: "What is included in the fare?",
+    question: "Do you provide takeaway?",
     answer:
-      "Vehicle charges, professional driver, fuel, and standard travel charges. Toll, parking and state permit charges are additional wherever applicable.",
+      "Yes. Fresh takeaway and home delivery are available throughout our service area.",
   },
   {
-    question: "What is the minimum billing distance?",
+    question: "Can I celebrate birthdays?",
     answer:
-      "One Way Trips have a minimum billing of 150 KM while Round Trips have a minimum billing of 300 KM per day.",
+      "Absolutely! We arrange birthday parties, family celebrations, anniversary dinners and corporate events.",
   },
   {
-    question: "Can I travel at midnight?",
+    question: "Are vegetarian dishes available?",
     answer:
-      "Yes. Our taxi service is available 24×7 including airport pickups, midnight rides and early morning departures.",
+      "Yes. We have an extensive vegetarian menu prepared with fresh ingredients and authentic spices.",
   },
   {
-    question: "Which locations do you cover?",
+    question: "What are your opening hours?",
     answer:
-      "We provide premium taxi services across Tamil Nadu, Kerala, Karnataka, Pondicherry and nearby cities.",
+      "We are open every day from 10:00 AM to 11:00 PM.",
   },
 ];
 
-function Faq({ darkMode }) {
+function Faq() {
   const [active, setActive] = useState(0);
-
-  const iconBox =
-    "group flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:scale-110 hover:border-orange-400 hover:bg-gradient-to-br hover:from-orange-500 hover:to-amber-500 hover:shadow-[0_0_25px_rgba(249,115,22,.55)]";
 
   return (
     <section
       id="faq"
-      className={`relative overflow-hidden py-20 ${
-        darkMode
-          ? "bg-[#050914]"
-          : "bg-gradient-to-b from-orange-50 via-white to-orange-100"
-      }`}
+      className="relative overflow-hidden bg-black py-24"
     >
-      {/* Background */}
+      {/* Gold Glow */}
 
       <div className="absolute inset-0 overflow-hidden">
 
-        <div className="absolute -left-40 top-10 h-[420px] w-[420px] rounded-full bg-orange-500/15 blur-[170px]" />
+        <div className="absolute -left-40 top-10 h-[420px] w-[420px] rounded-full bg-yellow-500/10 blur-[170px]" />
 
-        <div className="absolute -right-40 bottom-0 h-[420px] w-[420px] rounded-full bg-amber-400/15 blur-[170px]" />
+        <div className="absolute -right-40 bottom-0 h-[420px] w-[420px] rounded-full bg-amber-500/10 blur-[170px]" />
 
-        <div className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[120px]" />
+        <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-400/10 blur-[150px]" />
 
       </div>
 
-      {/* Grid */}
+      {/* Gold Grid */}
 
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            "linear-gradient(to right,#fff 1px,transparent 1px),linear-gradient(to bottom,#fff 1px,transparent 1px)",
-          backgroundSize: "65px 65px",
+            "linear-gradient(to right,#FFD700 1px,transparent 1px),linear-gradient(to bottom,#FFD700 1px,transparent 1px)",
+          backgroundSize: "70px 70px",
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
 
         {/* Heading */}
 
@@ -90,36 +83,30 @@ function Faq({ darkMode }) {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: .7 }}
-          className="mx-auto mb-14 max-w-3xl text-center"
+          transition={{ duration: 0.7 }}
+          className="mx-auto mb-16 max-w-3xl text-center"
         >
 
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/20 bg-white/5 px-4 py-2 backdrop-blur-xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/20 bg-[#111111] px-5 py-2">
 
             <Sparkles
-              size={15}
-              className="text-orange-400"
+              size={16}
+              className="text-yellow-400"
             />
 
-            <span className="text-[11px] font-bold uppercase tracking-[4px] text-orange-400">
+            <span className="text-xs font-bold uppercase tracking-[5px] text-yellow-400">
 
-              FAQ
+              Restaurant FAQ
 
             </span>
 
           </div>
 
-          <h2
-            className={`mt-6 text-4xl font-black md:text-5xl ${
-              darkMode
-                ? "text-white"
-                : "text-gray-900"
-            }`}
-          >
+          <h2 className="mt-6 text-5xl font-black text-white">
 
             Frequently Asked
 
-            <span className="block bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
 
               Questions
 
@@ -127,198 +114,134 @@ function Faq({ darkMode }) {
 
           </h2>
 
-          <p
-            className={`mx-auto mt-5 max-w-2xl text-base leading-7 ${
-              darkMode
-                ? "text-gray-400"
-                : "text-gray-600"
-            }`}
-          >
+          <p className="mx-auto mt-6 max-w-2xl text-gray-300 leading-8">
 
-            Everything you need to know about our premium taxi service,
-            bookings, pricing and travel experience.
+            Find answers about reservations, dining, takeaway,
+            celebrations, and everything you need to know before
+            visiting Spice Garden Restaurant.
 
           </p>
 
         </motion.div>
 
-        {/* Main Layout */}
-
         <div className="grid gap-8 lg:grid-cols-[1.45fr_.55fr]">
 
-          {/* ==========================
-               FAQ ACCORDION
-               Part 2
-          ========================== */}
-          {/* ==========================
-      PREMIUM FAQ ACCORDION
-========================== */}
+          {/* FAQ Accordion */}
 
-<div className="space-y-4">
+          <div className="space-y-5">
+          {faqs.map((item, index) => (
+  <motion.div
+    key={index}
+    initial={{ opacity: 0, x: -40 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    transition={{
+      duration: 0.45,
+      delay: index * 0.08,
+    }}
+    whileHover={{
+      y: -6,
+    }}
+    className={`group relative overflow-hidden rounded-3xl border transition-all duration-500 ${
+      active === index
+        ? "border-yellow-500/40 bg-gradient-to-r from-yellow-500/10 via-yellow-400/5 to-transparent shadow-[0_15px_45px_rgba(255,215,0,.25)]"
+        : "border-yellow-600/20 bg-[#111111] hover:border-yellow-500/40"
+    }`}
+  >
+    {/* Gold Glow */}
+    <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-yellow-500/20 blur-3xl opacity-0 transition-all duration-500 group-hover:opacity-100" />
 
-  {faqs.map((item, index) => (
-    <motion.div
-      key={index}
-      initial={{ opacity: 0, x: -40 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.45,
-        delay: index * 0.08,
-      }}
-      whileHover={{
-        y: -4,
-      }}
-      className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 ${
-        active === index
-          ? darkMode
-            ? "border-orange-500/40 bg-gradient-to-r from-orange-500/10 to-transparent shadow-[0_15px_45px_rgba(249,115,22,.22)]"
-            : "border-orange-300 bg-white shadow-xl"
-          : darkMode
-          ? "border-white/10 bg-white/5 hover:border-orange-500/30"
-          : "border-gray-200 bg-white hover:border-orange-300 hover:shadow-lg"
-      }`}
+    {/* Question */}
+    <button
+      onClick={() => setActive(active === index ? -1 : index)}
+      className="flex w-full items-center justify-between p-6"
     >
+      <div className="flex items-center gap-4">
 
-      {/* Glow */}
-
-      <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-orange-500/20 blur-3xl opacity-0 transition-all duration-500 group-hover:opacity-100" />
-
-      {/* Question */}
-
-      <button
-        onClick={() => setActive(active === index ? -1 : index)}
-        className="flex w-full items-center justify-between p-5"
-      >
-
-        <div className="flex items-center gap-4">
-
-          {/* Icon */}
-
-          <motion.div
-            whileHover={{
-              rotate: 8,
-              scale: 1.08,
-            }}
-            className={`flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 ${
-              active === index
-                ? "bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-lg"
-                : darkMode
-                ? "bg-white/10 text-orange-400"
-                : "bg-orange-100 text-orange-500"
-            }`}
-          >
-
-            <HelpCircle size={18} />
-
-          </motion.div>
-
-          {/* Title */}
-
-          <h3
-            className={`text-base font-bold md:text-lg ${
-              darkMode
-                ? "text-white"
-                : "text-gray-900"
-            }`}
-          >
-
-            {item.question}
-
-          </h3>
-
-        </div>
-
-        {/* Arrow */}
+        {/* Icon */}
 
         <motion.div
-          animate={{
-            rotate: active === index ? 180 : 0,
-            scale: active === index ? 1.05 : 1,
+          whileHover={{
+            rotate: 8,
+            scale: 1.08,
           }}
-          transition={{
-            duration: .35,
-          }}
-          className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-500 ${
+          className={`flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-500 ${
             active === index
-              ? "bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-lg"
-              : darkMode
-              ? "bg-white/10 text-orange-400"
-              : "bg-orange-100 text-orange-500"
+              ? "bg-gradient-to-br from-yellow-400 to-amber-600 text-black shadow-xl"
+              : "bg-yellow-500/10 text-yellow-400"
           }`}
         >
+          <HelpCircle size={20} />
+        </motion.div>
 
-          <ChevronDown size={18} />
+        <h3 className="text-lg font-bold text-yellow-400">
+          {item.question}
+        </h3>
+
+      </div>
+
+      <motion.div
+        animate={{
+          rotate: active === index ? 180 : 0,
+        }}
+        transition={{
+          duration: 0.3,
+        }}
+        className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-500 ${
+          active === index
+            ? "bg-gradient-to-br from-yellow-400 to-amber-600 text-black shadow-xl"
+            : "bg-yellow-500/10 text-yellow-400"
+        }`}
+      >
+        <ChevronDown size={20} />
+      </motion.div>
+    </button>
+
+    {/* Answer */}
+
+    <AnimatePresence>
+
+      {active === index && (
+
+        <motion.div
+          initial={{
+            height: 0,
+            opacity: 0,
+          }}
+          animate={{
+            height: "auto",
+            opacity: 1,
+          }}
+          exit={{
+            height: 0,
+            opacity: 0,
+          }}
+          transition={{
+            duration: 0.35,
+          }}
+          className="overflow-hidden"
+        >
+
+          <div className="border-t border-yellow-500/20 px-6 pb-6 pt-5">
+
+            <p className="text-gray-300 leading-8">
+              {item.answer}
+            </p>
+
+          </div>
 
         </motion.div>
 
-      </button>
+      )}
 
-      {/* Answer */}
+    </AnimatePresence>
 
-      <AnimatePresence>
-
-        {active === index && (
-
-          <motion.div
-            initial={{
-              height: 0,
-              opacity: 0,
-            }}
-            animate={{
-              height: "auto",
-              opacity: 1,
-            }}
-            exit={{
-              height: 0,
-              opacity: 0,
-            }}
-            transition={{
-              duration: .35,
-            }}
-            className="overflow-hidden"
-          >
-
-            <div
-              className={`border-t px-5 pb-5 pt-4 ${
-                darkMode
-                  ? "border-white/10"
-                  : "border-orange-100"
-              }`}
-            >
-
-              <p
-                className={`text-sm leading-7 ${
-                  darkMode
-                    ? "text-gray-300"
-                    : "text-gray-600"
-                }`}
-              >
-
-                {item.answer}
-
-              </p>
-
-            </div>
-
-          </motion.div>
-
-        )}
-
-      </AnimatePresence>
-
-    </motion.div>
-  ))}
+  </motion.div>
+))}
 
 </div>
 
-{/* ==========================
-      BOOKING CARD
-      (Part 3)
-========================== */}
-{/* ==========================
-      PREMIUM BOOKING CARD
-========================== */}
+{/* Reservation Card */}
 
 <motion.div
   initial={{ opacity: 0, x: 50 }}
@@ -326,390 +249,308 @@ function Faq({ darkMode }) {
   viewport={{ once: true }}
   transition={{ duration: 0.7 }}
 >
-  <div
-    className={`sticky top-24 relative overflow-hidden rounded-[26px] border p-6 ${
-      darkMode
-        ? "border-white/10 bg-white/5 backdrop-blur-3xl"
-        : "border-orange-200 bg-white shadow-2xl"
-    }`}
-  >
+  <div className="sticky top-24 relative overflow-hidden rounded-[30px] border border-yellow-600/30 bg-[#111111] p-7">
 
-    {/* Background Glow */}
+    {/* Glow */}
 
-    <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-orange-500/20 blur-[90px]" />
+    <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-yellow-500/20 blur-[100px]" />
 
-    <div className="absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-amber-400/20 blur-[90px]" />
+    <div className="absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-amber-400/20 blur-[100px]" />
 
     <div className="relative z-10">
-
-      {/* Premium Icon */}
 
       <motion.div
         whileHover={{
           scale: 1.08,
           rotate: 8,
         }}
-        className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 shadow-xl"
+        className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-600 shadow-xl"
       >
-        <ShieldCheck
+
+        <UtensilsCrossed
           size={28}
-          className="text-white"
+          className="text-black"
+        />
+
+      </motion.div>
+
+      <h3 className="mt-5 text-center text-2xl font-black text-white">
+
+        Reserve
+
+        <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+
+          Your Table
+
+        </span>
+
+      </h3>
+
+      <p className="mt-4 text-center text-gray-300 leading-7">
+
+        Enjoy premium dining, authentic flavours and unforgettable
+        hospitality with your family and friends.
+
+      </p>
+
+      <div className="mt-8 space-y-4">
+      {[
+  {
+    icon: UtensilsCrossed,
+    title: "Freshly Prepared Meals",
+  },
+  {
+    icon: Clock3,
+    title: "Open Daily 10 AM - 11 PM",
+  },
+  {
+    icon: Star,
+    title: "Premium Dining Experience",
+  },
+].map((item, index) => {
+  const Icon = item.icon;
+
+  return (
+    <motion.div
+      key={index}
+      whileHover={{ x: 5 }}
+      className="group flex items-center gap-4 rounded-2xl bg-black p-4 transition-all duration-500 hover:bg-yellow-500/10"
+    >
+      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-amber-600 shadow-lg transition-all duration-500 group-hover:rotate-6 group-hover:scale-110">
+        <Icon size={18} className="text-black" />
+      </div>
+
+      <span className="font-semibold text-yellow-400">
+        {item.title}
+      </span>
+    </motion.div>
+  );
+})}
+
+</div>
+
+{/* Stats */}
+
+<div className="mt-8 grid grid-cols-2 gap-3">
+
+  {[
+    {
+      value: "10+",
+      label: "Years",
+    },
+    {
+      value: "25K+",
+      label: "Customers",
+    },
+    {
+      value: "4.9★",
+      label: "Rating",
+    },
+    {
+      value: "100+",
+      label: "Menu Items",
+    },
+  ].map((item, index) => (
+    <motion.div
+      key={index}
+      whileHover={{
+        y: -5,
+      }}
+      className="rounded-2xl border border-yellow-600/20 bg-black p-4 text-center transition-all duration-500"
+    >
+      <h4 className="text-2xl font-black text-yellow-400">
+        {item.value}
+      </h4>
+
+      <p className="mt-1 text-xs text-gray-400">
+        {item.label}
+      </p>
+    </motion.div>
+  ))}
+
+</div>
+
+{/* Buttons */}
+
+<div className="mt-8 space-y-3">
+
+  <a
+    href="tel:+919876543210"
+    className="group flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 font-bold text-black transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(255,215,0,.45)]"
+  >
+    <Phone
+      size={18}
+      className="transition-transform duration-500 group-hover:rotate-12"
+    />
+
+    Reserve Now
+  </a>
+
+  <a
+    href="#contact"
+    className="group flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-yellow-500 font-bold text-yellow-400 transition-all duration-500 hover:scale-[1.03] hover:bg-yellow-500 hover:text-black"
+  >
+    <CalendarDays
+      size={18}
+      className="transition-transform duration-500 group-hover:rotate-12"
+    />
+
+    Book a Table
+  </a>
+
+</div>
+
+    </div>
+  </div>
+</motion.div>
+
+</div>
+
+{/* Bottom Premium CTA Starts Here */}
+<motion.div
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.7 }}
+  className="mt-20"
+>
+  <div className="relative overflow-hidden rounded-[32px] border border-yellow-500/30 bg-gradient-to-r from-[#050505] via-[#111111] to-[#050505] px-6 py-14 shadow-[0_25px_70px_rgba(255,215,0,.20)] md:px-12">
+
+    {/* Gold Glow */}
+    <div className="absolute -left-20 -top-20 h-60 w-60 rounded-full bg-yellow-500/20 blur-[120px]" />
+    <div className="absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-amber-500/20 blur-[120px]" />
+
+    <div className="relative z-10 text-center">
+
+      {/* Icon */}
+      <motion.div
+        whileHover={{
+          scale: 1.1,
+          rotate: 10,
+        }}
+        className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-600 shadow-xl"
+      >
+        <UtensilsCrossed
+          size={30}
+          className="text-black"
         />
       </motion.div>
 
-      <h3
-        className={`mt-5 text-center text-2xl font-black ${
-          darkMode ? "text-white" : "text-gray-900"
-        }`}
-      >
-        Instant
-        <span className="block bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
-          Taxi Booking
-        </span>
-      </h3>
+      <h2 className="mt-6 text-3xl font-black md:text-5xl text-white">
 
-      <p
-        className={`mt-4 text-center text-sm leading-7 ${
-          darkMode
-            ? "text-gray-400"
-            : "text-gray-600"
-        }`}
-      >
-        Book your cab in seconds with
-        verified drivers and fixed pricing.
+        Experience
+
+        <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+
+          Fine Dining
+
+        </span>
+
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-gray-300">
+
+        From delicious recipes and premium ingredients to exceptional
+        hospitality, every visit to Spice Garden Restaurant is designed
+        to create unforgettable memories.
+
       </p>
 
       {/* Features */}
 
-      <div className="mt-7 space-y-3">
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
 
         {[
           {
-            icon: ShieldCheck,
-            title: "Verified Drivers",
+            icon: Star,
+            text: "5★ Experience",
           },
           {
             icon: Clock3,
-            title: "24×7 Support",
+            text: "Open Everyday",
           },
           {
-            icon: Star,
-            title: "Top Rated",
+            icon: UtensilsCrossed,
+            text: "Fresh Ingredients",
           },
         ].map((item, index) => {
           const Icon = item.icon;
 
           return (
-
             <motion.div
               key={index}
               whileHover={{
-                x: 5,
+                y: -5,
+                scale: 1.08,
               }}
-              className={`group flex items-center gap-3 rounded-2xl p-3 transition-all duration-500 ${
-                darkMode
-                  ? "bg-white/5 hover:bg-white/10"
-                  : "bg-orange-50 hover:bg-orange-100"
-              }`}
+              className="flex items-center gap-2 rounded-full border border-yellow-500/20 bg-yellow-500/10 px-5 py-3 backdrop-blur-xl"
             >
+              <Icon
+                size={18}
+                className="text-yellow-400"
+              />
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 shadow-lg transition-all duration-500 group-hover:rotate-6 group-hover:scale-110">
-
-                <Icon
-                  size={18}
-                  className="text-white"
-                />
-
-              </div>
-
-              <span
-                className={`font-semibold ${
-                  darkMode
-                    ? "text-white"
-                    : "text-gray-800"
-                }`}
-              >
-                {item.title}
+              <span className="text-sm font-semibold text-white">
+                {item.text}
               </span>
 
             </motion.div>
-
           );
         })}
 
       </div>
 
-      {/* Stats */}
-
-      <div className="mt-7 grid grid-cols-2 gap-3">
-
-        {[
-          {
-            value: "25K+",
-            label: "Trips",
-          },
-          {
-            value: "4.9★",
-            label: "Rating",
-          },
-          {
-            value: "24×7",
-            label: "Support",
-          },
-          {
-            value: "150+",
-            label: "Cars",
-          },
-        ].map((item, index) => (
-
-          <motion.div
-            key={index}
-            whileHover={{
-              y: -4,
-            }}
-            className={`rounded-2xl border p-3 text-center transition-all duration-500 ${
-              darkMode
-                ? "border-white/10 bg-white/5"
-                : "border-orange-100 bg-orange-50"
-            }`}
-          >
-
-            <h4 className="text-xl font-black text-orange-500">
-
-              {item.value}
-
-            </h4>
-
-            <p
-              className={`mt-1 text-xs ${
-                darkMode
-                  ? "text-gray-400"
-                  : "text-gray-600"
-              }`}
-            >
-
-              {item.label}
-
-            </p>
-
-          </motion.div>
-
-        ))}
-
-      </div>
-
       {/* Buttons */}
 
-      <div className="mt-8 space-y-3">
+      <div className="mt-10 flex flex-col items-center justify-center gap-4 md:flex-row">
 
-        <a
-          href="https://wa.me/919888444952"
-          target="_blank"
-          rel="noreferrer"
-          className="group flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 font-bold text-white transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(249,115,22,.45)]"
+        <motion.a
+          whileHover={{
+            scale: 1.05,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          href="#menu"
+          className="group flex h-12 items-center justify-center gap-3 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-8 font-bold text-black transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,215,0,.45)]"
         >
-
-          <MessageCircle
+          <UtensilsCrossed
             size={18}
             className="transition-transform duration-500 group-hover:rotate-12"
           />
 
-          WhatsApp
+          Explore Menu
 
-        </a>
+        </motion.a>
 
-        <a
-          href="tel:+919888444952"
-          className={`group flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 font-bold transition-all duration-500 hover:scale-[1.03] ${
-            darkMode
-              ? "border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white"
-              : "border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
-          }`}
+        <motion.a
+          whileHover={{
+            scale: 1.05,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          href="tel:+919876543210"
+          className="group flex h-12 items-center justify-center gap-3 rounded-full border border-yellow-500 px-8 font-bold text-yellow-400 transition-all duration-500 hover:bg-yellow-500 hover:text-black"
         >
-
           <Phone
             size={18}
             className="transition-transform duration-500 group-hover:rotate-12"
           />
 
-          Call Now
+          Call Restaurant
 
-        </a>
+        </motion.a>
 
       </div>
 
     </div>
 
   </div>
+
 </motion.div>
 
-{/* ==========================
-      PREMIUM CTA
-      (Part 4)
-========================== */}
-        </div>
-
-        {/* ==========================
-              PREMIUM BOTTOM CTA
-        ========================== */}
-
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mt-16"
-        >
-
-          <div className="relative overflow-hidden rounded-[28px] border border-orange-400/20 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 px-6 py-12 shadow-[0_25px_70px_rgba(249,115,22,.35)] md:px-12">
-
-            {/* Glow */}
-
-            <div className="absolute -left-20 -top-20 h-60 w-60 rounded-full bg-white/20 blur-[110px]" />
-
-            <div className="absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-yellow-300/20 blur-[110px]" />
-
-            <div className="relative z-10 text-center">
-
-              {/* Floating Icon */}
-
-              <motion.div
-                whileHover={{
-                  scale: 1.1,
-                  rotate: 10,
-                }}
-                className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl shadow-xl"
-              >
-
-                <MessageCircle
-                  size={30}
-                  className="text-white"
-                />
-
-              </motion.div>
-
-              <h2 className="mt-5 text-3xl font-black text-white md:text-5xl">
-
-                Ready To
-
-                <span className="block">
-
-                  Book Your Ride?
-
-                </span>
-
-              </h2>
-
-              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-orange-50 md:text-base">
-
-                Safe rides, verified drivers, transparent pricing and
-                24×7 support for every journey across South India.
-
-              </p>
-
-              {/* Feature Icons */}
-
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-
-                {[
-                  {
-                    icon: ShieldCheck,
-                    text: "Safe",
-                  },
-                  {
-                    icon: Clock3,
-                    text: "24×7",
-                  },
-                  {
-                    icon: Star,
-                    text: "Top Rated",
-                  },
-                ].map((item, index) => {
-                  const Icon = item.icon;
-
-                  return (
-                    <motion.div
-                      key={index}
-                      whileHover={{
-                        y: -5,
-                        scale: 1.08,
-                      }}
-                      className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-xl"
-                    >
-
-                      <Icon
-                        size={16}
-                        className="text-white"
-                      />
-
-                      <span className="text-sm font-semibold text-white">
-
-                        {item.text}
-
-                      </span>
-
-                    </motion.div>
-                  );
-                })}
-
-              </div>
-
-              {/* Buttons */}
-
-              <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row">
-
-                <motion.a
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  whileTap={{
-                    scale: 0.96,
-                  }}
-                  href="https://wa.me/919888444952"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex h-12 items-center justify-center gap-3 rounded-full bg-[#0B101B] px-8 font-bold text-white transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,0,0,.4)]"
-                >
-
-                  <MessageCircle
-                    size={18}
-                    className="transition-transform duration-500 group-hover:rotate-12"
-                  />
-
-                  WhatsApp Booking
-
-                </motion.a>
-
-                <motion.a
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  whileTap={{
-                    scale: 0.96,
-                  }}
-                  href="tel:+919888444952"
-                  className="group flex h-12 items-center justify-center gap-3 rounded-full border border-white bg-white/10 px-8 font-bold text-white backdrop-blur-xl transition-all duration-500 hover:bg-white hover:text-orange-600"
-                >
-
-                  <Phone
-                    size={18}
-                    className="transition-transform duration-500 group-hover:rotate-12"
-                  />
-
-                  Call Now
-
-                </motion.a>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </motion.div>
-
       </div>
-
     </section>
   );
 }

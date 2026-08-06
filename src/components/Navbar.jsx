@@ -1,264 +1,396 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Moon, Sun, Phone, MessageCircle } from "lucide-react";
-import { Car, Clock3, MapPin, BadgeIndianRupee, CircleDot } from "lucide-react";
-import logo from "../assets/images/Logo.png";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
-function Navbar({ darkMode, setDarkMode, setActiveSection }) {
+import {
+  FaUtensils,
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaInfoCircle,
+  FaBookOpen,
+  FaImages,
+  FaPhoneAlt,
+  FaClipboardList,
+  FaArrowRight,
+} from "react-icons/fa";
+
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaXTwitter,
+} from "react-icons/fa6";
+
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const navItems = ["Home", "Services", "Tours", "Gallery", "Contact"];
-
-  const handleNavClick = (item) => {
-    if (item === "Tours") {
-      setActiveSection("tours");
-
-      setTimeout(() => {
-        document.getElementById("tours")?.scrollIntoView({
-          behavior: "smooth",
-        });
-      }, 100);
-
-      return;
-    }
-
-    if (item === "Gallery") {
-      setActiveSection("gallery");
-
-      setTimeout(() => {
-        document.getElementById("gallery")?.scrollIntoView({
-          behavior: "smooth",
-        });
-      }, 100);
-
-      return;
-    }
-
-    if (item === "Contact") {
-      setActiveSection("contact");
-
-      setTimeout(() => {
-        document.getElementById("contact")?.scrollIntoView({
-          behavior: "smooth",
-        });
-      }, 100);
-
-      return;
-    }
-
-    document.getElementById(item.toLowerCase())?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 40);
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
+  }, [menuOpen]);
+
+  const navItems = [
+    {
+      name: "Home",
+      path: "/",
+      icon: <FaHome />,
+    },
+    {
+      name: "About",
+      path: "/about",
+      icon: <FaInfoCircle />,
+    },
+    {
+      name: "Menu",
+      path: "/menu",
+      icon: <FaUtensils />,
+    },
+    {
+      name: "Gallery",
+      path: "/gallery",
+      icon: <FaImages />,
+    },
+    {
+      name: "Blog",
+      path: "/blog",
+      icon: <FaBookOpen />,
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+      icon: <FaPhoneAlt />,
+    },
+  ];
+
   return (
-    <header className="fixed top-0 left-0 w-full z-50">
-      <div
-        className={`transition-all duration-500 ${
-          scrolled ? "py-3 backdrop-blur-md" : "py-6 backdrop-blur-md"
-        }`}
+    <>
+          <motion.header
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          scrolled
+            ? "backdrop-blur-2xl border-b border-yellow-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.7)]"
+            : " backdrop-blur-xl"
+        } py-4`}
       >
-        <div className="max-w-7xl mx-auto px-5">
-          <nav
-            className={`rounded-full border transition-all duration-500 ${
-              darkMode
-                ? " bg-black backdrop-blur-sm border-white/10 shadow-2xl shadow-black/30"
-                : "bg-white backdrop-blur-sm border-gray-200 shadow-xl shadow-gray-200/70"
-            }`}
-          >
-            <div className="flex items-center justify-between px-6 lg:px-8 h-20">
-              {/* Logo */}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between">
 
-              <div className="flex items-center gap-3">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/40">
-                  <img src={logo} alt="Logo" className="h-9 w-auto" />
-                </div>
+            {/* Logo */}
 
-                <div className="hidden md:block">
-                  <h2
-                    className={`text-xl font-extrabold tracking-wide ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Nagma Travels
-                  </h2>
+            <Link
+              to="/"
+              className="flex items-center gap-2 group"
+            >
+              <img
+                src="/images/logo.png"
+                alt="Spice Garden Logo"
+                className="w-16 h-16 object-contain transition-all duration-500 group-hover:scale-110"
+              />
 
-                  <p
-                    className={`text-xs ${
-                      darkMode ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Safe • Trusted • Comfortable
-                  </p>
-                </div>
+              <div>
+                <h2 className="text-2xl font-black tracking-wide">
+                  <span className="text-white">
+                    Spice
+                  </span>
+
+                  <span className="bg-gradient-to-r from-yellow-300 via-yellow-500 to-amber-600 bg-clip-text text-transparent">
+                    Garden
+                  </span>
+                </h2>
+
+                <p className="uppercase tracking-[4px] text-xs text-yellow-500">
+                  Fine Dining
+                </p>
               </div>
+            </Link>
+                        {/* Desktop Menu */}
 
-              {/* Desktop Menu */}
+            <nav className="hidden lg:flex">
+              <div className="flex items-center gap-2 rounded-full px-3 py-2 bg-black/60 border border-yellow-500/20 backdrop-blur-xl shadow-lg">
 
-              <ul className="hidden lg:flex items-center gap-3 ">
                 {navItems.map((item) => (
-                  <li key={item}>
-                    <button
-                      onClick={() => handleNavClick(item)}
-                      className={`relative px-5 py-2 rounded-full font-semibold transition-all duration-300 group overflow-hidden ${
-                        darkMode
-                          ? "text-white hover:text-white"
-                          : "text-gray-800 hover:text-white"
-                      }`}
-                    >
-                      <span className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 scale-0 group-hover:scale-100 transition-transform duration-300 origin-center"></span>
-
-                      <span className="relative z-10">{item}</span>
-                    </button>
-                  </li>
+                  <NavLink
+                    key={item.name}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `relative flex items-center gap-2 px-5 py-3 rounded-full font-semibold transition-all duration-300 ${
+                        isActive
+                          ? "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-[0_0_20px_rgba(234,179,8,0.4)]"
+                          : "text-gray-200 hover:text-yellow-300 hover:bg-yellow-500/10"
+                      }`
+                    }
+                  >
+                    <span className="text-lg">{item.icon}</span>
+                    <span>{item.name}</span>
+                  </NavLink>
                 ))}
-              </ul>
 
-              {/* Right Side */}
-
-              <div className="hidden lg:flex items-center gap-3">
-                <button
-                  onClick={() => setDarkMode(!darkMode)}
-                  className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                    darkMode
-                      ? "bg-white/10 border border-white/10 hover:bg-orange-500"
-                      : "bg-gray-100 border border-gray-200 hover:bg-orange-500 hover:text-white"
-                  }`}
-                >
-                  {darkMode ? (
-                    <Sun size={20} className="text-yellow-400" />
-                  ) : (
-                    <Moon size={20} />
-                  )}
-                </button>
-
-                <a
-                  href="tel:+91 88844 49452"
-                  className={`flex items-center gap-2 px-5 py-3 rounded-full font-semibold transition-all duration-300 ${
-                    darkMode
-                      ? "bg-white/10 text-white hover:bg-orange-500 text-gray-800"
-                      : "bg-gray-100 text-gray-800 hover:bg-orange-200"
-                  }`}
-                >
-                  <Phone size={18} />
-                  Call
-                </a>
-
-                <a
-                  href="https://wa.me/+91 88844 49452"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-xl shadow-orange-500/40 hover:scale-105 transition-all duration-300"
-                >
-                  <MessageCircle size={18} />
-                  WhatsApp
-                </a>
               </div>
+            </nav>
+
+            {/* Right Side */}
+
+            <div className="flex items-center gap-3">
+
+              {/* Reserve Button */}
+
+              <Link
+                to="/reserve"
+                className="
+                  hidden
+                  lg:flex
+                  items-center
+                  gap-3
+                  px-7
+                  py-3
+                  rounded-full
+                  font-semibold
+                  bg-gradient-to-r
+                  from-yellow-400
+                  via-amber-500
+                  to-yellow-600
+                  text-black
+                  shadow-xl
+                  hover:scale-105
+                  hover:shadow-[0_0_35px_rgba(234,179,8,0.6)]
+                  transition-all
+                  duration-500
+                "
+              >
+                <FaClipboardList />
+                <span>Reserve Table</span>
+                <FaArrowRight />
+              </Link>
 
               {/* Mobile Menu Button */}
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                whileHover={{ rotate: 180 }}
+                transition={{ duration: 0.4 }}
                 onClick={() => setMenuOpen(!menuOpen)}
-                className={`lg:hidden w-12 h-12 rounded-full flex items-center justify-center ${
-                  darkMode
-                    ? "bg-white/10 text-white"
-                    : "bg-gray-100 text-gray-900"
-                }`}
+                className="lg:hidden w-12 h-12 rounded-full flex items-center justify-center bg-black/70 border border-yellow-500/20 text-yellow-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
               >
-                {menuOpen ? <X size={28} /> : <Menu size={28} />}
-              </button>
+                {menuOpen ? (
+                  <FaTimes size={22} />
+                ) : (
+                  <FaBars size={22} />
+                )}
+              </motion.button>
+
             </div>
 
-            {menuOpen && (
-              <div
-                className={`lg:hidden overflow-hidden transition-all duration-500 ${
-                  darkMode
-                    ? "bg-[#0f172a]/95 border-t border-white/10"
-                    : "bg-white border-t border-gray-200"
-                }`}
-              >
-                <div className="px-6 py-6 space-y-3">
-                  {navItems.map((item) => (
-                    <button
-                      key={item}
-                      onClick={() => {
-                        handleNavClick(item);
-                        setMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-5 py-4 rounded-2xl font-semibold transition-all duration-300 ${
-                        darkMode
-                          ? "text-white bg-white/5 hover:bg-orange-500"
-                          : "text-gray-800 bg-gray-100 hover:bg-orange-500 hover:text-white"
-                      }`}
-                    >
-                      {item}
-                    </button>
-                  ))}
-
-                  <div className="grid grid-cols-2 gap-3 pt-3">
-                    <a
-                      href="tel:+91 88844 49452"
-                      className="flex items-center justify-center gap-2 rounded-2xl py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-lg shadow-orange-500/30"
-                    >
-                      <Phone size={18} />
-                      Call
-                    </a>
-
-                    <a
-                      href="https://wa.me/+91 88844 49452"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-2xl py-4 bg-green-500 text-white font-semibold shadow-lg shadow-green-500/30"
-                    >
-                      <MessageCircle size={18} />
-                      WhatsApp
-                    </a>
-                  </div>
-                </div>
-              </div>
-            )}
-          </nav>
+          </div>
         </div>
-      </div>
+      </motion.header>
 
+      {/* Spacer */}
+      <div className="h-24"></div>
 
-      {/* Floating Contact Buttons */}
+      {/* Mobile Overlay */}
 
-      <div className="fixed bottom-6 right-6 z-[999] flex flex-col gap-4">
-        <a
-          href="tel:+91 88844 49452"
-          className="group w-16 h-16 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 shadow-2xl shadow-orange-500/40 flex items-center justify-center hover:scale-110 transition-all duration-300"
-        >
-          <Phone
-            size={28}
-            className="text-white group-hover:rotate-12 transition"
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setMenuOpen(false)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 lg:hidden"
           />
-        </a>
+        )}
+      </AnimatePresence>
+            {/* Mobile Drawer */}
 
-        <a
-          href="https://wa.me/+91 88844 49452"
-          target="_blank"
-          rel="noreferrer"
-          className="group w-16 h-16 rounded-full bg-green-500 shadow-2xl shadow-green-500/40 flex items-center justify-center hover:scale-110 transition-all duration-300"
-        >
-          <MessageCircle
-            size={28}
-            className="text-white group-hover:scale-110 transition"
-          />
-        </a>
-      </div>
-    </header>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{
+              duration: 0.35,
+              ease: "easeInOut",
+            }}
+            className="fixed top-0 right-0 w-80 max-w-full h-screen z-50 bg-black shadow-[0_0_40px_rgba(0,0,0,0.8)] lg:hidden border-l border-yellow-500/20"
+          >
+            {/* Drawer Header */}
+
+            <div className="flex items-center justify-between px-6 py-6 border-b border-yellow-500/20 bg-black">
+
+              <div className="flex items-center gap-3">
+
+                <img
+                  src="/images/logo.png"
+                  alt="Spice Garden Logo"
+                  className="h-12 w-auto object-contain"
+                />
+
+                <div>
+                  <h2 className="text-xl font-bold">
+                    <span className="text-white">Spice</span>
+
+                    <span className="bg-gradient-to-r from-yellow-300 via-amber-500 to-yellow-600 bg-clip-text text-transparent">
+                      Garden
+                    </span>
+                  </h2>
+
+                  <p className="text-xs uppercase tracking-[4px] text-yellow-500">
+                    Fine Dining
+                  </p>
+                </div>
+
+              </div>
+
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="w-10 h-10 rounded-full bg-black border border-yellow-500/20 text-yellow-300 hover:bg-yellow-500 hover:text-black transition-all duration-300 flex items-center justify-center"
+              >
+                <FaTimes size={18} />
+              </button>
+
+            </div>
+
+            {/* Mobile Navigation */}
+
+            <div className="px-6 py-8 flex flex-col gap-3">
+
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `group flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 ${
+                      isActive
+                        ? "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-lg"
+                        : "bg-black text-gray-300 hover:bg-yellow-500/10 hover:text-yellow-300 border border-transparent hover:border-yellow-500/20"
+                    }`
+                  }
+                >
+                  <span className="text-lg">
+                    {item.icon}
+                  </span>
+
+                  <span className="font-medium">
+                    {item.name}
+                  </span>
+                </NavLink>
+              ))}
+                            {/* Reserve Button */}
+
+              <Link
+                to="/reserve"
+                onClick={() => setMenuOpen(false)}
+                className="
+                  mt-5
+                  flex
+                  items-center
+                  justify-center
+                  gap-3
+                  rounded-2xl
+                  bg-gradient-to-r
+                  from-yellow-400
+                  via-amber-500
+                  to-yellow-600
+                  px-5
+                  py-4
+                  text-black
+                  font-semibold
+                  shadow-xl
+                  hover:scale-105
+                  hover:shadow-[0_0_30px_rgba(234,179,8,0.5)]
+                  transition-all
+                  duration-300
+                "
+              >
+                <FaClipboardList />
+                <span>Reserve Table</span>
+                <FaArrowRight />
+              </Link>
+
+            </div>
+
+            {/* Bottom */}
+
+            <div className="absolute bottom-0 left-0 w-full p-6 border-t border-yellow-500/20 bg-black">
+
+              <p className="text-center text-sm text-gray-400">
+                Experience Fine Dining
+              </p>
+
+              <h3 className="mt-2 text-center text-lg font-bold">
+                <span className="text-white">Spice</span>
+
+                <span className="bg-gradient-to-r from-yellow-300 via-amber-500 to-yellow-600 bg-clip-text text-transparent">
+                  Garden
+                </span>
+              </h3>
+
+              <p className="mt-1 text-center text-xs uppercase tracking-[4px] text-yellow-500">
+                Luxury Restaurant
+              </p>
+
+              <div className="flex justify-center gap-4 mt-6">
+
+                <motion.a
+                  whileHover={{ scale: 1.15 }}
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-full flex items-center justify-center bg-black border border-yellow-500/20 text-yellow-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
+                >
+                  <FaFacebookF size={18} />
+                </motion.a>
+
+                <motion.a
+                  whileHover={{ scale: 1.15 }}
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-full flex items-center justify-center bg-black border border-yellow-500/20 text-yellow-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
+                >
+                  <FaInstagram size={18} />
+                </motion.a>
+
+                <motion.a
+                  whileHover={{ scale: 1.15 }}
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-full flex items-center justify-center bg-black border border-yellow-500/20 text-yellow-300 hover:bg-yellow-500 hover:text-black transition-all duration-300"
+                >
+                  <FaXTwitter size={18} />
+                </motion.a>
+
+              </div>
+
+              <p className="mt-6 text-center text-xs text-gray-500">
+                © {new Date().getFullYear()} Spice Garden Restaurant
+              </p>
+
+            </div>
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+    </>
   );
-}
+};
 
 export default Navbar;

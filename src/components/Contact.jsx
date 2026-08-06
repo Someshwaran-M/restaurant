@@ -1,278 +1,403 @@
-import { motion } from "framer-motion";
-import { Phone, Mail, Globe, MapPin, Send } from "lucide-react";
+import React from "react";
+import {
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaClock,
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaWhatsapp,
+  FaPaperPlane,
+} from "react-icons/fa";
 
-const FacebookIcon = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    width={props.size}
-    height={props.size}
-  >
-    <path d="M13.5 21v-8.1h2.72l.41-3.16h-3.13V7.71c0-.92.25-1.54 1.57-1.54h1.68V3.35C15.98 3.24 15 3.15 13.84 3.15c-2.32 0-3.91 1.42-3.91 4.02v2.57H7.2v3.16h2.73V21h3.57z" />
-  </svg>
-);
-
-const InstagramIcon = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    width={props.size}
-    height={props.size}
-  >
-    <rect x="3" y="3" width="18" height="18" rx="5" />
-    <circle cx="12" cy="12" r="4" />
-    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-  </svg>
-);
-
-const TwitterIcon = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    width={props.size}
-    height={props.size}
-  >
-    <path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.6 11.6 0 0 1 3.4 4.6a4 4 0 0 0 1.3 5.5c-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4a4.1 4.1 0 0 1-1.9.1c.5 1.6 2.1 2.8 3.9 2.9A8.3 8.3 0 0 1 2 18.6a11.6 11.6 0 0 0 6.3 1.8c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1z" />
-  </svg>
-);
-
-function Contact({ darkMode }) {
+const Contact = () => {
   return (
-    <section
-      id="contact"
-      className={`relative overflow-hidden py-12 sm:py-16 transition-all duration-500 ${
-        darkMode ? "bg-[#080C16]" : "bg-white"
-      }`}
-    >
-      <div className="absolute left-0 top-20 h-72 w-72 rounded-full bg-orange-500/10 blur-[120px]" />
-      <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full bg-orange-600/10 blur-[120px]" />
+    <div className="min-h-screen bg-black text-white">
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-8">
-          <span className="text-lg sm:text-xl font-bold uppercase tracking-[4px] text-orange-400">
+      {/* Gold Glow */}
+      <div className="fixed -top-40 -left-40 h-[450px] w-[450px] rounded-full bg-yellow-500/10 blur-[180px]" />
+
+      <div className="fixed -bottom-40 -right-40 h-[450px] w-[450px] rounded-full bg-amber-500/10 blur-[180px]" />
+
+      {/* Hero */}
+
+      <section className="relative h-[380px] overflow-hidden">
+
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600"
+          alt="Contact"
+          className="h-full w-full object-cover"
+        />
+
+        <div className="absolute inset-0 bg-black/75"></div>
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+
+          <span className="uppercase tracking-[6px] font-bold text-yellow-400">
             Contact Us
           </span>
+
+          <h1 className="mt-4 text-5xl md:text-6xl font-black text-white">
+
+            We'd Love To
+
+            <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+
+              Hear From You
+
+            </span>
+
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-gray-300 leading-8">
+
+            Whether you're planning a family dinner, private event,
+            or simply have a question, our team is always ready
+            to assist you.
+
+          </p>
+
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-8">
-          {/* FORM - LEFT */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <form className="space-y-3">
+      </section>
+
+      {/* Contact Section */}
+
+      <section className="mx-auto max-w-7xl px-6 py-20">
+
+        <div className="grid gap-12 lg:grid-cols-2">
+
+          {/* Contact Form */}
+
+          <div className="rounded-3xl border border-yellow-500/20 bg-[#111111] p-8 shadow-[0_0_35px_rgba(255,215,0,.10)]">
+
+            <span className="uppercase tracking-[5px] font-bold text-yellow-400">
+              Send Message
+            </span>
+
+            <h2 className="mt-3 text-4xl font-black text-white">
+              Get In Touch
+            </h2>
+
+            <form className="mt-8 space-y-5">
+
               <input
                 type="text"
-                placeholder="Your Name"
-                className={`w-full rounded-lg px-4 py-2.5 text-sm outline-none transition ${
-                  darkMode
-                    ? "border border-white/10 bg-[#1B2230] text-white placeholder:text-gray-400 focus:border-orange-500"
-                    : "border border-gray-300 bg-gray-50 text-gray-900 placeholder:text-gray-500 focus:border-orange-500"
-                }`}
+                placeholder="Full Name"
+                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
               />
 
               <input
                 type="email"
-                placeholder="Your Email"
-                className={`w-full rounded-lg px-4 py-2.5 text-sm outline-none transition ${
-                  darkMode
-                    ? "border border-white/10 bg-[#1B2230] text-white placeholder:text-gray-400 focus:border-orange-500"
-                    : "border border-gray-300 bg-gray-50 text-gray-900 placeholder:text-gray-500 focus:border-orange-500"
-                }`}
+                placeholder="Email Address"
+                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
+              />
+
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
               />
 
               <input
                 type="text"
                 placeholder="Subject"
-                className={`w-full rounded-lg px-4 py-2.5 text-sm outline-none transition ${
-                  darkMode
-                    ? "border border-white/10 bg-[#1B2230] text-white placeholder:text-gray-400 focus:border-orange-500"
-                    : "border border-gray-300 bg-gray-50 text-gray-900 placeholder:text-gray-500 focus:border-orange-500"
-                }`}
+                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
               />
 
               <textarea
-                rows="4"
-                placeholder="Your Message"
-                className={`w-full rounded-lg px-4 py-2.5 text-sm outline-none transition resize-none ${
-                  darkMode
-                    ? "border border-white/10 bg-[#1B2230] text-white placeholder:text-gray-400 focus:border-orange-500"
-                    : "border border-gray-300 bg-gray-50 text-gray-900 placeholder:text-gray-500 focus:border-orange-500"
-                }`}
+                rows="6"
+                placeholder="Write your message..."
+                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
               ></textarea>
 
               <button
                 type="submit"
-                className="flex h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 text-sm font-semibold text-white transition-all duration-300 hover:bg-orange-600"
+                className="flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 py-4 font-bold text-black transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(255,215,0,.35)]"
               >
-                <Send size={16} />
+                <FaPaperPlane />
                 Send Message
               </button>
+
             </form>
-          </motion.div>
 
-          {/* INFO - RIGHT */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2
-              className={`mb-6 text-4xl sm:text-5xl font-extrabold ${
-                darkMode ? "text-white" : "text-gray-900"
-              }`}
-            >
-              Get In Touch
-            </h2>
+          </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:gap-3 mb-6">
-              <div className="flex items-start gap-2 sm:gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-500/10">
-                  <Phone className="text-orange-500" size={16} />
-                </div>
-                <div className="min-w-0">
-                  <h3
-                    className={`text-sm font-bold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Call Us
-                  </h3>
-                  <p
-                    className={`text-xs break-words ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    +91 98765 43210
-                  </p>
-                </div>
-              </div>
+          {/* Contact Information Starts Here */}
+          <div>
 
-              <div className="flex items-start gap-2 sm:gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-500/10">
-                  <Mail className="text-orange-500" size={16} />
-                </div>
-                <div className="min-w-0">
-                  <h3
-                    className={`text-sm font-bold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Email Us
-                  </h3>
-                  <p
-                    className={`text-xs break-words ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    info@nagmatravels.com
-                  </p>
-                </div>
-              </div>
+  <span className="uppercase tracking-[5px] font-bold text-yellow-400">
+    Contact Details
+  </span>
 
-              <div className="flex items-start gap-2 sm:gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-500/10">
-                  <Globe className="text-orange-500" size={16} />
-                </div>
-                <div className="min-w-0">
-                  <h3
-                    className={`text-sm font-bold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Website
-                  </h3>
-                  <p
-                    className={`text-xs break-words ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    www.nagmatravels.com
-                  </p>
-                </div>
-              </div>
+  <h2 className="mt-3 text-4xl font-black text-white">
+    Visit Our Restaurant
+  </h2>
 
-              <div className="flex items-start gap-2 sm:gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-500/10">
-                  <MapPin className="text-orange-500" size={16} />
-                </div>
-                <div className="min-w-0">
-                  <h3
-                    className={`text-sm font-bold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Address
-                  </h3>
-                  <p
-                    className={`text-xs break-words ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    Chennai, Tamil Nadu
-                  </p>
-                </div>
-              </div>
-            </div>
+  <p className="mt-5 text-gray-300 leading-8">
+    We'd love to welcome you to Spice Garden Restaurant.
+    Visit us for delicious food, warm hospitality, and an
+    unforgettable dining experience.
+  </p>
 
-            <h4
-              className={`mb-2 text-sm font-semibold ${
-                darkMode ? "text-white" : "text-gray-900"
-              }`}
-            >
-              Follow Us On
-            </h4>
+  <div className="mt-10 space-y-6">
 
-            <div className="flex gap-2">
-              <a
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500/10 text-orange-500 transition hover:bg-orange-500 hover:text-white"
-              >
-                <FacebookIcon size={15} />
-              </a>
-              <a
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500/10 text-orange-500 transition hover:bg-orange-500 hover:text-white"
-              >
-                <InstagramIcon size={15} />
-              </a>
-              <a
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500/10 text-orange-500 transition hover:bg-orange-500 hover:text-white"
-              >
-                <TwitterIcon size={15} />
-              </a>
-            </div>
-          </motion.div>
-        </div>
+    {/* Address */}
 
-        {/* MAP */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          viewport={{ once: true }}
-          className={`mt-8 overflow-hidden rounded-2xl ${
-            darkMode
-              ? "border border-white/10"
-              : "border border-gray-200 shadow-lg"
-          }`}
-        >
-          <iframe
-            title="Google Map"
-            src="https://www.google.com/maps?q=Chennai&output=embed"
-            className="w-full h-[220px] sm:h-[280px] md:h-[320px] border-0"
-            loading="lazy"
-          ></iframe>
-        </motion.div>
+    <div className="flex gap-5 rounded-3xl border border-yellow-500/20 bg-[#111111] p-6 transition duration-300 hover:border-yellow-400">
+
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 text-2xl text-black">
+
+        <FaMapMarkerAlt />
+
       </div>
-    </section>
-  );
-}
+
+      <div>
+
+        <h3 className="text-2xl font-bold text-yellow-400">
+          Address
+        </h3>
+
+        <p className="mt-2 leading-7 text-gray-300">
+          123 Food Street
+          <br />
+          Chennai, Tamil Nadu
+          <br />
+          India - 600001
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Phone */}
+
+    <div className="flex gap-5 rounded-3xl border border-yellow-500/20 bg-[#111111] p-6 transition duration-300 hover:border-yellow-400">
+
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 text-2xl text-black">
+
+        <FaPhoneAlt />
+
+      </div>
+
+      <div>
+
+        <h3 className="text-2xl font-bold text-yellow-400">
+          Phone
+        </h3>
+
+        <p className="mt-2 text-gray-300">
+          +91 98765 43210
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Email */}
+
+    <div className="flex gap-5 rounded-3xl border border-yellow-500/20 bg-[#111111] p-6 transition duration-300 hover:border-yellow-400">
+
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 text-2xl text-black">
+
+        <FaEnvelope />
+
+      </div>
+
+      <div>
+
+        <h3 className="text-2xl font-bold text-yellow-400">
+          Email
+        </h3>
+
+        <p className="mt-2 text-gray-300">
+          info@spicegarden.com
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Opening Hours */}
+
+    <div className="flex gap-5 rounded-3xl border border-yellow-500/20 bg-[#111111] p-6 transition duration-300 hover:border-yellow-400">
+
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 text-2xl text-black">
+
+        <FaClock />
+
+      </div>
+
+      <div>
+
+        <h3 className="text-2xl font-bold text-yellow-400">
+          Opening Hours
+        </h3>
+
+        <p className="mt-2 leading-7 text-gray-300">
+          Monday – Friday : 10:00 AM – 10:00 PM
+          <br />
+          Saturday : 09:00 AM – 11:00 PM
+          <br />
+          Sunday : 09:00 AM – 11:00 PM
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  {/* Social Media */}
+
+  <div className="mt-10">
+
+    <h3 className="mb-5 text-2xl font-bold text-yellow-400">
+      Follow Us
+    </h3>
+
+    <div className="flex gap-4">
+
+      {[
+        <FaFacebookF />,
+        <FaInstagram />,
+        <FaTwitter />,
+        <FaWhatsapp />,
+      ].map((icon, index) => (
+        <a
+          key={index}
+          href="#"
+          className="flex h-14 w-14 items-center justify-center rounded-full border border-yellow-500/20 bg-[#111111] text-xl text-yellow-400 transition-all duration-300 hover:scale-110 hover:bg-gradient-to-br hover:from-yellow-400 hover:to-amber-500 hover:text-black"
+        >
+          {icon}
+        </a>
+      ))}
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+</section>
+
+{/* Google Map Starts Here */}
+<section className="px-6 pb-24">
+
+  <div className="mx-auto max-w-7xl overflow-hidden rounded-[30px] border border-yellow-500/20 shadow-[0_0_35px_rgba(255,215,0,.15)]">
+
+    <iframe
+      title="Restaurant Location"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.219706885813!2d76.958242!3d11.016844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859a62d9d5f71%3A0x2df0fbb58f2d3f57!2sCoimbatore!5e0!3m2!1sen!2sin!4v1722960000000"
+      width="100%"
+      height="500"
+      style={{ border: 0 }}
+      loading="lazy"
+      allowFullScreen
+    ></iframe>
+
+  </div>
+
+</section>
+
+{/* Luxury CTA */}
+
+<section className="relative overflow-hidden border-t border-yellow-500/20 bg-gradient-to-r from-[#050505] via-[#111111] to-[#050505] py-24">
+
+  {/* Gold Glow */}
+
+  <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-yellow-500/10 blur-[150px]" />
+
+  <div className="absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-amber-500/10 blur-[150px]" />
+
+  <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
+
+    <span className="uppercase tracking-[6px] font-bold text-yellow-400">
+      Visit Spice Garden
+    </span>
+
+    <h2 className="mt-4 text-4xl font-black text-white md:text-5xl">
+
+      Enjoy The Taste Of
+
+      <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+
+        Premium Dining
+
+      </span>
+
+    </h2>
+
+    <p className="mx-auto mt-6 max-w-3xl leading-8 text-gray-300">
+
+      Whether you're planning a romantic dinner, family gathering,
+      birthday celebration, or corporate event, Spice Garden Restaurant
+      is ready to serve unforgettable food and exceptional hospitality.
+
+    </p>
+
+    {/* Highlights */}
+
+    <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
+
+      {[
+        {
+          value: "10+",
+          label: "Years Experience",
+        },
+        {
+          value: "25K+",
+          label: "Happy Guests",
+        },
+        {
+          value: "100+",
+          label: "Signature Dishes",
+        },
+        {
+          value: "4.9★",
+          label: "Customer Rating",
+        },
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="rounded-2xl border border-yellow-500/20 bg-[#111111] p-6 transition-all duration-300 hover:-translate-y-2 hover:border-yellow-400"
+        >
+          <h3 className="text-3xl font-black text-yellow-400">
+            {item.value}
+          </h3>
+
+          <p className="mt-2 text-gray-400">
+            {item.label}
+          </p>
+
+        </div>
+      ))}
+
+    </div>
+
+    {/* Buttons */}
+
+    <div className="mt-12 flex flex-col items-center justify-center gap-5 md:flex-row">
+
+      <button className="rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,215,0,.35)]">
+        Reserve Your Table
+      </button>
+
+      <button className="rounded-full border border-yellow-500 px-10 py-4 font-bold text-yellow-400 transition-all duration-300 hover:bg-yellow-500 hover:text-black">
+        View Menu
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+);
+};
 
 export default Contact;

@@ -1,292 +1,354 @@
+import React from "react";
 import {
-  Phone,
-  Mail,
-  MapPin,
-  Calendar,
-  IndianRupee,
-  Car,
-  PhoneCall,
-} from "lucide-react";
-import { FaWhatsapp, FaFacebookF, FaInstagram } from "react-icons/fa";
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaYoutube,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-function Footer({ darkMode }) {
+const Footer = () => {
   return (
-    <footer
-      className={`relative overflow-hidden transition-all duration-500 ${
-        darkMode ? "bg-[#080C16] text-white" : "bg-white text-gray-900"
-      }`}
-    >
-      {/* top gradient line */}
-      <div className="absolute top-0 left-0 h-[3px] w-40 bg-gradient-to-r from-orange-500 to-transparent" />
+    <footer className="relative overflow-hidden bg-black text-white border-t border-yellow-500/20">
 
-      {/* ambient glows */}
-      <div
-        className={`absolute left-0 top-0 h-64 w-64 rounded-full blur-[120px] ${
-          darkMode ? "bg-orange-500/10" : "bg-orange-300/20"
-        }`}
-      />
-      <div
-        className={`absolute right-0 bottom-0 h-64 w-64 rounded-full blur-[120px] ${
-          darkMode ? "bg-amber-500/10" : "bg-yellow-300/20"
-        }`}
-      />
+      {/* Gold Glow */}
+      <div className="absolute -top-32 -left-32 h-80 w-80 rounded-full bg-yellow-500/10 blur-[140px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-9">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand column */}
+      <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-amber-500/10 blur-[140px]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+
+          {/* About */}
+
           <div>
-            <div className="flex items-center gap-3">
+
+            <div className="flex items-center gap-4">
+
               <img
-                src="/images/Logo.png"
-                alt="Nagma Tours & Travels logo"
-                className="h-10 w-auto object-contain"
+                src="/images/logo.png"
+                alt="Spice Garden Logo"
+                className="h-14 w-14 object-contain"
               />
-              <h2 className="text-lg font-bold leading-tight">
-                Nagma
-                <br />
-                <span className="text-orange-400">Tours&amp;Travels</span>
-              </h2>
+
+              <div>
+
+                <h2 className="text-3xl font-black text-white">
+
+                  Spice
+
+                  <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+
+                    Garden
+
+                  </span>
+
+                </h2>
+
+                <p className="text-sm tracking-[4px] uppercase text-yellow-400">
+                  Fine Dining
+                </p>
+
+              </div>
+
             </div>
 
-            <p
-              className={`mt-3 text-sm leading-6 ${
-                darkMode ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              One Way &amp; Outstation Cab Service across Tamil Nadu, Kerala,
-              Karnataka and Pondicherry.
+            <p className="mt-6 leading-8 text-gray-400">
+
+              Experience authentic flavours, premium ingredients,
+              elegant ambience and unforgettable hospitality.
+              Every meal at Spice Garden Restaurant is prepared
+              with passion and served with excellence.
+
             </p>
 
-            <div className="mt-4 flex flex-wrap gap-3">
-              <a
-                href="tel:+919888444952"
-                className="flex items-center gap-2 rounded-full border border-orange-500 px-4 py-2 text-xs font-medium text-orange-400 transition-all duration-300 hover:bg-orange-500 hover:text-white"
-              >
-                <Phone size={14} />
-                Call
-              </a>
+            {/* Social Icons */}
 
-              <a
-                href="https://wa.me/919888444952"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-xs font-medium text-white transition-all duration-300 hover:bg-orange-600"
-              >
-                <FaWhatsapp size={14} />
-                WhatsApp
-              </a>
+            <div className="mt-8 flex gap-4">
+
+              {[
+                <FaFacebookF />,
+                <FaInstagram />,
+                <FaTwitter />,
+                <FaYoutube />,
+              ].map((icon, index) => (
+
+                <a
+                  key={index}
+                  href="#"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-yellow-500/20 bg-[#111111] text-yellow-400 transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-yellow-400 hover:to-amber-500 hover:text-black"
+                >
+                  {icon}
+                </a>
+
+              ))}
+
             </div>
+
           </div>
 
-          {/* Explore Services */}
-          <div>
-            <h3 className="mb-1 text-sm font-bold uppercase tracking-wide text-orange-400">
-              Explore Services
-            </h3>
-            <div className="mb-3 h-[2px] w-8 bg-orange-500" />
+          {/* Quick Links Starts Here */}
+                    {/* Quick Links */}
 
-            <ul className="space-y-2.5">
+          <div>
+
+            <h3 className="mb-6 text-2xl font-bold text-yellow-400">
+              Quick Links
+            </h3>
+
+            <ul className="space-y-4">
+
               {[
-                { icon: Calendar, label: "Book a Cab", href: "#services" },
-                {
-                  icon: IndianRupee,
-                  label: "Taxi Fare & Pricing",
-                  href: "#services",
-                },
-                { icon: Car, label: "Available Cars", href: "#services" },
-                {
-                  icon: MapPin,
-                  label: "One Way Taxi Service",
-                  href: "#services",
-                },
-                {
-                  icon: PhoneCall,
-                  label: "Contact & Booking",
-                  href: "#contact",
-                },
-              ].map(({ icon: Icon, label, href }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    className={`flex items-center gap-2 text-xs transition hover:text-orange-500 ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    }`}
+                { name: "Home", link: "/" },
+                { name: "About", link: "/about" },
+                { name: "Menu", link: "/menu" },
+                { name: "Gallery", link: "/gallery" },
+                { name: "Blog", link: "/blog" },
+                { name: "Contact", link: "/contact" },
+                { name: "Reserve Table", link: "/reserve" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.link}
+                    className="text-gray-400 transition-all duration-300 hover:pl-2 hover:text-yellow-400"
                   >
-                    <Icon size={14} className="text-orange-400 shrink-0" />
-                    {label}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
+
             </ul>
+
           </div>
 
-          {/* Popular Routes */}
-          <div>
-            <h3 className="mb-1 text-sm font-bold uppercase tracking-wide text-orange-400">
-              Popular Routes
-            </h3>
-            <div className="mb-3 h-[2px] w-8 bg-orange-500" />
+          {/* Opening Hours */}
 
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5">
-              {[
-                "Chennai to Madurai Taxi",
-                "Chennai to Coimbatore Taxi",
-                "Chennai to Bangalore Taxi",
-                "Coimbatore to Kochi Taxi",
-                "Madurai to Rameswaram Taxi",
-                "Trichy to Thanjavur Taxi",
-              ].map((route) => (
-                <li key={route}>
-                  <a
-                    href="#"
-                    className={`flex items-center gap-2 text-xs transition hover:text-orange-500 ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    }`}
-                  >
-                    <MapPin size={14} className="text-orange-400 shrink-0" />
-                    {route}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div>
+
+            <h3 className="mb-6 text-2xl font-bold text-yellow-400">
+              Opening Hours
+            </h3>
+
+            <div className="space-y-5">
+
+              <div className="rounded-2xl border border-yellow-500/20 bg-[#111111] p-4">
+
+                <h4 className="font-bold text-white">
+                  Monday - Friday
+                </h4>
+
+                <p className="mt-2 text-gray-400">
+                  10:00 AM - 10:00 PM
+                </p>
+
+              </div>
+
+              <div className="rounded-2xl border border-yellow-500/20 bg-[#111111] p-4">
+
+                <h4 className="font-bold text-white">
+                  Saturday
+                </h4>
+
+                <p className="mt-2 text-gray-400">
+                  09:00 AM - 11:00 PM
+                </p>
+
+              </div>
+
+              <div className="rounded-2xl border border-yellow-500/20 bg-[#111111] p-4">
+
+                <h4 className="font-bold text-white">
+                  Sunday
+                </h4>
+
+                <p className="mt-2 text-gray-400">
+                  09:00 AM - 11:00 PM
+                </p>
+
+              </div>
+
+            </div>
+
           </div>
 
           {/* Contact */}
+
           <div>
-            <h3 className="mb-1 text-sm font-bold uppercase tracking-wide text-orange-400">
-              Contact
+
+            <h3 className="mb-6 text-2xl font-bold text-yellow-400">
+              Contact Info
             </h3>
-            <div className="mb-3 h-[2px] w-8 bg-orange-500" />
 
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
-                    darkMode ? "bg-orange-500/10" : "bg-orange-50"
-                  }`}
-                >
-                  <Phone size={14} className="text-orange-400" />
+            <div className="space-y-6">
+
+              <div className="flex items-start gap-4">
+
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 text-black">
+
+                  <FaMapMarkerAlt />
+
                 </div>
-                <p
-                  className={`mt-1.5 text-xs ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  }`}
-                >
-                  +91 98884 44952
-                </p>
+
+                <div>
+
+                  <h4 className="font-semibold text-white">
+                    Address
+                  </h4>
+
+                  <p className="mt-2 text-gray-400 leading-7">
+                    123 Food Street
+                    <br />
+                    Chennai, Tamil Nadu
+                    <br />
+                    India
+                  </p>
+
+                </div>
+
               </div>
 
-              <div className="flex items-start gap-3">
-                <div
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
-                    darkMode ? "bg-orange-500/10" : "bg-orange-50"
-                  }`}
-                >
-                  <Mail size={14} className="text-orange-400" />
+              <div className="flex items-center gap-4">
+
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 text-black">
+
+                  <FaPhoneAlt />
+
                 </div>
-                <p
-                  className={`mt-1.5 text-xs ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  }`}
-                >
-                  nonstopdroptaxi2026@gmail.com
-                </p>
+
+                <div>
+
+                  <h4 className="font-semibold text-white">
+                    Phone
+                  </h4>
+
+                  <p className="mt-2 text-gray-400">
+                    +91 98765 43210
+                  </p>
+
+                </div>
+
               </div>
 
-              <div className="flex items-start gap-3">
-                <div
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
-                    darkMode ? "bg-orange-500/10" : "bg-orange-50"
-                  }`}
-                >
-                  <MapPin size={14} className="text-orange-400" />
+              <div className="flex items-center gap-4">
+
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 text-black">
+
+                  <FaEnvelope />
+
                 </div>
-                <p
-                  className={`mt-1.5 text-xs leading-5 ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  }`}
-                >
-                  Tamil Nadu • Kerala • Karnataka • Pondicherry
-                </p>
+
+                <div>
+
+                  <h4 className="font-semibold text-white">
+                    Email
+                  </h4>
+
+                  <p className="mt-2 text-gray-400">
+                    info@spicegarden.com
+                  </p>
+
+                </div>
+
               </div>
+
             </div>
+
+            {/* Newsletter */}
+
+            <div className="mt-8">
+
+              <h4 className="mb-4 text-xl font-bold text-yellow-400">
+                Newsletter
+              </h4>
+
+              <div className="flex overflow-hidden rounded-xl border border-yellow-500/20">
+
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full bg-[#111111] px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none"
+                />
+
+                <button className="bg-gradient-to-r from-yellow-400 to-amber-500 px-6 font-bold text-black transition hover:brightness-110">
+
+                  Join
+
+                </button>
+
+              </div>
+
+            </div>
+
           </div>
+
         </div>
+
       </div>
 
-      {/* bottom bar */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-6">
-        <div
-          className={`rounded-2xl border px-6 py-4 ${
-            darkMode
-              ? "border-white/10 bg-white/[0.02]"
-              : "border-orange-100 bg-orange-50/30"
-          }`}
-        >
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            {/* social icons */}
-            <div className="flex gap-3">
-              {[
-                { icon: FaFacebookF, href: "#" },
-                { icon: FaInstagram, href: "#" },
-                { icon: FaWhatsapp, href: "https://wa.me/919888444952" },
-                { icon: MapPin, href: "#" },
-              ].map(({ icon: Icon, href }, i) => (
-                <a
-                  key={i}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:bg-orange-500 hover:text-white ${
-                    darkMode
-                      ? "bg-white/5 text-orange-400"
-                      : "bg-white text-orange-500 shadow-sm"
-                  }`}
-                >
-                  <Icon size={14} />
-                </a>
-              ))}
-            </div>
+      {/* Bottom Footer Starts Here */}
+      <div className="border-t border-yellow-500/20 bg-[#050505]">
 
-            {/* center tagline with car divider */}
-            <div className="flex flex-col items-center gap-1.5">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-10 bg-orange-500/40" />
-                <Car size={16} className="text-orange-400" strokeWidth={1.5} />
-                <span className="h-px w-10 bg-orange-500/40" />
-              </div>
-              <p
-                className={`text-center text-xs ${
-                  darkMode ? "text-gray-300" : "text-gray-700"
-                }`}
-              >
-                Safe Rides.{" "}
-                <span className="text-orange-400 font-medium">
-                  Trusted Service.
-                </span>{" "}
-                Every Mile Matters.
-              </p>
-            </div>
+  <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 py-8 md:flex-row">
 
-            {/* copyright */}
-            <div className="text-center md:text-right">
-              <p
-                className={`text-xs ${
-                  darkMode ? "text-gray-500" : "text-gray-600"
-                }`}
-              >
-                © {new Date().getFullYear()}{" "}
-                <span className="text-orange-400 font-medium">
-                  Nagma Tours&amp;Travels
-                </span>
-                . All Rights Reserved.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
+    {/* Copyright */}
+
+    <div>
+
+      <p className="text-center text-gray-400 md:text-left">
+        © {new Date().getFullYear()}{" "}
+        <span className="font-bold bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+          Spice Garden Restaurant
+        </span>
+        . All Rights Reserved.
+      </p>
+
+      <p className="mt-2 text-center text-sm text-gray-500 md:text-left">
+        Crafted with ❤️ for unforgettable dining experiences.
+      </p>
+
+    </div>
+
+    {/* Footer Links */}
+
+    <div className="flex flex-wrap items-center justify-center gap-6">
+
+      <Link
+        to="/privacy"
+        className="text-gray-400 transition duration-300 hover:text-yellow-400"
+      >
+        Privacy Policy
+      </Link>
+
+      <span className="text-yellow-500">|</span>
+
+      <Link
+        to="/terms"
+        className="text-gray-400 transition duration-300 hover:text-yellow-400"
+      >
+        Terms & Conditions
+      </Link>
+
+      <span className="text-yellow-500">|</span>
+
+      <Link
+        to="/reserve"
+        className="text-gray-400 transition duration-300 hover:text-yellow-400"
+      >
+        Reserve Table
+      </Link>
+
+    </div>
+
+  </div>
+
+</div>
+
+</footer>
+);
+};
 
 export default Footer;

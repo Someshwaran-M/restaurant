@@ -1,202 +1,296 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Camera, ArrowRight } from "lucide-react";
+import React, { useState } from "react";
 
-const galleryImages = [
+const images = [
   {
     id: 1,
-    image: "/images/Maldives.jpg",
-    title: "Maldives",
+    category: "Food",
+    image:
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800",
+    title: "Cheese Pizza",
   },
   {
     id: 2,
-    image: "/images/Bali.jpg",
-    title: "Bali",
+    category: "Food",
+    image:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800",
+    title: "Chicken Burger",
   },
   {
     id: 3,
-    image: "/images/Dubai.jpg",
-    title: "Dubai",
+    category: "Food",
+    image:
+      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800",
+    title: "Creamy Pasta",
   },
   {
     id: 4,
-    image: "/images/Switzerland.jpg",
-    title: "Switzerland",
+    category: "Interior",
+    image:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+    title: "Luxury Interior",
   },
   {
     id: 5,
-    image: "/images/Pairs.jpg",
-    title: "Paris",
+    category: "Chef",
+    image:
+      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+    title: "Master Chef",
   },
   {
     id: 6,
-    image: "/images/Singapore.jpg",
-    title: "Singapore",
+    category: "Events",
+    image:
+      "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800",
+    title: "Family Dinner",
+  },
+  {
+    id: 7,
+    category: "Food",
+    image:
+      "https://images.unsplash.com/photo-1544025162-d76694265947?w=800",
+    title: "Grilled Steak",
+  },
+  {
+    id: 8,
+    category: "Food",
+    image:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+    title: "Special Pizza",
   },
 ];
 
-function Gallery({ darkMode }) {
-  // Tracks which card is "open" on tap — CSS :hover/:active alone is unreliable
-  // on touch devices, so we drive the shade explicitly for mobile taps.
-  const [activeId, setActiveId] = useState(null);
+const categories = [
+  "All",
+  "Food",
+  "Interior",
+  "Chef",
+  "Events",
+];
 
-  const handleCardTap = (id) => {
-    setActiveId((prev) => (prev === id ? null : id));
-  };
+const Gallery = () => {
+  const [active, setActive] = useState("All");
+
+  const filteredImages =
+    active === "All"
+      ? images
+      : images.filter((item) => item.category === active);
 
   return (
-    <section
-      id="gallery"
-      className={`relative overflow-hidden py-20 sm:py-32 transition-all duration-500 ${
-        darkMode ? "bg-[#080C16]" : "bg-white"
-      }`}
-    >
-      {/* Shimmer keyframes, scoped to this component */}
-      <style>{`
-        @keyframes gallery-shimmer {
-          0% { transform: translateX(-130%) skewX(-20deg); }
-          100% { transform: translateX(230%) skewX(-20deg); }
-        }
-        .gallery-shimmer-sweep {
-          animation: gallery-shimmer 2.6s ease-in-out infinite;
-        }
-      `}</style>
+    <div className="min-h-screen bg-black text-white">
 
-      <div
-        className={`absolute left-0 top-40 h-80 w-80 rounded-full blur-[120px] ${
-          darkMode ? "bg-orange-500/10" : "bg-orange-300/20"
-        }`}
-      />
+      {/* Gold Glow */}
 
-      <div
-        className={`absolute right-0 bottom-0 h-80 w-80 rounded-full blur-[120px] ${
-          darkMode ? "bg-orange-600/10" : "bg-yellow-300/20"
-        }`}
-      />
+      <div className="fixed -top-40 -left-40 h-[450px] w-[450px] rounded-full bg-yellow-500/10 blur-[180px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mx-auto mb-10 sm:mb-14 max-w-3xl text-center"
-        >
-          <span className="text-xs sm:text-sm font-bold uppercase tracking-[4px] sm:tracking-[6px] text-orange-400">
-            GALLERY
+      <div className="fixed -bottom-40 -right-40 h-[450px] w-[450px] rounded-full bg-amber-500/10 blur-[180px]" />
+
+      {/* Hero */}
+
+      <section className="relative h-[380px] overflow-hidden">
+
+        <img
+          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1600"
+          alt="Restaurant Gallery"
+          className="h-full w-full object-cover"
+        />
+
+        <div className="absolute inset-0 bg-black/75"></div>
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+
+          <span className="uppercase tracking-[6px] font-bold text-yellow-400">
+            Premium Gallery
           </span>
 
-          <h2
-            className={`mt-4 text-3xl sm:text-4xl font-extrabold md:text-5xl ${
-              darkMode ? "text-white" : "text-gray-900"
-            }`}
-          >
-            Explore Our{" "}
-            <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
-              Travel Moments
+          <h1 className="mt-4 text-5xl md:text-6xl font-black text-white">
+
+            Explore Our
+
+            <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+
+              Restaurant Moments
+
             </span>
-          </h2>
 
-          <p
-            className={`mx-auto mt-5 max-w-2xl text-sm sm:text-base leading-6 sm:leading-7 ${
-              darkMode ? "text-gray-400" : "text-gray-600"
-            }`}
-          >
-            Beautiful journeys, unforgettable memories and premium travel
-            experiences captured from our happy customers.
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-gray-300 leading-8">
+
+            Experience delicious food, elegant interiors,
+            unforgettable celebrations, and world-class hospitality
+            at Spice Garden Restaurant.
+
           </p>
-        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mt-8 sm:mt-10">
-          {galleryImages.map((item, index) => {
-            const isActive = activeId === item.id;
-
-            return (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 70 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.08,
-                }}
-                viewport={{ once: true }}
-                onClick={() => handleCardTap(item.id)}
-                className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:-translate-y-2 ${
-                  darkMode
-                    ? "border border-white/10 bg-[#141922] hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(249,115,22,.18)]"
-                    : "border border-gray-200 bg-white shadow-lg hover:border-orange-400"
-                }`}
-              >
-                {/* Image + shimmer sweep */}
-                <div className="relative h-56 sm:h-64 w-full overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  />
-
-                  {/* Diagonal light sweep — ambient shimmer, pauses/hides while hovered */}
-                  <div
-                    className="gallery-shimmer-sweep pointer-events-none absolute inset-y-0 left-0 w-1/3
-                               bg-gradient-to-r from-transparent via-white/35 to-transparent
-                               opacity-100 transition-opacity duration-200
-                               group-hover:opacity-0"
-                  />
-                </div>
-
-                {/* Shade overlay: shows on hover (desktop) or tap (mobile), fast transition */}
-                <div
-                  className={`absolute inset-0 flex flex-col justify-end p-5 sm:p-6
-                             bg-gradient-to-t from-black/85 via-black/45 to-black/10
-                             transition-opacity duration-150 ease-out
-                             group-hover:opacity-100
-                             ${isActive ? "opacity-100" : "opacity-0"}`}
-                >
-                  <Camera
-                    size={30}
-                    className={`text-orange-400 mb-2 sm:mb-4 transition-transform duration-300 group-hover:scale-110 ${
-                      isActive ? "scale-110" : ""
-                    }`}
-                  />
-
-                  <h3 className="text-xl sm:text-2xl font-bold text-white">
-                    {item.title}
-                  </h3>
-
-                  <button
-                    className={`mt-2 sm:mt-3 flex items-center gap-2 text-sm font-semibold text-orange-300 transition-transform duration-300 group-hover:translate-x-1 ${
-                      isActive ? "translate-x-1" : ""
-                    }`}
-                  >
-                    View Destination
-                    <ArrowRight size={18} />
-                  </button>
-                </div>
-              </motion.div>
-            );
-          })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          viewport={{ once: true }}
-          className="text-center mt-10 sm:mt-12"
+      </section>
+
+      {/* Category Buttons */}
+
+      <section className="mx-auto max-w-7xl px-6 py-12">
+
+        <div className="flex flex-wrap justify-center gap-4">
+          {categories.map((category) => (
+  <button
+    key={category}
+    onClick={() => setActive(category)}
+    className={`rounded-full px-7 py-3 font-semibold transition-all duration-300 ${
+      active === category
+        ? "bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-[0_0_25px_rgba(255,215,0,.35)]"
+        : "border border-yellow-500/20 bg-[#111111] text-yellow-400 hover:bg-yellow-500 hover:text-black"
+    }`}
+  >
+    {category}
+  </button>
+))}
+        </div>
+      </section>
+
+      {/* Gallery Grid */}
+
+      <section className="mx-auto max-w-7xl px-6 pb-24">
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+          {filteredImages.map((item) => (
+            <div
+              key={item.id}
+              className="group relative overflow-hidden rounded-3xl border border-yellow-500/20 bg-[#111111] transition-all duration-500 hover:-translate-y-3 hover:border-yellow-400 hover:shadow-[0_0_35px_rgba(255,215,0,.18)]"
+            >
+              {/* Image */}
+
+              <div className="overflow-hidden">
+
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-72 w-full object-cover transition duration-700 group-hover:scale-110"
+                />
+
+              </div>
+
+              {/* Overlay */}
+
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 opacity-0 transition-all duration-500 group-hover:opacity-100">
+
+                <div className="rounded-full border border-yellow-500/20 bg-yellow-500/10 px-4 py-1 text-sm font-semibold text-yellow-400">
+                  {item.category}
+                </div>
+
+                <h3 className="mt-5 text-center text-2xl font-bold text-white">
+                  {item.title}
+                </h3>
+
+                <div className="mt-5 h-1 w-16 rounded-full bg-gradient-to-r from-yellow-400 to-amber-600"></div>
+
+              </div>
+
+              {/* Bottom Title */}
+
+              <div className="border-t border-yellow-500/20 bg-[#111111] p-5">
+
+                <h3 className="text-xl font-bold text-yellow-400">
+                  {item.title}
+                </h3>
+
+                <p className="mt-2 text-gray-400">
+                  {item.category}
+                </p>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* Premium CTA Starts Here */}
+      <section className="relative overflow-hidden border-t border-yellow-500/20 bg-gradient-to-r from-[#050505] via-[#111111] to-[#050505] py-24">
+
+  {/* Gold Glow */}
+  <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-yellow-500/10 blur-[140px]" />
+  <div className="absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-amber-500/10 blur-[140px]" />
+
+  <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
+
+    <span className="uppercase tracking-[6px] font-bold text-yellow-400">
+      Luxury Dining Experience
+    </span>
+
+    <h2 className="mt-4 text-4xl md:text-5xl font-black text-white">
+      Create
+      <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+        Unforgettable Memories
+      </span>
+    </h2>
+
+    <p className="mx-auto mt-6 max-w-3xl text-gray-300 leading-8">
+      From our signature dishes and elegant interiors to memorable celebrations,
+      every moment at <span className="text-yellow-400 font-semibold">Spice Garden Restaurant</span>
+      is crafted to give you an unforgettable dining experience.
+    </p>
+
+    {/* Highlights */}
+
+    <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
+
+      {[
+        {
+          value: "25K+",
+          label: "Happy Guests",
+        },
+        {
+          value: "100+",
+          label: "Delicious Dishes",
+        },
+        {
+          value: "10+",
+          label: "Years Experience",
+        },
+        {
+          value: "4.9★",
+          label: "Customer Rating",
+        },
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="rounded-2xl border border-yellow-500/20 bg-[#111111] p-6 transition-all duration-300 hover:border-yellow-400 hover:-translate-y-2"
         >
-          <button
-            className={`rounded-full border-2 border-orange-500 px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition-all duration-300 hover:bg-orange-500 hover:text-white ${
-              darkMode ? "text-orange-400" : "text-orange-500"
-            }`}
-          >
-            View Complete Gallery
-          </button>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
+          <h3 className="text-3xl font-black text-yellow-400">
+            {item.value}
+          </h3>
+
+          <p className="mt-2 text-gray-400">
+            {item.label}
+          </p>
+        </div>
+      ))}
+
+    </div>
+
+    {/* Buttons */}
+
+    <div className="mt-12 flex flex-col items-center justify-center gap-5 md:flex-row">
+
+      <button className="rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,215,0,.35)]">
+        Reserve Your Table
+      </button>
+
+      <button className="rounded-full border border-yellow-500 px-10 py-4 font-bold text-yellow-400 transition-all duration-300 hover:bg-yellow-500 hover:text-black">
+        View Our Menu
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+);
+};
 
 export default Gallery;
