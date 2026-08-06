@@ -8,6 +8,7 @@ import {
   FaFire,
   FaLeaf,
 } from "react-icons/fa";
+import logo from "../assets/images/logo.png";
 
 const menuItems = [
   {
@@ -203,7 +204,7 @@ function Mobile() {
   <div className="absolute top-10 right-4 z-30 flex items-center gap-2 px-3 py-2 ">
 
     <img
-      src="/images/logo.png"
+      src={logo}
       alt="Logo"
       className="ml-47 h-9 w-9 rounded-full border border-yellow-400 object-cover"
     />

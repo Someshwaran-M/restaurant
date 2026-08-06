@@ -20,6 +20,7 @@ import {
   FaInstagram,
   FaXTwitter,
 } from "react-icons/fa6";
+import logo from "../assets/images/logo.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -92,7 +93,7 @@ const Navbar = () => {
               className="flex items-center gap-2 group"
             >
               <img
-                src="/images/logo.png"
+                src={logo}
                 alt="Spice Garden Logo"
                 className="w-16 h-16 object-contain transition-all duration-500 group-hover:scale-110"
               />
