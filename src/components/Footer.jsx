@@ -20,7 +20,7 @@ const Footer = () => {
 
       <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-amber-500/10 blur-[140px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-18">
 
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
 
