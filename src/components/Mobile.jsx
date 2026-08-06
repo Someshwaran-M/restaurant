@@ -164,7 +164,7 @@ function Mobile() {
   <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/75"></div>
 
   {/* Status Bar */}
-  <div className="absolute top-2 left-38 right-0 z-40 flex items-center justify-between px-4">
+  <div className="absolute top-2 inset-x-0 z-40 flex items-center justify-between px-4">
 
     <span className="text-sm font-semibold tracking-wide text-white">
       {time}
@@ -201,13 +201,13 @@ function Mobile() {
   </div>
 
   {/* Restaurant Logo */}
-  <div className="absolute top-10 right-4 z-30 flex items-center gap-2 px-3 py-2 ">
+  <div className="absolute top-10 right-4 z-30 flex items-center gap-2 rounded-xl bg-black/40 px-3 py-2 backdrop-blur-md">
 
     <img
-      src={logo}
-      alt="Logo"
-      className="ml-47 h-9 w-9 rounded-full border border-yellow-400 object-cover"
-    />
+  src={logo}
+  alt="Spice Garden Logo"
+  className="h-9 w-9 rounded-full border border-yellow-400 object-cover"
+/>
 
     <div>
 
@@ -227,7 +227,7 @@ function Mobile() {
   </div>
 
   {/* Hero Text */}
-  <div className="absolute bottom-4 left-4 z-30">
+  <div className="absolute top-6 left-4 z-20">
 
     <p className="text-lg italic text-yellow-400 font-serif">
       Our
@@ -259,20 +259,8 @@ function Mobile() {
         y: -5,
       }}
       transition={{ duration: 0.3 }}
-      className="relative flex items-center rounded-3xl border border-white/10 bg-zinc-900/70 p-3 shadow-2xl backdrop-blur-xl transition-all duration-300"
-    >
-      {/* Popular Badge */}
-      {item.popular && (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-2.5 py-1 text-[10px] font-semibold text-white shadow-lg"
-        >
-          <FaFire className="text-[9px]" />
-          Popular
-        </motion.div>
-      )}
+      className="relative flex items-center rounded-2xl border border-white/10 bg-zinc-900/70 p-2.5 shadow-xl backdrop-blur-xl"
+ >    
 
       {/* Food Image */}
       <motion.div
@@ -293,31 +281,29 @@ function Mobile() {
       </motion.div>
 
       {/* Content */}
-      <div className="ml-4 flex-1">
+      <div className="ml-3 flex-1">
 
-        {/* Title */}
-        <div className="flex items-start justify-between gap-2">
+  <div className="flex items-start justify-between">
 
-          <div>
-            <h4 className="text-[17px] font-bold text-white">
-              {item.name}
-            </h4>
+    <div>
+      <h4 className="text-sm font-bold text-white">
+        {item.name}
+      </h4>
 
-            <p className="mt-1 text-xs leading-5 text-gray-300">
-              {item.desc}
-            </p>
-          </div>
+      <p className="mt-1 text-[10px] leading-4 text-gray-300 line-clamp-2">
+        {item.desc}
+      </p>
+    </div>
 
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.15 }}
-            className="rounded-full bg-red-500/20 p-2 text-red-400 transition-all"
-          >
-            <FaHeart />
-          </motion.button>
+    <motion.button
+      whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.1 }}
+      className="rounded-full bg-red-500/20 p-1.5 text-red-400"
+    >
+      <FaHeart size={12} />
+    </motion.button>
 
-        </div>
-
+  </div>
         {/* Rating */}
         <div className="mt-3 flex items-center gap-1">
           {[...Array(5)].map((_, i) => (
@@ -334,32 +320,26 @@ function Mobile() {
           </span>
         </div>
 
-        {/* Price & Type */}
-       {/* Price & Order Button */}
-<div className="mt-4 flex items-center justify-between">
+       <div className="mt-2 flex items-center justify-between">
 
-  <motion.span
-    whileHover={{ scale: 1.05 }}
-    className="text-xl font-extrabold text-yellow-400"
-  >
+  <span className="text-lg font-bold text-yellow-400">
     {item.price}
-  </motion.span>
+  </span>
 
   <motion.button
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     onClick={() => navigate("/menu")}
-    className="rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 px-4 py-2 text-xs font-bold text-black shadow-lg transition-all duration-300 hover:shadow-yellow-500/40"
+    className="rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 px-3 py-1 text-[10px] font-bold text-black"
   >
-    Order Now
+    Order
   </motion.button>
 
 </div>
 
-{/* Food Type */}
-<div className="mt-3">
+<div className="mt-2">
   <span
-    className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${
+    className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-[9px] font-semibold ${
       item.type === "Veg"
         ? "bg-green-900/40 text-green-300"
         : item.type === "Dessert"
@@ -369,7 +349,7 @@ function Mobile() {
         : "bg-red-900/40 text-red-300"
     }`}
   >
-    {item.type === "Veg" && <FaLeaf className="text-[11px]" />}
+    {item.type === "Veg" && <FaLeaf size={8} />}
     {item.type}
   </span>
 </div>
@@ -383,8 +363,7 @@ function Mobile() {
 {/* Bottom Navigation */}
 <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-white/10 bg-black/70 px-4 py-4 backdrop-blur-3xl">
 
-  {/* Home Indicator */}
-  <div className="mx-auto mt-4 h-1.5 w-32 rounded-full bg-white/80" />
+  
 
 </div>
 
