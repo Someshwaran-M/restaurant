@@ -192,7 +192,7 @@ function Mobile() {
 
       {/* Battery */}
       <div className="relative h-4 w-7 rounded border border-white">
-        <div className="absolute left-[2px] top-[2px] h-[8px] w-[18px] rounded bg-green-400"></div>
+        <div className="absolute left-[2px] top-[2px] h-[8px] w-[18px] rounded bg-yellow-400"></div>
         <div className="absolute -right-[3px] top-[4px] h-[5px] w-[2px] rounded bg-white"></div>
       </div>
 

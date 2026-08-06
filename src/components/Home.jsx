@@ -84,9 +84,7 @@ function Home() {
 
        
 
-<div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center justify-between gap-8 px-6 py-10 lg:gap-16">
-
-  {/* LEFT SIDE */}
+<div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col-reverse items-center justify-center gap-10 px-5 py-10 lg:flex-row lg:justify-between lg:gap-16">
 
   <motion.div
     initial={{ opacity: 0, x: -80 }}
