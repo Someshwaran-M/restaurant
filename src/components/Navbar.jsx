@@ -47,11 +47,7 @@ const Navbar = () => {
       path: "/",
       icon: <FaHome />,
     },
-    {
-      name: "About",
-      path: "/about",
-      icon: <FaInfoCircle />,
-    },
+    
     {
       name: "Menu",
       path: "/menu",
