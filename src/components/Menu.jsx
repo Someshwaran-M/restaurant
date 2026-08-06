@@ -137,6 +137,18 @@ const Menu = () => {
     return matchCategory && matchSearch;
   });
 
+  const [selectedFood, setSelectedFood] = useState(menuItems[0]);
+const [showSuccess, setShowSuccess] = useState(false);
+
+const handleOrder = (item) => {
+  setSelectedFood(item);
+  setShowSuccess(true);
+
+  setTimeout(() => {
+    setShowSuccess(false);
+  }, 3000);
+};
+
   return (
     <div className="min-h-screen bg-black text-white">
 
