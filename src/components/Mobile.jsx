@@ -8,7 +8,7 @@ import {
   FaFire,
   FaLeaf,
 } from "react-icons/fa";
-import logo from "../assets/images/logo.png";
+
 
 const menuItems = [
   {
@@ -204,7 +204,7 @@ function Mobile() {
   <div className="absolute top-10 right-4 z-30 flex items-center gap-2 rounded-xl bg-black/40 px-3 py-2 backdrop-blur-md">
 
     <img
-  src={logo}
+  src="/images/logo.png"
   alt="Spice Garden Logo"
   className="h-9 w-9 rounded-full border border-yellow-400 object-cover"
 />

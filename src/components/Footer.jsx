@@ -9,7 +9,7 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.png";
+
 
 const Footer = () => {
   return (
@@ -31,7 +31,7 @@ const Footer = () => {
             <div className="flex items-center gap-4">
 
               <img
-                src={logo}
+                src="/images/logo.png"
                 alt="Spice Garden Logo"
                 className="h-14 w-14 object-contain"
               />
