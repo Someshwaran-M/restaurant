@@ -8,6 +8,7 @@ import {
   FaConciergeBell,
   FaUtensils,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const serviceAreas = [
   {
@@ -49,6 +50,7 @@ const serviceAreas = [
 ];
 
 const ServiceAreas = () => {
+  const navigate = useNavigate();
   return (
     <section
       id="services"
@@ -163,9 +165,14 @@ const ServiceAreas = () => {
               outstanding hospitality every day.
             </p>
 
-            <button className="mt-8 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 font-bold text-black transition duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,215,0,.35)]">
-              Book Your Table
-            </button>
+       
+<button
+  onClick={() => navigate("/reserve")}
+  className="mt-8 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 font-bold text-black transition duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,215,0,.35)]"
+>
+  Book Your Table
+</button>
+
 
           </div>
         </motion.div>

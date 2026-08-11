@@ -13,6 +13,7 @@ import ReserveTable from "./components/ReserveTable";
 import Faq from "./components/Faq";
 import ServiceAreas from "./components/ServiceAreas";
 import Testimonials from "./components/Testimonials";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 function App() {
   return (
@@ -33,9 +34,10 @@ function App() {
             <Route path="/faq" element={<Faq />} />
             <Route path="/serviceareas" element={<ServiceAreas />} />
             <Route path="/testimonials" element={<Testimonials />} />
+          
           </Routes>
         </main>
-
+<ScrollToTopButton />
         <Footer />
       </div>
     </BrowserRouter>

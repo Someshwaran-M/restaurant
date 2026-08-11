@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaPhoneAlt,
   FaClock,
@@ -6,7 +6,104 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 
+const getCurrentDate = () => {
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
+/* ==============================
+   CURRENT TIME
+============================== */
+const getCurrentTime = () => {
+  const now = new Date();
+
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  return `${hours}:${minutes}`;
+};
+
 const ReserveTable = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    date: getCurrentDate(),
+    time: getCurrentTime(),
+    guests: "",
+    table: "",
+    request: "",
+  });
+
+  const [bookedTables, setBookedTables] = useState([]);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState(null);
+
+  const tableNumbers = Array.from({ length: 20 }, (_, index) => index + 1);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleBooking = (e) => {
+    e.preventDefault();
+
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.date ||
+      !formData.time ||
+      !formData.guests ||
+      !formData.table
+    ) {
+      alert("Please fill in all required fields and select a table.");
+      return;
+    }
+
+    if (bookedTables.includes(Number(formData.table))) {
+      alert("This table has already been booked. Please select another table.");
+      return;
+    }
+
+    const newBooking = {
+      ...formData,
+      table: Number(formData.table),
+      bookingId: `SG-${Date.now().toString().slice(-6)}`,
+    };
+
+    setBookedTables((prev) => [...prev, Number(formData.table)]);
+    setBookingDetails(newBooking);
+    setBookingSuccess(true);
+  };
+
+  const resetBooking = () => {
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      date: getCurrentDate(),
+      time: getCurrentTime(),
+      guests: "",
+      table: "",
+      request: "",
+    });
+
+    setBookingSuccess(false);
+    setBookingDetails(null);
+  };
+
+ 
   return (
     <div className="min-h-screen bg-black text-white">
 
@@ -76,67 +173,227 @@ const ReserveTable = () => {
               Book Your Table
             </h2>
 
-            <form className="mt-8 space-y-5">
+            <form onSubmit={handleBooking} className="mt-8 space-y-5">
 
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
-              />
+  {/* Name */}
+  <input
+    type="text"
+    name="name"
+    placeholder="Full Name *"
+    value={formData.name}
+    onChange={handleChange}
+    className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
+    required
+  />
 
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
-              />
+  {/* Email */}
+  <input
+    type="email"
+    name="email"
+    placeholder="Email Address *"
+    value={formData.email}
+    onChange={handleChange}
+    className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
+    required
+  />
 
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
-              />
+  {/* Phone */}
+  <input
+    type="tel"
+    name="phone"
+    placeholder="Phone Number *"
+    value={formData.phone}
+    onChange={handleChange}
+    className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
+    required
+  />
 
-              <div className="grid gap-5 md:grid-cols-2">
+  {/* Date + Time */}
+  <div className="grid gap-5 md:grid-cols-2">
 
-                <input
-                  type="date"
-                  className="rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white focus:border-yellow-400 focus:outline-none"
-                />
+    <input
+  type="date"
+  name="date"
+  value={formData.date}
+  onChange={handleChange}
+  min={getCurrentDate()}
+  className="rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white focus:border-yellow-400 focus:outline-none"
+  required
+/>
 
-                <input
-                  type="time"
-                  className="rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white focus:border-yellow-400 focus:outline-none"
-                />
+<input
+  type="time"
+  name="time"
+  value={formData.time}
+  onChange={handleChange}
+  className="rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white focus:border-yellow-400 focus:outline-none"
+  required
+/>
 
-              </div>
+  </div>
 
-              <select className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white focus:border-yellow-400 focus:outline-none">
+  {/* Guests */}
+  <select
+    name="guests"
+    value={formData.guests}
+    onChange={handleChange}
+    className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white focus:border-yellow-400 focus:outline-none"
+    required
+  >
+    <option value="">Select Guests *</option>
+    <option value="1">1 Person</option>
+    <option value="2">2 People</option>
+    <option value="3">3 People</option>
+    <option value="4">4 People</option>
+    <option value="5">5 People</option>
+    <option value="6">6 People</option>
+    <option value="7">More Then 6</option>
+  </select>
 
-                <option>Select Guests</option>
-                <option>1 Person</option>
-                <option>2 People</option>
-                <option>3 People</option>
-                <option>4 People</option>
-                <option>5 People</option>
-                <option>6+ People</option>
+  {/* Table Selection */}
+  <div>
 
-              </select>
+    <label className="mb-3 block font-semibold text-yellow-400">
+      Select Table Number *
+    </label>
 
-              <textarea
-                rows="5"
-                placeholder="Special Request (Optional)"
-                className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
-              ></textarea>
+    <div className="grid grid-cols-4 gap-3 sm:grid-cols-5">
 
-              <button
-                type="submit"
-                className="w-full rounded-xl bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 py-4 font-bold text-black transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(255,215,0,.35)]"
-              >
-                Reserve Now
-              </button>
+      {tableNumbers.map((table) => {
+        const isBooked = bookedTables.includes(table);
+        const isSelected = Number(formData.table) === table;
 
-            </form>
+        return (
+          <button
+            key={table}
+            type="button"
+            disabled={isBooked}
+            onClick={() =>
+              setFormData((prev) => ({
+                ...prev,
+                table: String(table),
+              }))
+            }
+            className={`rounded-xl border px-3 py-3 text-sm font-bold transition-all duration-300 ${
+              isBooked
+                ? "cursor-not-allowed border-red-500/30 bg-red-500/10 text-red-400"
+                : isSelected
+                ? "border-yellow-400 bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 text-black shadow-[0_0_20px_rgba(255,215,0,.35)] scale-105"
+                : "border-yellow-500/20 bg-black text-yellow-400 hover:border-yellow-400 hover:bg-yellow-500/10"
+            }`}
+          >
+            {isBooked ? `T${table} ✕` : `Table ${table}`}
+          </button>
+        );
+      })}
 
+    </div>
+
+    {formData.table && (
+      <p className="mt-3 text-sm text-gray-400">
+        Selected Table:
+        <span className="ml-2 font-bold text-yellow-400">
+          Table {formData.table}
+        </span>
+      </p>
+    )}
+
+  </div>
+
+  {/* Special Request */}
+  <textarea
+    name="request"
+    rows="4"
+    placeholder="Special Request (Optional)"
+    value={formData.request}
+    onChange={handleChange}
+    className="w-full rounded-xl border border-yellow-500/20 bg-black px-5 py-4 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:outline-none"
+  />
+
+  {/* Book Button */}
+  <button
+    type="submit"
+    className="w-full rounded-xl bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 py-4 font-bold text-black transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(255,215,0,.35)]"
+  >
+    Book Your Table
+  </button>
+
+</form>
+{bookingSuccess && bookingDetails && (
+  <div className="mt-8 rounded-2xl border border-green-500/30 bg-green-500/10 p-6">
+
+    <div className="text-center">
+
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-3xl text-white">
+        ✓
+      </div>
+
+      <h3 className="mt-4 text-2xl font-black text-green-400">
+        Table Booked Successfully!
+      </h3>
+
+      <p className="mt-2 text-gray-300">
+        Your reservation has been confirmed.
+      </p>
+
+    </div>
+
+    <div className="mt-6 space-y-3 rounded-xl bg-black/50 p-5">
+
+      <div className="flex justify-between">
+        <span className="text-gray-400">Booking ID</span>
+        <span className="font-bold text-yellow-400">
+          {bookingDetails.bookingId}
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <span className="text-gray-400">Name</span>
+        <span className="font-semibold text-white">
+          {bookingDetails.name}
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <span className="text-gray-400">Table</span>
+        <span className="font-bold text-yellow-400">
+          Table {bookingDetails.table}
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <span className="text-gray-400">Guests</span>
+        <span className="text-white">
+          {bookingDetails.guests}
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <span className="text-gray-400">Date</span>
+        <span className="text-white">
+          {bookingDetails.date}
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <span className="text-gray-400">Time</span>
+        <span className="text-white">
+          {bookingDetails.time}
+        </span>
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      onClick={resetBooking}
+      className="mt-5 w-full rounded-xl border border-yellow-500 py-3 font-bold text-yellow-400 transition-all hover:bg-yellow-500 hover:text-black"
+    >
+      Make Another Reservation
+    </button>
+
+  </div>
+)}
           </div>
 
           {/* Restaurant Details Starts Here */}
@@ -290,7 +547,7 @@ const ReserveTable = () => {
 
       <h3 className="mt-3 text-3xl font-black text-white">
 
-        🎉 Reserve Online &
+        Reserve Online &
 
         <span className="block bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
 

@@ -10,6 +10,7 @@ import {
   Star,
   Sparkles,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const faqs = [
   {
@@ -46,6 +47,7 @@ const faqs = [
 
 function Faq() {
   const [active, setActive] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <section
@@ -386,17 +388,7 @@ function Faq() {
     Reserve Now
   </a>
 
-  <a
-    href="#contact"
-    className="group flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-yellow-500 font-bold text-yellow-400 transition-all duration-500 hover:scale-[1.03] hover:bg-yellow-500 hover:text-black"
-  >
-    <CalendarDays
-      size={18}
-      className="transition-transform duration-500 group-hover:rotate-12"
-    />
-
-    Book a Table
-  </a>
+  <button onClick={() => navigate("/reserve")} className="group flex h-12 w-full items-center justify-center gap-3 rounded-xl border-2 border-yellow-500 font-bold text-yellow-400 transition-all duration-500 hover:scale-[1.03] hover:bg-yellow-500 hover:text-black" > <CalendarDays size={18} className="transition-transform duration-500 group-hover:rotate-12" /> Book a Table </button>
 
 </div>
 
@@ -504,24 +496,26 @@ function Faq() {
 
       <div className="mt-10 flex flex-col items-center justify-center gap-4 md:flex-row">
 
-        <motion.a
-          whileHover={{
-            scale: 1.05,
-          }}
-          whileTap={{
-            scale: 0.95,
-          }}
-          href="#menu"
-          className="group flex h-12 items-center justify-center gap-3 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-8 font-bold text-black transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,215,0,.45)]"
-        >
-          <UtensilsCrossed
-            size={18}
-            className="transition-transform duration-500 group-hover:rotate-12"
-          />
+      
+<motion.button
+  whileHover={{
+    scale: 1.05,
+  }}
+  whileTap={{
+    scale: 0.95,
+  }}
+  onClick={() => navigate("/menu")}
+  className="group flex h-12 items-center justify-center gap-3 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-8 font-bold text-black transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,215,0,.45)]"
+>
+  <UtensilsCrossed
+    size={18}
+    className="transition-transform duration-500 group-hover:rotate-12"
+  />
 
-          Explore Menu
+  Explore Menu
+</motion.button>
 
-        </motion.a>
+
 
         <motion.a
           whileHover={{

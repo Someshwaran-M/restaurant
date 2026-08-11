@@ -1,5 +1,6 @@
 import React from "react";
 import { FaUtensils, FaAward, FaUsers, FaLeaf } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   {
@@ -29,6 +30,7 @@ const features = [
 ];
 
 const About = () => {
+  const navigate = useNavigate();
   return (
     <section
       id="about"
@@ -137,9 +139,12 @@ const About = () => {
 
             {/* Button */}
 
-            <button className="mt-10 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 text-lg font-bold text-black transition duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,215,0,.35)]">
-              Discover More
-            </button>
+            <button
+  onClick={() => navigate("/gallery")}
+  className="mt-10 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 text-lg font-bold text-black transition duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,215,0,.35)]"
+>
+  Gallery
+</button>
 
           </div>
 

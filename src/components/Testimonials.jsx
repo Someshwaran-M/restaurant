@@ -237,20 +237,6 @@ const Testimonials = () => {
 
               </div>
 
-              {/* Button */}
-
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
-                className="mt-12 rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 text-lg font-bold text-black shadow-[0_0_30px_rgba(255,215,0,.35)] transition duration-300"
-              >
-                Reserve Your Table
-              </motion.button>
-
             </div>
 
           </div>

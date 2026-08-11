@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const images = [
   {
@@ -75,7 +76,11 @@ const Gallery = () => {
       ? images
       : images.filter((item) => item.category === active);
 
+      const navigate = useNavigate();
+
   return (
+    
+
     <div className="min-h-screen bg-black text-white">
 
       {/* Gold Glow */}
@@ -275,13 +280,24 @@ const Gallery = () => {
 
     <div className="mt-12 flex flex-col items-center justify-center gap-5 md:flex-row">
 
-      <button className="rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,215,0,.35)]">
-        Reserve Your Table
-      </button>
+      
+{/* Reserve Your Table */}
+<button
+  onClick={() => navigate("/reserve")}
+  className="rounded-full bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-600 px-10 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,215,0,.35)]"
+>
+  Reserve Your Table
+</button>
 
-      <button className="rounded-full border border-yellow-500 px-10 py-4 font-bold text-yellow-400 transition-all duration-300 hover:bg-yellow-500 hover:text-black">
-        View Our Menu
-      </button>
+{/* View Our Menu */}
+<button
+  onClick={() => navigate("/menu")}
+  className="rounded-full border border-yellow-500 px-10 py-4 font-bold text-yellow-400 transition-all duration-300 hover:bg-yellow-500 hover:text-black"
+>
+  View Our Menu
+</button>
+
+
 
     </div>
 

@@ -1,0 +1,115 @@
+
+/* =========================================
+   FAVOURITE DISHES SLIDER
+========================================= */
+
+.favourite-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0 20px;
+}
+
+/* Moving row */
+.favourite-track {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  animation: favouriteMove 35s linear infinite;
+}
+
+/* Pause when user hovers */
+.favourite-slider:hover .favourite-track {
+  animation-play-state: paused;
+}
+
+/* Individual card */
+.favourite-card {
+  width: 320px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  border-radius: 24px;
+  background: #111111;
+  transition:
+    transform 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.favourite-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(250, 204, 21, 0.8);
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.18);
+}
+
+/* Right -> Left */
+@keyframes favouriteMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 12px));
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .favourite-track {
+    gap: 16px;
+    animation-duration: 30s;
+  }
+
+  .favourite-card {
+    width: 285px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .favourite-card {
+    width: 300px;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Cart Scrollbar */
+/* Cart Scrollbar */
+.cart-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #facc15 transparent;
+}
+
+/* Chrome / Edge */
+.cart-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cart-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cart-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #facc15,
+    #f59e0b
+  );
+  border-radius: 999px;
+}
+
+.cart-scroll::-webkit-scrollbar-thumb:hover {
+  background: #fbbf24;
+}
