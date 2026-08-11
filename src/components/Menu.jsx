@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FaStar, FaShoppingCart, FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 import "../styles/Menu.css";
 
 const favouriteItems = [
@@ -217,14 +219,12 @@ const Menu = () => {
 const [search, setSearch] = useState("");
 const [showFavourites, setShowFavourites] = useState(false);
 
-const [cart, setCart] = useState([]);
+const { cart, addToCart, updateQuantity, tableNo, setTableNo } = useContext(CartContext);
 const [showCart, setShowCart] = useState(false);
 const [orderConfirmed, setOrderConfirmed] = useState(false);
 const [orderDetails, setOrderDetails] = useState(null);
 const [cartPopup, setCartPopup] = useState(false);
 const [lastAddedItem, setLastAddedItem] = useState(null);
-
-const [tableNo, setTableNo] = useState("");
 const [showTableSelection, setShowTableSelection] = useState(false);
 
   const filteredItems = menuItems.filter((item) => {
@@ -242,31 +242,7 @@ const [showTableSelection, setShowTableSelection] = useState(false);
 const [showSuccess, setShowSuccess] = useState(false);
 
 const handleAddToCart = (item) => {
-  setCart((prevCart) => {
-    const existingItem = prevCart.find(
-      (cartItem) => cartItem.id === item.id
-    );
-
-    if (existingItem) {
-      return prevCart.map((cartItem) =>
-        cartItem.id === item.id
-          ? {
-              ...cartItem,
-              quantity: cartItem.quantity + 1,
-            }
-          : cartItem
-      );
-    }
-
-    return [
-      ...prevCart,
-      {
-        ...item,
-        quantity: 1,
-      },
-    ];
-  });
-
+  addToCart(item);
   setLastAddedItem(item);
   setCartPopup(true);
 
@@ -274,46 +250,15 @@ const handleAddToCart = (item) => {
     setCartPopup(false);
   }, 2500);
 };
-const updateQuantity = (id, change) => {
-  setCart((prevCart) =>
-    prevCart
-      .map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: Math.max(0, item.quantity + change),
-            }
-          : item
-      )
-      .filter((item) => item.quantity > 0)
-  );
-};
+// updateQuantity handled from CartContext
 const handlePlaceOrder = () => {
-  if (cart.length === 0) {
+  if (!cart || cart.length === 0) {
     alert("Your cart is empty.");
     return;
   }
 
-  if (!tableNo) {
-    alert("Please select your table number.");
-    return;
-  }
-
-  const orderId = `SG-${Date.now().toString().slice(-3)}`;
-
-  setOrderDetails({
-    orderId,
-    tableNo: tableNo,
-    items: cart,
-    orderTime: new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
-  });
-
-  setOrderConfirmed(true);
-  setShowCart(false);
-  setCart([]);
+  // route to checkout for full details and placement
+  window.location.href = "/checkout";
 };
 
   return (

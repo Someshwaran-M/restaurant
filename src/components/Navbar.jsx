@@ -144,7 +144,7 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
 
               {/* Reserve Button */}
-
+              {/* Reserve Button */}
               <Link
                 to="/reserve"
                 className="
@@ -171,6 +171,14 @@ const Navbar = () => {
                 <FaClipboardList />
                 <span>Reserve Table</span>
                 <FaArrowRight />
+              </Link>
+
+              {/* Admin Key Button (demo) */}
+              <Link
+                to="/admin/login"
+                className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-full border border-yellow-500 text-yellow-400 hover:bg-yellow-500/10 transition"
+              >
+                Admin Key
               </Link>
 
               {/* Mobile Menu Button */}
