@@ -93,6 +93,7 @@ const Checkout = () => {
             <select value={paymentMethod} onChange={(e)=>setPaymentMethod(e.target.value)} className="mt-2 rounded-xl bg-[#111111] p-3 w-full">
               <option>Cash</option>
               <option>Card</option>
+              <option>Online</option>
             </select>
           </div>
 
